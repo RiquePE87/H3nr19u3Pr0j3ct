@@ -19,7 +19,6 @@ import android.widget.Toast;
 import com.microsoft.appcenter.AppCenter;
 import com.microsoft.appcenter.analytics.Analytics;
 import com.microsoft.appcenter.crashes.Crashes;
-
 import com.example.luizhenrique.numerosloteria.Adapter.AbasPagerAdapter;
 import com.example.luizhenrique.numerosloteria.R;
 import com.google.android.gms.ads.AdRequest;

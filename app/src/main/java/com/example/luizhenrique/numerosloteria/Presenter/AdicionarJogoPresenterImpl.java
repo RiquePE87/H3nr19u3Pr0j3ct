@@ -62,6 +62,7 @@ public class AdicionarJogoPresenterImpl implements AdicionarJogoPresenter {
 
             try {
 
+                adicionarJogoView.exibirProgress(true);
                 resultadoAtual = new ResultadoTask().execute(tipoJogo).get();
                 intNumerosMaisSorteados = ResultadoService.verificarMaisSorteados(String.valueOf(resultadoAtual.getNumero()), tipoJogo, resultadoAtual.getSorteio().length, numeroDezenas, minAposta);
 
@@ -70,6 +71,8 @@ public class AdicionarJogoPresenterImpl implements AdicionarJogoPresenter {
 
             adicionarJogoView.exibirToast(ex.getMessage());
         }
+
+        adicionarJogoView.exibirProgress(false);
         adicionarJogoView.exibirPublicidade();
         return intNumerosMaisSorteados;
 
