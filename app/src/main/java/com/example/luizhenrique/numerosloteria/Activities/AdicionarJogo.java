@@ -18,7 +18,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.luizhenrique.numerosloteria.Model.Jogo;
-import com.example.luizhenrique.numerosloteria.Model.JogoManager;
+import com.example.luizhenrique.numerosloteria.Services.JogoManager;
 import com.example.luizhenrique.numerosloteria.Presenter.AdicionarJogoPresenter;
 import com.example.luizhenrique.numerosloteria.Presenter.AdicionarJogoPresenterImpl;
 import com.example.luizhenrique.numerosloteria.R;
@@ -196,7 +196,7 @@ public class AdicionarJogo extends AppCompatActivity implements AdicionarJogoVie
         numeroDesenasJogo.clear();
         etSorteio.setText("");
 
-        if (isAtualizacao(it) == false){
+        if (!isAtualizacao(it)){
             tvNumerosGerados.setText("");
         }
 
@@ -250,7 +250,7 @@ public class AdicionarJogo extends AppCompatActivity implements AdicionarJogoVie
 
                 }else{
 
-                    if (adicionarJogoPresenter.validarJogo(tvNumerosGerados.getText().toString(),etSorteio.getText().toString())== true){
+                    if (adicionarJogoPresenter.validarJogo(tvNumerosGerados.getText().toString(), etSorteio.getText().toString())){
                         realmServices.salvarJogo(pegarDadosJogo());
                         exibirToast("Aposta salva com sucesso!");
                         exibirPublicidade();
@@ -311,7 +311,7 @@ public class AdicionarJogo extends AppCompatActivity implements AdicionarJogoVie
     @Override
     public void setView() {
 
-        if (isAtualizacao(it) == true){
+        if (isAtualizacao(it)){
 
             Jogo jogo = realmServices.getJogo(it.getIntExtra("id", 0));
 

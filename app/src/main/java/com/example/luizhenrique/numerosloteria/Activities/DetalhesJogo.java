@@ -64,7 +64,7 @@ public class DetalhesJogo extends AppCompatActivity implements DetalhesJogoView 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detalhes_jogo);
 
-        detalhesJogoPresenter = new DetalhesJogoPresenterImpl();
+        detalhesJogoPresenter = new DetalhesJogoPresenterImpl(this);
 
         realmServices = new RealmServices(this);
 
@@ -103,9 +103,7 @@ public class DetalhesJogo extends AppCompatActivity implements DetalhesJogoView 
 
         try {
             res = new ResultadoTask().execute(jogo.tipoJogo, String.valueOf(jogo.sorteio)).get();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
+        } catch (InterruptedException | ExecutionException e) {
             e.printStackTrace();
         }
 
@@ -169,17 +167,7 @@ public class DetalhesJogo extends AppCompatActivity implements DetalhesJogoView 
 
             } else {
 
-                Resultado resAnt = new ResultadoTask().execute(jogo.tipoJogo, String.valueOf(jogo.sorteio-1)).get();
-
-                if (resAnt == null){
-                    tvValorPremio.setText("Sorteio não ocorreu ainda!");
-                    tvAcertos.setText("");
-                    tvTxtAcertoData.setText("");
-                }else{
-                    tvAcertos.setText("");
-                    tvTxtAcertoData.setText("");
-                    tvValorPremio.setText("Sorteio ocorrerá dia "+ ResultadoService.formatarData(resAnt.getProximo_data()));
-                }
+                detalhesJogoPresenter.getResultadoAnterior(jogo.tipoJogo,jogo.sorteio);
             }
 
         } catch (Exception ex) {
@@ -198,11 +186,10 @@ public class DetalhesJogo extends AppCompatActivity implements DetalhesJogoView 
 
         numerosAcertados = detalhesJogoPresenter.verificarNumerosAcertos(res,jogo);
 
-        for (int i = 0; i < nums.length; i++) {
+        for (int num : nums) {
 
-            int num = nums[i];
             TextView t = new TextView(this);
-            t.setText(String.valueOf(nums[i]));
+            t.setText(String.valueOf(num));
             t.setGravity(TextView.TEXT_ALIGNMENT_GRAVITY);
             t.setLayoutParams(lp);
             t.setGravity(Gravity.CENTER_VERTICAL | Gravity.CENTER_HORIZONTAL);
@@ -216,18 +203,24 @@ public class DetalhesJogo extends AppCompatActivity implements DetalhesJogoView 
                     if (n == num) {
                         t.setBackgroundResource(corBola);
                         break;
-                    }
-                    else {
+                    } else {
                         t.setBackgroundResource(R.drawable.bolanaoac);
 
                     }
                 }
-            }
-            else{
+            } else {
                 t.setBackgroundResource(R.drawable.bolanaoac);
             }
             tb.addView(t);
         }
+    }
+
+    @Override
+    public void setTextView(String txt) {
+
+        tvValorPremio.setText(txt);
+        tvAcertos.setText("");
+        tvTxtAcertoData.setText("");
     }
 
     public void EditarJogo(Jogo jogo){

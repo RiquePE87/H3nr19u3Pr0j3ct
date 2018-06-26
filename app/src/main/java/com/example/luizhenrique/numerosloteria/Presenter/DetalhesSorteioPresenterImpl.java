@@ -1,6 +1,6 @@
 package com.example.luizhenrique.numerosloteria.Presenter;
 
-import com.example.luizhenrique.numerosloteria.Model.JogoManager;
+import com.example.luizhenrique.numerosloteria.Services.JogoManager;
 import com.example.luizhenrique.numerosloteria.Model.Resultado;
 import com.example.luizhenrique.numerosloteria.View.DetalhesSorteioView;
 

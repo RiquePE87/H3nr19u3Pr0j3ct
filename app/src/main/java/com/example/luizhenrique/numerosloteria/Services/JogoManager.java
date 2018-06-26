@@ -1,4 +1,4 @@
-package com.example.luizhenrique.numerosloteria.Model;
+package com.example.luizhenrique.numerosloteria.Services;
 
 import java.util.HashMap;
 
@@ -15,19 +15,19 @@ public class JogoManager {
 
     private  HashMap<String,Integer> dicRangeJogos;
 
-    public static int rangeMegaSena = 60;
-    public static int rangeDuplaSena = 50;
-    public static int rangeLotomania = 100;
-    public static int rangeLotoFacil = 25;
-    public static int rangeQuina = 80;
-    public static int rangeTimeMania = 80;
+    private static int rangeMegaSena = 60;
+    private static int rangeDuplaSena = 50;
+    private static int rangeLotomania = 100;
+    private static int rangeLotoFacil = 25;
+    private static int rangeQuina = 80;
+    private static int rangeTimeMania = 80;
 
-    public static int[] acertosMegaSena = {6,5,4};
-    public  static int[] acertosDuplaSena = {0};
-    public static int[] acertosLotoFacil = {15,14,13,12,11};
-    public static int[] acertosLotoMania = {20,19,18,17,16,15,0};
-    public static int[] acertosQuina = {5,4,3,2};
-    public static int[] acertosTimeMania = {7,6,5,4,3,2};
+    private static int[] acertosMegaSena = {6,5,4};
+    private  static int[] acertosDuplaSena = {0};
+    private static int[] acertosLotoFacil = {15,14,13,12,11};
+    private static int[] acertosLotoMania = {20,19,18,17,16,15,0};
+    private static int[] acertosQuina = {5,4,3,2};
+    private static int[] acertosTimeMania = {7,6,5,4,3,2};
 
     private HashMap<String,int[]> dicAcertos;
 

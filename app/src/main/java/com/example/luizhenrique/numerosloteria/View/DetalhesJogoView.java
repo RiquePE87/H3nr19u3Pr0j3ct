@@ -7,4 +7,6 @@ public interface DetalhesJogoView {
     void mostrarAposta();
 
     void gerarGrid();
+
+    void setTextView(String txt);
 }
