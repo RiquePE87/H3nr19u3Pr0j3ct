@@ -1,0 +1,127 @@
+<resources>
+    <string name="app_name">Números da Loteria</string>
+    <string name="title_activity_adicionar_jogo">adicionarJogo</string>
+
+    <string name="opcao_novoJogo">Novo Jogo</string>
+    <string name="opcao_meusJogos">Meus Jogos</string>
+    <string name="opcao_consultaSorteios">Ver Sorteios</string>
+
+    <string name="banner_ad_unit_id">ca-app-pub-1281837718502232/2098332383</string>
+    <string name="banner_ad_detalhes">ca-app-pub-1281837718502232/6409601151</string>
+
+
+    <string-array name="secoes">
+        <item>Minhas Apostas</item>
+        <item>Sorteios</item>
+    </string-array>
+
+    <string-array name="tipoJogo">
+        <item>Mega-Sena</item>
+        <item>LotoFacil</item>
+        <item>LotoMania</item>
+        <item>Quina</item>
+        <item>TimeMania</item>
+    </string-array>
+
+    <string-array name="timesdocoracao">
+        <item>FLAMENGO/RJ</item>
+        <item>CORINTHIANS//SP</item>
+        <item>VASCO DA GAMA/RJ</item>
+        <item>INTERNACIONAL/RS</item>
+        <item>CRUZEIRO/MG</item>
+        <item>BOTAFOGO/RJ</item>
+        <item>ATLÉTICO/MG</item>
+        <item>FLUMINENSE/RJ</item>
+        <item>BAHIA/BA</item>
+        <item>FORTALEZA/CE</item>
+        <item>GOIÁS/GO</item>
+        <item>VITÓRIA/BA</item>
+        <item>ATLÉTICO/PR</item>
+        <item>ABC/RN</item>
+        <item>SANTA CRUZ/PE</item>
+        <item>CEARÁ/CE</item>
+        <item>AVAÍ/SC</item>
+        <item>TREZE/PB</item>
+        <item>GUARANI/SP</item>
+        <item>CORITIBA/PR</item>
+        <item>ITUANO/SP</item>
+        <item>LONDRINA/PR</item>
+        <item>P. DESPORTOS/SP</item>
+        <item>SPORT/PE</item>
+        <item>ATLÉTICO/GO</item>
+        <item>REMO/PA</item>
+        <item>GAMA/DF</item>
+        <item>JOINVILLE/SC</item>
+        <item>RIVER/PI</item>
+        <item>BANGU/RJ</item>
+        <item>MARÍLIA/SP</item>
+        <item>IPATINGA/MG</item>
+        <item>JUVENTUDE/RS</item>
+        <item>NÁUTICO/PE</item>
+        <item>BOTAFOGO/PB</item>
+        <item>AMÉRICA/MG</item>
+        <item>PONTE PRETA/SP</item>
+        <item>MIXTO/MT</item>
+        <item>AMÉRICA/RN</item>
+        <item>JI-PARANÁ/RO</item>
+        <item>INTER LIMEIRA/SP</item>
+        <item>MOTO CLUBE/MA</item>
+        <item>AMÉRICA/RJ</item>
+        <item>JUVENTUS/SP</item>
+        <item>PAYSANDU/PA</item>
+        <item>SÃO CAETANO/SP</item>
+        <item>PARANÁ/PR</item>
+        <item>BRASILIENSE/DF</item>
+        <item>SERGIPE/SE</item>
+        <item>SAMPAIO CORRÊA/MA</item>
+        <item>SANTO ANDRÉ/SP</item>
+        <item>BRAGANTINO/SP</item>
+        <item>BARUERI/SP</item>
+        <item>FIGUEIRENSE/SC</item>
+        <item>VILA NOVA/GO</item>
+        <item>PALMAS/TO</item>
+        <item>CRICIÚMA/SC</item>
+        <item>AMERICANO/RJ</item>
+        <item>CRB/AL</item>
+        <item>RIO BRANCO/ES</item>
+        <item>TUNA LUSO/PA</item>
+        <item>SÃO RAIMUNDO/AM</item>
+        <item>OLARIA/RJ</item>
+        <item>NACIONAL/AM</item>
+        <item>OPERARIO/MS</item>
+        <item>UBERLÂNDIA/MG</item>
+        <item>RIO BRANCO/AC</item>
+        <item>YPIRANGA/AP</item>
+        <item>RORAIMA/RR</item>
+        <item>CSA/AL</item>
+        <item>UNIÃO SÃO JOÃO/SP</item>
+        <item>XV PIRACICABA/SP</item>
+        <item>DESPORTIVA/ES</item>
+        <item>PAULISTA/SP</item>
+        <item>UNIÃO BARBARENSE/SP</item>
+        <item>VILLA NOVA/MG</item>
+        <item>GRÊMIO/RS</item>
+
+    </string-array>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_main2">Números da Loteria</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_detalhes_sorteio">DetalhesSorteio</string>
+    <string name="concurso">Concurso</string>
+    <string name="escolhendo_os_n_meros_mais_sorteados_ser_gerada_as_dezenas_mais_sorteadas_nos_dez_ltimos_concursos">Escolhendo os números mais sorteados será gerada as dezenas mais sorteadas nos dez últimos concursos.</string>
+    <string name="n_mero_de_dezenas">Número de dezenas</string>
+    <string name="escolher">Escolher</string>
+    <string name="gerar">Gerar</string>
+    <string name="mais_sorteados">Mais Sorteados</string>
+    <string name="n_meros">Números</string>
+    <string name="selecione_o_jogo">Selecione o jogo</string>
+    <string name="Entrarcomnumeroconcurso">Digite o número do concurso</string>
+
+
+</resources>

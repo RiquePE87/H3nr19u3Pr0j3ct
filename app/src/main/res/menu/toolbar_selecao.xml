@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".Activities.SelecaoNumeros"
+    app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+    android:theme="@style/AppTheme.ActionBar">
+
+    <item android:title="Limpar"
+        android:id="@+id/action_limpar"
+        app:showAsAction="always">
+
+    </item>
+
+    <item android:title="OK"
+        android:id="@+id/action_OKSelecao"
+        app:showAsAction="always">
+
+    </item>
+
+
+</menu>

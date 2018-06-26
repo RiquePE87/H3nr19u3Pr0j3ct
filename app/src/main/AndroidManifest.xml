@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.luizhenrique.numerosloteria">
+
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/icone_numeros_da_sorte"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/icone_numeros_da_sorte"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme.NoActionBar">
+
+        <activity
+            android:name=".Activities.SplashActicity"
+            android:theme="@style/SplashTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".Activities.AdicionarJogo"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".Activities.DetalhesJogo"
+            android:noHistory="true" />
+        <activity
+            android:name=".Activities.MainActivity"
+            android:label="@string/title_activity_main2"
+            android:theme="@style/AppTheme.NoActionBar">
+
+        </activity>
+        <activity
+            android:name=".Activities.DetalhesSorteio"
+            android:label="@string/title_activity_detalhes_sorteio"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".Activities.SelecaoNumeros" />
+
+    </application>
+
+</manifest>

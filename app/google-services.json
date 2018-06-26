@@ -1,0 +1,107 @@
+{
+  "project_info": {
+    "project_number": "689022093605",
+    "firebase_url": "https://numerosloteria-9abe1.firebaseio.com",
+    "project_id": "numerosloteria-9abe1",
+    "storage_bucket": "numerosloteria-9abe1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:689022093605:android:cb4b8b40d954d51a",
+        "android_client_info": {
+          "package_name": "com.example.luizhenrique.numerosloteria"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "689022093605-0cnipptevl4fb7dl13rr52dd7amlholh.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.luizhenrique.numerosloteria",
+            "certificate_hash": "c718c79bd27ee74b01cab5ac420c5b124300588b"
+          }
+        },
+        {
+          "client_id": "689022093605-dpdeg7r53avjn11ifugjqe66lv8qggr1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDeDBRChLoggt6KpznilcoYXAeahwaZVJ4"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "689022093605-dpdeg7r53avjn11ifugjqe66lv8qggr1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:689022093605:android:5c96d87095acf908",
+        "android_client_info": {
+          "package_name": "com.riquesoft.numerosloteria.numerosdaloteria"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "689022093605-338poo35vig785l9dml7c6t0177cjatg.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.riquesoft.numerosloteria.numerosdaloteria",
+            "certificate_hash": "03fe097919c720af9946ae2e13c7edf32d35abdc"
+          }
+        },
+        {
+          "client_id": "689022093605-qktlronu6j628ualvu2v8tbqan9cm50i.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.riquesoft.numerosloteria.numerosdaloteria",
+            "certificate_hash": "c718c79bd27ee74b01cab5ac420c5b124300588b"
+          }
+        },
+        {
+          "client_id": "689022093605-dpdeg7r53avjn11ifugjqe66lv8qggr1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDeDBRChLoggt6KpznilcoYXAeahwaZVJ4"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "689022093605-dpdeg7r53avjn11ifugjqe66lv8qggr1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
