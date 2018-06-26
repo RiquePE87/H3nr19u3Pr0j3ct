@@ -9,7 +9,7 @@ import com.example.luizhenrique.numerosloteria.View.AdicionarJogoView;
 
 import java.util.concurrent.ExecutionException;
 
-public class AdicionarJogoPresenterImpl implements AdicionarJogoPresenter {
+public class AdicionarJogoPresenterImpl implements AdicionarJogoPresenter{
 
     private AdicionarJogoView adicionarJogoView;
 
@@ -45,9 +45,7 @@ public class AdicionarJogoPresenterImpl implements AdicionarJogoPresenter {
         try {
             res = new ResultadoTask().execute(tipoJogo.toLowerCase()).get();
             proximoConcurso = res.getNumero() + 1;
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
+        } catch (InterruptedException | ExecutionException e) {
             e.printStackTrace();
         }
         return proximoConcurso;
