@@ -41,6 +41,10 @@ dependencies {
     implementation 'com.android.support:cardview-v7:26.1.0'
     implementation 'com.squareup.retrofit2:retrofit:2.4.0'
     implementation 'com.squareup.retrofit2:converter-jackson:2.3.0'
+
+    dependencies { def appCenterSdkVersion = '1.6.1'
+        implementation "com.microsoft.appcenter:appcenter-analytics:${appCenterSdkVersion}"
+        implementation "com.microsoft.appcenter:appcenter-crashes:${appCenterSdkVersion}" }
     testImplementation 'junit:junit:4.12'
 }
 

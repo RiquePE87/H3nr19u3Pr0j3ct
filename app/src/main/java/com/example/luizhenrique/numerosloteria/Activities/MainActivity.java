@@ -16,6 +16,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
+import com.microsoft.appcenter.AppCenter;
+import com.microsoft.appcenter.analytics.Analytics;
+import com.microsoft.appcenter.crashes.Crashes;
 
 import com.example.luizhenrique.numerosloteria.Adapter.AbasPagerAdapter;
 import com.example.luizhenrique.numerosloteria.R;
@@ -40,6 +43,8 @@ public class MainActivity extends AppCompatActivity
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
+
+        AppCenter.start(getApplication(), "c030fb40-e0b0-48ed-b3df-c5946e208d63", Analytics.class, Crashes.class);
 
         mAdView = findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder().build();
