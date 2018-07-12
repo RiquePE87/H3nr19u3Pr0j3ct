@@ -6,10 +6,14 @@ import android.net.NetworkInfo;
 
 import com.example.luizhenrique.numerosloteria.Adapter.ResultadosAdapter;
 import com.example.luizhenrique.numerosloteria.Model.Resultado;
+import com.example.luizhenrique.numerosloteria.Model.Sorteio;
+import com.example.luizhenrique.numerosloteria.Retrofit.CtrlResultado;
 import com.example.luizhenrique.numerosloteria.Services.ResultadoTask;
+import com.example.luizhenrique.numerosloteria.Services.SorteioTask;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 public class FragmentSorteiosPresenterImpl implements FragmentSorteiosPresenter {
 
@@ -18,13 +22,25 @@ public class FragmentSorteiosPresenterImpl implements FragmentSorteiosPresenter 
     public ResultadosAdapter adapter;
     public NetworkInfo info;
     public ConnectivityManager cm;
+    public CtrlResultado ctrlResultado;
+    Sorteio sorteio;
 
     public FragmentSorteiosPresenterImpl(Context ctx){
 
         this.ctx = ctx;
+
+        try {
+            sorteio = new SorteioTask().execute("mega-sena").get();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+
     }
 
      public List<Resultado> carregarResultados(){
+
 
         List<Resultado> resultadoList = new ArrayList<Resultado>();
 

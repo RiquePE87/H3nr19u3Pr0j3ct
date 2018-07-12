@@ -1,4 +1,4 @@
-package com.example.luizhenrique.numerosloteria.Retrofit;
+package com.example.luizhenrique.numerosloteria.Services;
 
 import com.example.luizhenrique.numerosloteria.Services.LoteriaService;
 
