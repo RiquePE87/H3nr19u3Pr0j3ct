@@ -7,19 +7,23 @@ import retrofit2.converter.jackson.JacksonConverterFactory;
 
 public class RetrofitConfig {
 
-    private final Retrofit retrofit;
+    private static Retrofit retrofit;
+    private static final String BASE_URL = "https://lotodicas.com.br/api/";
 
     RetrofitConfig(){
 
-       retrofit = new Retrofit.Builder()
-                .baseUrl("http://lotodicas.com.br/api/")
-                .addConverterFactory(JacksonConverterFactory.create())
-                .build();
     }
 
-    public LoteriaService getLoteriaService(){
+    public static Retrofit getRetrofitInstance(){
 
-        return this.retrofit.create(LoteriaService.class);
+        if (retrofit == null){
 
+            retrofit = new Retrofit.Builder()
+                    .baseUrl(BASE_URL)
+                    .addConverterFactory(JacksonConverterFactory.create())
+                    .build();
+        }
+
+        return retrofit;
     }
 }

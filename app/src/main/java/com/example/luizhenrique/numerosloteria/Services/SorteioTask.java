@@ -8,17 +8,22 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class SorteioTask extends AsyncTask<String,Void,Sorteio> {
+public class SorteioTask {
 
-    Sorteio sorteio_l;
+    public Sorteio sorteio_l;
 
     public Sorteio carregarResultado(String tipoJogo, String num_sorteio){
 
-        Call<Sorteio> call = new RetrofitConfig().getLoteriaService().buscarLoteria(tipoJogo,num_sorteio);
+        LoteriaService loteriaService = RetrofitConfig.getRetrofitInstance().create(LoteriaService.class);
+
+        Call<Sorteio> call = loteriaService.buscarLoteria1(tipoJogo, num_sorteio);
+
+        String calli = call.request().url().toString();
 
         call.enqueue(new Callback<Sorteio>() {
             @Override
             public void onResponse(Call<Sorteio> call, Response<Sorteio> response) {
+
 
                 sorteio_l = response.body();
             }
@@ -26,6 +31,7 @@ public class SorteioTask extends AsyncTask<String,Void,Sorteio> {
             @Override
             public void onFailure(Call<Sorteio> call, Throwable t) {
 
+                String erro = t.getMessage();
             }
         });
 
@@ -34,41 +40,26 @@ public class SorteioTask extends AsyncTask<String,Void,Sorteio> {
 
     public Sorteio carregarResultado(String tipoJogo){
 
-        try {
-            Call<Sorteio> call = new RetrofitConfig().getLoteriaService().buscarLoteria(tipoJogo);
+
+            LoteriaService loteriaService = RetrofitConfig.getRetrofitInstance().create(LoteriaService.class);
+
+            Call<Sorteio> call = loteriaService.buscarLoteria2(tipoJogo);
+
+            String calli = call.request().url().toString();
 
             call.enqueue(new Callback<Sorteio>() {
                 @Override
                 public void onResponse(Call<Sorteio> call, Response<Sorteio> response) {
 
                     sorteio_l = response.body();
-
                 }
 
                 @Override
                 public void onFailure(Call<Sorteio> call, Throwable t) {
-
+                    String erro = t.getMessage();
                 }
             });
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
 
         return sorteio_l;
-    }
-    @Override
-    protected Sorteio doInBackground(String... strings) {
-
-        try {
-            if (strings.length == 2) {
-                return carregarResultado(strings[0], strings[1]);
-            } else {
-                return carregarResultado(strings[0]);
-            }
-        }catch (Exception ex){
-
-        }
-
-        return null;
     }
 }

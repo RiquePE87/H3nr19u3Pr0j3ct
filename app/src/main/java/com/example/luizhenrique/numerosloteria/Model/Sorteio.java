@@ -1,25 +1,52 @@
 package com.example.luizhenrique.numerosloteria.Model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.List;
 
+@JsonIgnoreProperties({"cidades"})
 public class Sorteio {
 
-    private String numero;
+    @JsonProperty("numero")
+    private Integer numero;
+    @JsonProperty("data")
     private String data;
-    private List<List<Integer>> sorteio;
-    private List<List<Integer>> ganhadores;
-    private List<List<Integer>> rateio;
+    @JsonProperty("sorteio")
+    private List<List<Integer>> sorteio = null;
+    @JsonProperty("ganhadores")
+    private List<List<Integer>> ganhadores = null;
+    @JsonProperty("rateio")
+    private List<List<Integer>> rateio = null;
+    @JsonProperty("acumulado")
     private String acumulado;
-    private String valor_acumulado;
-    private List<String> cidades;
-    private int proximo_estimativa;
-    private String proximo_data;
+    @JsonProperty("valor_acumulado")
+    private Double valorAcumulado;
+    @JsonProperty("cidades")
+    private List<Object> cidades = null;
+    @JsonProperty("proximo_estimativa")
+    private Integer proximoEstimativa;
+    @JsonProperty("proximo_data")
+    private String proximoData;
 
-    public String getNumero() {
+    public Sorteio(Integer numero, String data, List<List<Integer>> sorteio, List<List<Integer>> ganhadores, List<List<Integer>> rateio, String acumulado, Double valorAcumulado, List<Object> cidades, Integer proximoEstimativa, String proximoData) {
+        this.numero = numero;
+        this.data = data;
+        this.sorteio = sorteio;
+        this.ganhadores = ganhadores;
+        this.rateio = rateio;
+        this.acumulado = acumulado;
+        this.valorAcumulado = valorAcumulado;
+        //this.cidades = cidades;
+        this.proximoEstimativa = proximoEstimativa;
+        this.proximoData = proximoData;
+    }
+
+    public Integer getNumero() {
         return numero;
     }
 
-    public void setNumero(String numero) {
+    public void setNumero(Integer numero) {
         this.numero = numero;
     }
 
@@ -63,35 +90,35 @@ public class Sorteio {
         this.acumulado = acumulado;
     }
 
-    public String getValor_acumulado() {
-        return valor_acumulado;
+    public Double getValorAcumulado() {
+        return valorAcumulado;
     }
 
-    public void setValor_acumulado(String valor_acumulado) {
-        this.valor_acumulado = valor_acumulado;
+    public void setValorAcumulado(Double valorAcumulado) {
+        this.valorAcumulado = valorAcumulado;
     }
 
-    public List<String> getCidades() {
+    public List<Object> getCidades() {
         return cidades;
     }
 
-    public void setCidades(List<String> cidades) {
+    public void setCidades(List<Object> cidades) {
         this.cidades = cidades;
     }
 
-    public int getProximo_estimativa() {
-        return proximo_estimativa;
+    public Integer getProximoEstimativa() {
+        return proximoEstimativa;
     }
 
-    public void setProximo_estimativa(int proximo_estimativa) {
-        this.proximo_estimativa = proximo_estimativa;
+    public void setProximoEstimativa(Integer proximoEstimativa) {
+        this.proximoEstimativa = proximoEstimativa;
     }
 
-    public String getProximo_data() {
-        return proximo_data;
+    public String getProximoData() {
+        return proximoData;
     }
 
-    public void setProximo_data(String proximo_data) {
-        this.proximo_data = proximo_data;
+    public void setProximoData(String proximoData) {
+        this.proximoData = proximoData;
     }
 }

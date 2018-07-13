@@ -10,9 +10,9 @@ import retrofit2.http.Path;
 public interface LoteriaService {
 
     @GET("{tipojogo}/{concurso}")
-    Call<Sorteio> buscarLoteria(@Path("tipojogo")String tipoJogo, @Path("concurso") String concurso);
+    Call<Sorteio> buscarLoteria1(@Path("tipojogo")String tipoJogo, @Path("concurso") String concurso);
 
-    @GET("{tipojogo}/{concurso}")
-    Call<Sorteio> buscarLoteria(@Path("tipojogo")String tipoJogo);
+    @GET("{tipojogo}")
+    Call<Sorteio> buscarLoteria2(@Path("tipojogo")String tipoJogo);
 
 }
