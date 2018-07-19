@@ -105,6 +105,10 @@ public class JogosAdapter extends BaseAdapter {
 
                             t.setBackgroundResource(R.drawable.bolatimemania);
                             break;
+
+                        case "Dupla-Sena":
+                            t.setBackgroundResource(R.drawable.boladuplasena);
+                            break;
                     }
                 }
 
@@ -124,6 +128,9 @@ public class JogosAdapter extends BaseAdapter {
                         break;
                     case "TimeMania":
                         tvTipoJogo.setTextColor(Color.parseColor("maroon"));
+                        break;
+                    case "Dupla-Sena":
+                        tvTipoJogo.setTextColor(Color.parseColor("#af3869"));
                         break;
                 }
 

@@ -36,6 +36,7 @@ public class FragmentSorteiosPresenterImpl implements FragmentSorteiosPresenter 
 
                 //  resultadoList.add(new ResultadoDuplaTask().execute("dupla-sena").get());
                 resultadoList.add(new ResultadoTask().execute("mega-sena").get());
+                resultadoList.add(new ResultadoTask().execute("dupla-sena").get());
                 resultadoList.add(new ResultadoTask().execute("lotomania").get());
                 resultadoList.add(new ResultadoTask().execute("lotofacil").get());
                 resultadoList.add(new ResultadoTask().execute("quina").get());

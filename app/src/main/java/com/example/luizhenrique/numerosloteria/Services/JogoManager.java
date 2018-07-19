@@ -23,7 +23,7 @@ public class JogoManager {
     private static int rangeTimeMania = 80;
 
     private static int[] acertosMegaSena = {6,5,4};
-    private  static int[] acertosDuplaSena = {0};
+    private  static int[] acertosDuplaSena = {6,5,4,3};
     private static int[] acertosLotoFacil = {15,14,13,12,11};
     private static int[] acertosLotoMania = {20,19,18,17,16,15,0};
     private static int[] acertosQuina = {5,4,3,2};
@@ -38,7 +38,7 @@ public class JogoManager {
         dicAcertos = new HashMap<>();
 
         dicTipoJogos.put("mega-sena",megasena);
-        dicTipoJogos.put("duplasena",duplasena);
+        dicTipoJogos.put("dupla-sena",duplasena);
         dicTipoJogos.put("lotofacil",lotofacil);
         dicTipoJogos.put("quina",quina);
         dicTipoJogos.put("lotomania",lotomania);

@@ -15,6 +15,7 @@ import android.widget.TextView;
 import com.example.luizhenrique.numerosloteria.Model.Resultado;
 import com.example.luizhenrique.numerosloteria.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -25,6 +26,10 @@ public class ResultadosAdapter extends BaseAdapter {
 
     Context ctx;
     List<Resultado> resultados;
+    View linha;
+    GridLayout gridLayout;
+    GridLayout gridLayoutJogo2;
+    TableRow.LayoutParams lp;
 
      public ResultadosAdapter(Context ctx,List<Resultado> resultados){
 
@@ -51,7 +56,7 @@ public class ResultadosAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
 
         Resultado res = resultados.get(position);
-        View linha = null;
+        linha = null;
 
         if (res != null) {
 
@@ -65,47 +70,59 @@ public class ResultadosAdapter extends BaseAdapter {
                 TextView tvResTipoJogo = linha.findViewById(R.id.tvResTipoJogo);
                 TextView tvResSorteio = linha.findViewById(R.id.tvResNumSorteio);
                 TextView tvResData = linha.findViewById(R.id.tvResData);
-                GridLayout gridLayout = linha.findViewById(R.id.glResNumeros);
+                gridLayout = linha.findViewById(R.id.glResNumeros);
+                gridLayoutJogo2 = linha.findViewById(R.id.glResNumerosJogo2);
 
-                TableRow.LayoutParams lp = new TableRow.LayoutParams(160, 160);
+                lp = new TableRow.LayoutParams(160, 160);
 
-                for (int i = 0; i < res.getSorteio().size(); i++) {
+                if (res.getTipo() == "dupla-sena") {
 
-                    TextView t = new TextView(linha.getContext());
-                    t.setText(String.valueOf(res.getSorteio().get(i)));
-                    t.setGravity(TextView.TEXT_ALIGNMENT_GRAVITY);
-                    t.setLayoutParams(lp);
-                    t.setGravity(Gravity.CENTER_VERTICAL | Gravity.CENTER_HORIZONTAL);
-                    t.setTextSize(18);
-                    t.setTextColor(Color.WHITE);
-                    t.setTypeface(Typeface.DEFAULT_BOLD);
+                    ArrayList<Integer> jogo1 = (ArrayList<Integer>) res.getSorteio().get(0);
+                    ArrayList<Integer> jogo2 = (ArrayList<Integer>) res.getSorteio().get(1);
+
+                    gerarBolas(jogo1);
+                    gerarBolas(jogo2);
+
+                }else {
+
+                    for (int i = 0; i < res.getSorteio().size(); i++) {
+
+                        gridLayoutJogo2.setVisibility(View.GONE);
+                        TextView t = new TextView(linha.getContext());
+                        t.setText(String.valueOf(res.getSorteio().get(i)));
+                        t.setGravity(TextView.TEXT_ALIGNMENT_GRAVITY);
+                        t.setLayoutParams(lp);
+                        t.setGravity(Gravity.CENTER_VERTICAL | Gravity.CENTER_HORIZONTAL);
+                        t.setTextSize(18);
+                        t.setTextColor(Color.WHITE);
+                        t.setTypeface(Typeface.DEFAULT_BOLD);
 
 
-                    gridLayout.addView(t);
+                        gridLayout.addView(t);
 
-                    switch (res.getTipo()) {
-                        case "mega-sena":
+                        switch (res.getTipo()) {
+                            case "mega-sena":
 
-                            t.setBackgroundResource(R.drawable.bolamega);
-                            break;
-                        case "lotomania":
+                                t.setBackgroundResource(R.drawable.bolamega);
+                                break;
+                            case "lotomania":
 
-                            t.setBackgroundResource(R.drawable.bolalotomania);
-                            break;
-                        case "lotofacil":
+                                t.setBackgroundResource(R.drawable.bolalotomania);
+                                break;
+                            case "lotofacil":
 
-                            t.setBackgroundResource(R.drawable.bolalotofacil);
-                            break;
-                        case "quina":
+                                t.setBackgroundResource(R.drawable.bolalotofacil);
+                                break;
+                            case "quina":
 
-                            t.setBackgroundResource(R.drawable.bolaquina);
-                            break;
-                        case "timemania":
+                                t.setBackgroundResource(R.drawable.bolaquina);
+                                break;
+                            case "timemania":
 
-                            t.setBackgroundResource(R.drawable.bolatimemania);
-                            break;
+                                t.setBackgroundResource(R.drawable.bolatimemania);
+                                break;
+                        }
                     }
-
                 }
 
                 tvResSorteio.setText(String.valueOf(res.getNumero()));
@@ -128,6 +145,10 @@ public class ResultadosAdapter extends BaseAdapter {
                     case "timemania":
                         tvResTipoJogo.setTextColor(Color.parseColor("maroon"));
                         break;
+
+                    case "dupla-sena":
+                        tvResTipoJogo.setTextColor(Color.parseColor("#af3869"));
+                        break;
                 }
 
             } catch (Exception ex) {
@@ -135,5 +156,24 @@ public class ResultadosAdapter extends BaseAdapter {
             }
 
         }return linha;
+    }
+
+    public void gerarBolas(ArrayList<Integer> jogo){
+
+        for (int i = 0; i < 6; i++) {
+
+            TextView t = new TextView(linha.getContext());
+            t.setText(String.valueOf(jogo.get(i)));
+            t.setGravity(TextView.TEXT_ALIGNMENT_GRAVITY);
+            t.setLayoutParams(lp);
+            t.setGravity(Gravity.CENTER_VERTICAL | Gravity.CENTER_HORIZONTAL);
+            t.setTextSize(18);
+            t.setTextColor(Color.WHITE);
+            t.setTypeface(Typeface.DEFAULT_BOLD);
+            t.setBackgroundResource(R.drawable.boladuplasena);
+
+            gridLayout.addView(t);
+
+        }
     }
 }

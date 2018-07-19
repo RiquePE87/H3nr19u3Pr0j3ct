@@ -204,6 +204,10 @@ public class DetalhesSorteio extends AppCompatActivity implements DetalhesSortei
 
                     t.setBackgroundResource(R.drawable.bolatimemania);
                     break;
+
+                case "dupla-sena":
+                    t.setBackgroundResource(R.drawable.boladuplasena);
+                    break;
             }
 
         }
@@ -230,6 +234,9 @@ public class DetalhesSorteio extends AppCompatActivity implements DetalhesSortei
             case "timemania":
                 tvJogo.setBackgroundColor(Color.parseColor("maroon"));
                 break;
+
+            case "dupla-sena":
+                tvJogo.setBackgroundColor(Color.parseColor("#af3869"));
         }
 
     }
