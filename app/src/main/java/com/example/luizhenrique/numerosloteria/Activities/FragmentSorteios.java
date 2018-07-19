@@ -14,11 +14,9 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 
 import com.example.luizhenrique.numerosloteria.Model.Resultado;
-import com.example.luizhenrique.numerosloteria.Model.Sorteio;
 import com.example.luizhenrique.numerosloteria.Presenter.FragmentSorteiosPresenter;
 import com.example.luizhenrique.numerosloteria.Presenter.FragmentSorteiosPresenterImpl;
 import com.example.luizhenrique.numerosloteria.R;
-import com.example.luizhenrique.numerosloteria.Services.SorteioTask;
 
 public class FragmentSorteios extends ListFragment  {
 
@@ -47,7 +45,6 @@ public class FragmentSorteios extends ListFragment  {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
         fragmentSorteiosPresenter = new FragmentSorteiosPresenterImpl(getContext());
-        Sorteio sorteio = new SorteioTask().carregarResultado("dupla-sena","100");
     }
 
     @Override
@@ -67,7 +64,7 @@ public class FragmentSorteios extends ListFragment  {
                 Resultado res = (Resultado) listView.getItemAtPosition(position);
 
                 Intent it = new Intent(getContext(),DetalhesSorteio.class );
-                it.putExtra("tipoJogo",res.tipo);
+                it.putExtra("tipoJogo",res.getTipo());
                 it.putExtra("ultimoSorteio", res.getNumero());
                 startActivity(it);
             }

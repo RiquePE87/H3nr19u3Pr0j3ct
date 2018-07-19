@@ -16,19 +16,19 @@ public class DetalhesSorteioPresenterImpl implements DetalhesSorteioPresenter {
     public void preencherGanhadores(Resultado res) {
 
         detalhesSorteioView.removerLinhas();
-        int[] acertos = new JogoManager().getAcertos(res.tipo.toLowerCase());
+        int[] acertos = new JogoManager().getAcertos(res.getTipo().toLowerCase());
         String txt;
         int rows = 1;
 
         if (detalhesSorteioView != null) {
-            for (int i = 0; i < res.getGanhadores().length;i++){
+            for (int i = 0; i < res.getGanhadores().size();i++){
 
-                if (res.tipo.equals("timemania") && acertos[i] == 2){
+                if (res.getTipo().equals("timemania") && acertos[i] == 2){
 
-                    detalhesSorteioView.inserirLinha("Time do Coração ", String.valueOf(res.getGanhadores()[i]),res.getRateio()[i],rows);
+                    detalhesSorteioView.inserirLinha("Time do Coração ", String.valueOf(res.getGanhadores().get(i)),res.getRateio().get(i),rows);
 
                 }else{
-                    detalhesSorteioView.inserirLinha(String.valueOf(acertos[i]), String.valueOf(res.getGanhadores()[i]),res.getRateio()[i],rows);
+                    detalhesSorteioView.inserirLinha(String.valueOf(acertos[i]), String.valueOf(res.getGanhadores().get(i)),res.getRateio().get(i),rows);
                     rows++;
                 }
             }

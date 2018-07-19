@@ -7,13 +7,10 @@ import android.net.NetworkInfo;
 import com.example.luizhenrique.numerosloteria.Adapter.ResultadosAdapter;
 import com.example.luizhenrique.numerosloteria.Model.Resultado;
 import com.example.luizhenrique.numerosloteria.Model.Sorteio;
-import com.example.luizhenrique.numerosloteria.Retrofit.CtrlResultado;
 import com.example.luizhenrique.numerosloteria.Services.ResultadoTask;
-import com.example.luizhenrique.numerosloteria.Services.SorteioTask;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.ExecutionException;
 
 public class FragmentSorteiosPresenterImpl implements FragmentSorteiosPresenter {
 
@@ -27,8 +24,6 @@ public class FragmentSorteiosPresenterImpl implements FragmentSorteiosPresenter 
     public FragmentSorteiosPresenterImpl(Context ctx){
 
         this.ctx = ctx;
-
-
     }
 
      public List<Resultado> carregarResultados(){
@@ -48,6 +43,7 @@ public class FragmentSorteiosPresenterImpl implements FragmentSorteiosPresenter 
 
             }catch (Exception ex){
 
+                ex.printStackTrace();
             }
         }
 

@@ -160,7 +160,7 @@ public class DetalhesJogo extends AppCompatActivity implements DetalhesJogoView 
                 tvAcertos.setText(String.valueOf(detalhesJogoPresenter.verificarNumerosAcertos(res, jogo).size()));
                 tvValorPremio.setText(String.valueOf("Você ganhou " + numberFormat.format(detalhesJogoPresenter.verificarPremiacao(res,jogo))));
 
-                if (res.tipo.equals("TimeMania")){
+                if (res.getTipo().equals("TimeMania")){
                     tvPremioTimeCoracao.setText("Time do Coração "+ numberFormat.format(detalhesJogoPresenter.verificarPremiacaoTime(res,jogo)));
                     tvPremioTimeCoracao.setVisibility(View.VISIBLE);
                 }

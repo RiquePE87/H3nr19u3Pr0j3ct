@@ -51,86 +51,89 @@ public class ResultadosAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
 
         Resultado res = resultados.get(position);
+        View linha = null;
 
-        View linha = LayoutInflater.from(ctx).inflate(R.layout.item_resultado,null);
+        if (res != null) {
 
-        String dataSorteio = res.getData();
-        String data = dataSorteio.substring(8,10)+"/"+dataSorteio.substring(5,7)+"/"+dataSorteio.substring(0,4);
+            linha = LayoutInflater.from(ctx).inflate(R.layout.item_resultado, null);
 
-        try {
+            String dataSorteio = res.getData();
+            String data = dataSorteio.substring(8, 10) + "/" + dataSorteio.substring(5, 7) + "/" + dataSorteio.substring(0, 4);
 
-            TextView tvResTipoJogo = linha.findViewById(R.id.tvResTipoJogo);
-            TextView tvResSorteio = linha.findViewById(R.id.tvResNumSorteio);
-            TextView tvResData = linha.findViewById(R.id.tvResData);
-            GridLayout gridLayout = linha.findViewById(R.id.glResNumeros);
+            try {
 
-            TableRow.LayoutParams lp = new TableRow.LayoutParams(160,160);
+                TextView tvResTipoJogo = linha.findViewById(R.id.tvResTipoJogo);
+                TextView tvResSorteio = linha.findViewById(R.id.tvResNumSorteio);
+                TextView tvResData = linha.findViewById(R.id.tvResData);
+                GridLayout gridLayout = linha.findViewById(R.id.glResNumeros);
 
-            for (int i = 0; i< res.getSorteio().length; i++){
+                TableRow.LayoutParams lp = new TableRow.LayoutParams(160, 160);
 
-                TextView t = new TextView(linha.getContext());
-                t.setText(String.valueOf(res.getSorteio()[i]));
-                t.setGravity(TextView.TEXT_ALIGNMENT_GRAVITY);
-                t.setLayoutParams(lp);
-                t.setGravity(Gravity.CENTER_VERTICAL | Gravity.CENTER_HORIZONTAL);
-                t.setTextSize(18);
-                t.setTextColor(Color.WHITE);
-                t.setTypeface(Typeface.DEFAULT_BOLD);
+                for (int i = 0; i < res.getSorteio().size(); i++) {
+
+                    TextView t = new TextView(linha.getContext());
+                    t.setText(String.valueOf(res.getSorteio().get(i)));
+                    t.setGravity(TextView.TEXT_ALIGNMENT_GRAVITY);
+                    t.setLayoutParams(lp);
+                    t.setGravity(Gravity.CENTER_VERTICAL | Gravity.CENTER_HORIZONTAL);
+                    t.setTextSize(18);
+                    t.setTextColor(Color.WHITE);
+                    t.setTypeface(Typeface.DEFAULT_BOLD);
 
 
-                gridLayout.addView(t);
+                    gridLayout.addView(t);
 
-                switch (res.tipo){
+                    switch (res.getTipo()) {
+                        case "mega-sena":
+
+                            t.setBackgroundResource(R.drawable.bolamega);
+                            break;
+                        case "lotomania":
+
+                            t.setBackgroundResource(R.drawable.bolalotomania);
+                            break;
+                        case "lotofacil":
+
+                            t.setBackgroundResource(R.drawable.bolalotofacil);
+                            break;
+                        case "quina":
+
+                            t.setBackgroundResource(R.drawable.bolaquina);
+                            break;
+                        case "timemania":
+
+                            t.setBackgroundResource(R.drawable.bolatimemania);
+                            break;
+                    }
+
+                }
+
+                tvResSorteio.setText(String.valueOf(res.getNumero()));
+                tvResTipoJogo.setText(res.getTipo().toUpperCase());
+                tvResData.setText(data);
+
+                switch (res.getTipo()) {
                     case "mega-sena":
-
-                         t.setBackgroundResource(R.drawable.bolamega);
+                        tvResTipoJogo.setTextColor(Color.parseColor("#0f5935"));
                         break;
                     case "lotomania":
-
-                          t.setBackgroundResource(R.drawable.bolalotomania);
+                        tvResTipoJogo.setTextColor(Color.parseColor("#EC4526"));
                         break;
                     case "lotofacil":
-
-                           t.setBackgroundResource(R.drawable.bolalotofacil);
+                        tvResTipoJogo.setTextColor(Color.parseColor("purple"));
                         break;
                     case "quina":
-
-                          t.setBackgroundResource(R.drawable.bolaquina);
+                        tvResTipoJogo.setTextColor(Color.BLUE);
                         break;
                     case "timemania":
-
-                          t.setBackgroundResource(R.drawable.bolatimemania);
+                        tvResTipoJogo.setTextColor(Color.parseColor("maroon"));
                         break;
                 }
 
+            } catch (Exception ex) {
+
             }
 
-            tvResSorteio.setText(String.valueOf(res.getNumero()));
-            tvResTipoJogo.setText(res.tipo.toUpperCase());
-            tvResData.setText(data);
-
-            switch (res.tipo){
-                case "mega-sena":
-                    tvResTipoJogo.setTextColor(Color.parseColor("#0f5935"));
-                    break;
-                case "lotomania":
-                    tvResTipoJogo.setTextColor(Color.parseColor("#EC4526"));
-                    break;
-                case "lotofacil":
-                    tvResTipoJogo.setTextColor(Color.parseColor("purple"));
-                    break;
-                case "quina":
-                    tvResTipoJogo.setTextColor(Color.BLUE);
-                    break;
-                case "timemania":
-                    tvResTipoJogo.setTextColor(Color.parseColor("maroon"));
-                    break;
-            }
-
-        }catch (Exception ex){
-
-        }
-
-        return linha;
+        }return linha;
     }
 }

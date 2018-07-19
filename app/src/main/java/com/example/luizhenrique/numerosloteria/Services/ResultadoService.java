@@ -1,6 +1,8 @@
 package com.example.luizhenrique.numerosloteria.Services;
 
 import com.example.luizhenrique.numerosloteria.Model.Resultado;
+import com.example.luizhenrique.numerosloteria.Model.Sorteio;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -11,6 +13,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ExecutionException;
 
@@ -19,14 +22,13 @@ public class ResultadoService {
     public static Resultado carregarResultado(String tipo, String sorteio) {
 
         Resultado res = new Resultado();
-
         String url = "https://www.lotodicas.com.br/api/" + tipo.toLowerCase() + "/" + sorteio + "";
 
         try {
             Reader reader = new InputStreamReader((new URL(url).openStream()));
-            Gson gson = new GsonBuilder().create();
-            res = gson.fromJson(reader, Resultado.class);
-            res.tipo = tipo;
+            ObjectMapper objectMapper = new ObjectMapper();
+            res = objectMapper.readValue(reader, Resultado.class);
+            res.setTipo(tipo);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -36,13 +38,13 @@ public class ResultadoService {
     public static Resultado carregarResultado(String tipo) {
 
         Resultado res = new Resultado();
-
         String url = "https://www.lotodicas.com.br/api/" + tipo.toLowerCase();
+
         try {
             Reader reader = new InputStreamReader((new URL(url).openStream()));
-            Gson gson = new GsonBuilder().create();
-            res = gson.fromJson(reader, Resultado.class);
-            res.tipo = tipo;
+            ObjectMapper objectMapper = new ObjectMapper();
+            res = objectMapper.readValue(reader, Resultado.class);
+            res.setTipo(tipo);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -52,7 +54,8 @@ public class ResultadoService {
 
     public static int[] verificarMaisSorteados(String sorteio, String tipo, int range, int dezenas, int quantidade) {
 
-        ArrayList<int[]> sorteios = new ArrayList<int[]>();
+        ArrayList<Object> sorteios = new ArrayList<Object>() {
+        };
         Map<Integer, Integer> numeros = new HashMap<Integer, Integer>();
         int[] n = new int[range * 10];
         int count = 0;
@@ -77,10 +80,10 @@ public class ResultadoService {
             numSorteio--;
         }
 
-        for (int num[] : sorteios) {
+        for (Object num : sorteios) {
 
-            for (int i = 0; i < num.length; i++) {
-                n[count] = num[i];
+            for (int i = 0; i < sorteios.size(); i++) {
+                n[count] = (int) num;
                 count++;
             }
         }

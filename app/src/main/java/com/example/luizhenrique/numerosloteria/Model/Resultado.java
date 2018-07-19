@@ -1,99 +1,181 @@
 package com.example.luizhenrique.numerosloteria.Model;
 
+import com.fasterxml.jackson.annotation.JsonAnyGetter;
+import com.fasterxml.jackson.annotation.JsonAnySetter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by luizhenrique on 28/07/17.
  */
-
+@JsonIgnoreProperties("cidades")
 public class Resultado implements Serializable {
 
-    public String tipo;
-    private int numero;
-    private String data;
-   // public int []numeroSorteio;
-   private int[]sorteio;
-    private int[] ganhadores;
-    private float[] rateio;
-    private String acumulado;
-    private float valor_acumulado;
-    //private String[] cidades;
-    private int proximo_estimativa;
-    private String proximo_data;
-    private String time;
-    public int Acertos;
-    int i = 0;
+    @JsonIgnoreProperties(value = "cidades", ignoreUnknown = true)
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    @JsonPropertyOrder({
+            "numero",
+            "data",
+            "sorteio",
+            "ganhadores",
+            "rateio",
+            "acumulado",
+            "valor_acumulado",
+//            "cidades",
+            "proximo_estimativa",
+            "proximo_data"
+    })
 
-    public int getNumero() {
+    @JsonProperty("numero")
+    private Integer numero;
+    @JsonProperty("data")
+    private String data;
+    @JsonProperty("sorteio")
+    private ArrayList<Object> sorteio = null;
+    @JsonProperty("ganhadores")
+    private ArrayList<Object> ganhadores = null;
+    @JsonProperty("rateio")
+    private ArrayList<Object> rateio = null;
+    @JsonProperty("acumulado")
+    private String acumulado;
+    @JsonProperty("valor_acumulado")
+    private Double valorAcumulado;
+    @JsonProperty("cidades")
+    private List<Object> cidades = null;
+    @JsonProperty("proximo_estimativa")
+    private Integer proximoEstimativa;
+    @JsonProperty("proximo_data")
+    private String proximoData;
+    private String tipo;
+    private String time;
+    @JsonIgnore
+    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+
+    @JsonProperty("numero")
+    public Integer getNumero() {
         return numero;
     }
 
-    public void setNumero(int numero) {
+    @JsonProperty("numero")
+    public void setNumero(Integer numero) {
         this.numero = numero;
     }
 
+    @JsonProperty("data")
     public String getData() {
         return data;
     }
 
+    @JsonProperty("data")
     public void setData(String data) {
         this.data = data;
     }
 
-    public int[] getSorteio() {
+    @JsonProperty("sorteio")
+    public List<Object> getSorteio() {
         return sorteio;
     }
 
-    public void setSorteio(int[] sorteio) {
+    @JsonProperty("sorteio")
+    public void setSorteio(ArrayList<Object> sorteio) {
         this.sorteio = sorteio;
     }
 
-    public int[] getGanhadores() {
+    @JsonProperty("ganhadores")
+    public List<Object> getGanhadores() {
         return ganhadores;
     }
 
-    public void setGanhadores(int[] ganhadores) {
+    @JsonProperty("ganhadores")
+    public void setGanhadores(ArrayList<Object> ganhadores) {
         this.ganhadores = ganhadores;
     }
 
-    public float[] getRateio() {
+    @JsonProperty("rateio")
+    public List<Object> getRateio() {
         return rateio;
     }
 
-    public void setRateio(float[] rateio) {
+    @JsonProperty("rateio")
+    public void setRateio(ArrayList<Object> rateio) {
         this.rateio = rateio;
     }
 
+    @JsonProperty("acumulado")
     public String getAcumulado() {
         return acumulado;
     }
 
+    @JsonProperty("acumulado")
     public void setAcumulado(String acumulado) {
         this.acumulado = acumulado;
     }
 
-    public float getValor_acumulado() {
-        return valor_acumulado;
+    @JsonProperty("valor_acumulado")
+    public Double getValorAcumulado() {
+        return valorAcumulado;
     }
 
-    public void setValor_acumulado(float valor_acumulado) {
-        this.valor_acumulado = valor_acumulado;
+    @JsonProperty("valor_acumulado")
+    public void setValorAcumulado(Double valorAcumulado) {
+        this.valorAcumulado = valorAcumulado;
     }
 
-    public int getProximo_estimativa() {
-        return proximo_estimativa;
+    @JsonProperty("cidades")
+    public List<Object> getCidades() {
+        return cidades;
     }
 
-    public void setProximo_estimativa(int proximo_estimativa) {
-        this.proximo_estimativa = proximo_estimativa;
+    @JsonProperty("cidades")
+    public void setCidades(List<Object> cidades) {
+        this.cidades = cidades;
     }
 
-    public String getProximo_data() {
-        return proximo_data;
+    @JsonProperty("proximo_estimativa")
+    public Integer getProximoEstimativa() {
+        return proximoEstimativa;
     }
 
-    public void setProximo_data(String proximo_data) {
-        this.proximo_data = proximo_data;
+    @JsonProperty("proximo_estimativa")
+    public void setProximoEstimativa(Integer proximoEstimativa) {
+        this.proximoEstimativa = proximoEstimativa;
+    }
+
+    @JsonProperty("proximo_data")
+    public String getProximoData() {
+        return proximoData;
+    }
+
+    @JsonProperty("proximo_data")
+    public void setProximoData(String proximoData) {
+        this.proximoData = proximoData;
+    }
+
+    @JsonAnyGetter
+    public Map<String, Object> getAdditionalProperties() {
+        return this.additionalProperties;
+    }
+
+    @JsonAnySetter
+    public void setAdditionalProperty(String name, Object value) {
+        this.additionalProperties.put(name, value);
+    }
+
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
     }
 
     public String getTime() {

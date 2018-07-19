@@ -9,6 +9,7 @@ import com.example.luizhenrique.numerosloteria.Services.ResultadoTask;
 import com.example.luizhenrique.numerosloteria.View.DetalhesJogoView;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 public class DetalhesJogoPresenterImpl implements DetalhesJogoPresenter {
@@ -28,18 +29,18 @@ public class DetalhesJogoPresenterImpl implements DetalhesJogoPresenter {
 
         ArrayList<Integer> numerosAcertos = new ArrayList<>();
 
-        int[] numerosInt = GeradorDeNumeros.ParseToInt(jogo);
+        int[] numerosJogados = GeradorDeNumeros.ParseToInt(jogo);
 
         if (resultado == null){
             return numerosAcertos;
         }else{
 
-            int[] numerosSorteados = resultado.getSorteio();
+            List<Object> numerosSorteados = resultado.getSorteio();
 
-            for (int aNumerosInt : numerosInt) {
-                for (int numerosSorteado : numerosSorteados) {
-                    if (aNumerosInt == numerosSorteado) {
-                        numerosAcertos.add(aNumerosInt);
+            for (int nums : numerosJogados) {
+                for (Object numerosSorteado : numerosSorteados) {
+                    if (numerosSorteado.equals(nums)) {
+                        numerosAcertos.add(nums);
                     }
                 }
             }
@@ -49,9 +50,9 @@ public class DetalhesJogoPresenterImpl implements DetalhesJogoPresenter {
 
     // verifica quanto a apsota rendeu em reais
 
-    public float verificarPremiacao(Resultado res, Jogo jogo){
+    public Object verificarPremiacao(Resultado res, Jogo jogo){
 
-        float valorPremio = 0;
+        Object valorPremio = 0;
         int[] premiacaoes;
         int count = 0;
 
@@ -65,7 +66,7 @@ public class DetalhesJogoPresenterImpl implements DetalhesJogoPresenter {
 
             if (num == acertos){
 
-                valorPremio = res.getRateio()[count];
+                valorPremio = res.getRateio().get(count);
 
             }else{
                 count++;
@@ -77,13 +78,13 @@ public class DetalhesJogoPresenterImpl implements DetalhesJogoPresenter {
         }
 
     @Override
-    public float verificarPremiacaoTime(Resultado resultado, Jogo jogo) {
+    public Object verificarPremiacaoTime(Resultado resultado, Jogo jogo) {
 
-        float premioTimeCoracao = 0;
+        Object premioTimeCoracao = 0;
 
         if (resultado.getTime().equals(jogo.timeDoCoracao)){
 
-            premioTimeCoracao = resultado.getRateio()[5];
+            premioTimeCoracao = resultado.getRateio().get(5);
 
         }
 
@@ -104,7 +105,7 @@ public class DetalhesJogoPresenterImpl implements DetalhesJogoPresenter {
             }
             else {
 
-                txt = "Sorteio ocorrerá dia "+ ResultadoService.formatarData(resAnt.getProximo_data());
+                txt = "Sorteio ocorrerá dia "+ ResultadoService.formatarData(resAnt.getProximoData());
             }
         } catch (InterruptedException | ExecutionException e) {
             e.printStackTrace();

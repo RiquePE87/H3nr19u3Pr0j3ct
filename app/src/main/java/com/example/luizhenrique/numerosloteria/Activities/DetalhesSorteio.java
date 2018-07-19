@@ -78,7 +78,7 @@ public class DetalhesSorteio extends AppCompatActivity implements DetalhesSortei
             @Override
             public void onClick(View v) {
                 try {
-                    carregarSorteio(tipo,String.valueOf(resultado.getNumero() -1));
+                    carregarSorteio(tipo,String.valueOf(resultado.getNumero()-1));
                 }catch (Exception ex){
                     ex.getMessage();
                 }
@@ -89,7 +89,7 @@ public class DetalhesSorteio extends AppCompatActivity implements DetalhesSortei
             @Override
             public void onClick(View v) {
 
-                carregarSorteio(tipo,String.valueOf(resultado.getNumero() +1));
+                carregarSorteio(tipo,String.valueOf(resultado.getNumero()+1));
             }
         });
     }
@@ -107,7 +107,7 @@ public class DetalhesSorteio extends AppCompatActivity implements DetalhesSortei
             }
 
         }catch (Exception ec){
-
+            ec.printStackTrace();
         }
 
         Locale locale;
@@ -115,7 +115,7 @@ public class DetalhesSorteio extends AppCompatActivity implements DetalhesSortei
 
         numberFormat = NumberFormat.getCurrencyInstance(locale);
 
-        String JogoMaiuscula = resultado.tipo.toUpperCase();
+        String JogoMaiuscula = resultado.getTipo().toUpperCase();
 
         tvJogo = findViewById(R.id.tvDetJogo);
         tvSorteio = findViewById(R.id.tvDetSorteio);
@@ -139,7 +139,7 @@ public class DetalhesSorteio extends AppCompatActivity implements DetalhesSortei
 
         String data = ResultadoService.formatarData(resultado.getData());
 
-        String dataproximo = ResultadoService.formatarData(resultado.getProximo_data());
+        String dataproximo = ResultadoService.formatarData(resultado.getProximoData());
 
         detalhesSorteioPresenter.preencherGanhadores(resultado);
 
@@ -149,17 +149,17 @@ public class DetalhesSorteio extends AppCompatActivity implements DetalhesSortei
         if (resultado.getAcumulado().equals("sim")){
 
             tvAcumulou.setText("Acumulou");
-            tvValor.setText(numberFormat.format(resultado.getValor_acumulado()));
+            tvValor.setText(numberFormat.format(resultado.getValorAcumulado()));
         }else{
 
-            tvValor.setText(numberFormat.format(resultado.getRateio()[0]));
+            tvValor.setText(numberFormat.format(resultado.getRateio().get(0)));
 
 
-            if (resultado.getGanhadores()[0] == 1){
-                tvAcumulou.setText(resultado.getGanhadores()[0]+" Ganhador");
+            if (resultado.getGanhadores().get(0).equals(1)){
+                tvAcumulou.setText(resultado.getGanhadores().get(0)+" Ganhador");
             }
             else{
-                tvAcumulou.setText(resultado.getGanhadores()[0]+" Ganhadores");
+                tvAcumulou.setText(resultado.getGanhadores().get(0)+" Ganhadores");
             }
             }
 
@@ -169,10 +169,10 @@ public class DetalhesSorteio extends AppCompatActivity implements DetalhesSortei
         TableRow.LayoutParams lp = new TableRow.LayoutParams(160,160);
         gridLayout.removeAllViews();
 
-        for (int i = 0; i< resultado.getSorteio().length; i++){
+        for (int i = 0; i< resultado.getSorteio().size(); i++){
 
             TextView t = new TextView(this);
-            t.setText(String.valueOf(resultado.getSorteio()[i]));
+            t.setText(String.valueOf(resultado.getSorteio().get(i)));
             t.setGravity(TextView.TEXT_ALIGNMENT_GRAVITY);
             t.setLayoutParams(lp);
             t.setBackgroundResource(R.drawable.bola);
@@ -182,7 +182,7 @@ public class DetalhesSorteio extends AppCompatActivity implements DetalhesSortei
             t.setTypeface(Typeface.DEFAULT_BOLD);
             gridLayout.addView(t);
 
-            switch (resultado.tipo){
+            switch (resultado.getTipo()){
 
                 case "mega-sena":
 
@@ -209,11 +209,11 @@ public class DetalhesSorteio extends AppCompatActivity implements DetalhesSortei
         }
 
         tvProximoSorteio.setText(dataproximo);
-        tvValorProximo.setText(numberFormat.format((resultado.getProximo_estimativa())));
+        tvValorProximo.setText(numberFormat.format((resultado.getProximoEstimativa())));
         tvTime.setText(resultado.getTime());
         tvTime.setVisibility(View.VISIBLE);
 
-        switch (resultado.tipo){
+        switch (resultado.getTipo()){
 
             case "mega-sena":
                 tvJogo.setBackgroundColor(Color.parseColor("#FF0F4B11"));
@@ -241,7 +241,7 @@ public class DetalhesSorteio extends AppCompatActivity implements DetalhesSortei
         }
     }
 
-    public void inserirLinha(String acertos,String ganhadores,float premio, int rows ){
+    public void inserirLinha(String acertos, String ganhadores, Object premio, int rows ){
 
         TableRow row = new TableRow(this);
         TableRow.LayoutParams lp = new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT);
