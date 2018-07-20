@@ -71,7 +71,6 @@ public class ResultadosAdapter extends BaseAdapter {
                 TextView tvResSorteio = linha.findViewById(R.id.tvResNumSorteio);
                 TextView tvResData = linha.findViewById(R.id.tvResData);
                 gridLayout = linha.findViewById(R.id.glResNumeros);
-                gridLayoutJogo2 = linha.findViewById(R.id.glResNumerosJogo2);
 
                 lp = new TableRow.LayoutParams(160, 160);
 
@@ -87,7 +86,6 @@ public class ResultadosAdapter extends BaseAdapter {
 
                     for (int i = 0; i < res.getSorteio().size(); i++) {
 
-                        gridLayoutJogo2.setVisibility(View.GONE);
                         TextView t = new TextView(linha.getContext());
                         t.setText(String.valueOf(res.getSorteio().get(i)));
                         t.setGravity(TextView.TEXT_ALIGNMENT_GRAVITY);
@@ -130,6 +128,7 @@ public class ResultadosAdapter extends BaseAdapter {
                 tvResData.setText(data);
 
                 switch (res.getTipo()) {
+
                     case "mega-sena":
                         tvResTipoJogo.setTextColor(Color.parseColor("#0f5935"));
                         break;
@@ -173,7 +172,6 @@ public class ResultadosAdapter extends BaseAdapter {
             t.setBackgroundResource(R.drawable.boladuplasena);
 
             gridLayout.addView(t);
-
         }
     }
 }

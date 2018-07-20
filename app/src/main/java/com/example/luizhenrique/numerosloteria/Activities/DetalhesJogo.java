@@ -71,7 +71,7 @@ public class DetalhesJogo extends AppCompatActivity implements DetalhesJogoView 
         mapBolas = new HashMap<>();
 
         mapBolas.put("Mega-Sena",R.drawable.bolamega);
-        mapBolas.put("duplasena",R.drawable.bolamega);
+        mapBolas.put("Dupla-Sena",R.drawable.boladuplasena);
         mapBolas.put("LotoFacil",R.drawable.bolalotofacil);
         mapBolas.put("Quina",R.drawable.bolaquina);
         mapBolas.put("LotoMania",R.drawable.bolalotomania);
@@ -138,6 +138,10 @@ public class DetalhesJogo extends AppCompatActivity implements DetalhesJogoView 
                 toolbarDetalhes.setBackgroundColor(Color.parseColor("maroon"));
                 tvTimedoCoracao.setText(jogo.timeDoCoracao);
                 tvTimedoCoracao.setVisibility(View.VISIBLE);
+                break;
+            case "Dupla-Sena":
+                tvTipoJogo.setBackgroundColor(Color.parseColor("#af3869"));
+                toolbarDetalhes.setBackgroundColor(Color.parseColor("#af3869"));
                 break;
         }
 

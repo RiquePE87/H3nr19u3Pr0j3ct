@@ -68,16 +68,6 @@
         android:rowCount="5"
         android:textAlignment="center"
         android:foregroundGravity="center_horizontal"/>
-    <GridLayout
-        android:layout_gravity="top|center"
-        android:id="@+id/glResNumerosJogo2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:columnCount="6"
-        android:rowCount="5"
-        android:textAlignment="center"
-        android:foregroundGravity="center_horizontal"/>
 </LinearLayout>
 
     </LinearLayout>

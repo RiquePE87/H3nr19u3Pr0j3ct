@@ -35,16 +35,38 @@ public class DetalhesJogoPresenterImpl implements DetalhesJogoPresenter {
             return numerosAcertos;
         }else{
 
-            List<Object> numerosSorteados = resultado.getSorteio();
+            if (resultado.getTipo().equals("Dupla-Sena")){
 
-            for (int nums : numerosJogados) {
-                for (Object numerosSorteado : numerosSorteados) {
-                    if (numerosSorteado.equals(nums)) {
-                        numerosAcertos.add(nums);
+                List<Integer> numerosSorteados = new ArrayList<>();
+                List<Integer> numsJogo1 = (ArrayList<Integer>) resultado.getSorteio().get(0);
+                List<Integer> numsJogo2 = (ArrayList<Integer>) resultado.getSorteio().get(1);
+
+                for (int i = 0; i < 6;i++){
+                    numerosSorteados.add(numsJogo1.get(i));
+                    numerosSorteados.add(numsJogo2.get(i));
+                }
+
+                for (int nums : numerosJogados) {
+                    for (Object numerosSorteado : numerosSorteados) {
+                        if (numerosSorteado.equals(nums)) {
+                            numerosAcertos.add(nums);
+                        }
                     }
                 }
+                return numerosAcertos;
+
+            }else{
+                List<Object> numerosSorteados = resultado.getSorteio();
+
+                for (int nums : numerosJogados) {
+                    for (Object numerosSorteado : numerosSorteados) {
+                        if (numerosSorteado.equals(nums)) {
+                            numerosAcertos.add(nums);
+                        }
+                    }
+                }
+                return numerosAcertos;
             }
-            return numerosAcertos;
         }
     }
 
