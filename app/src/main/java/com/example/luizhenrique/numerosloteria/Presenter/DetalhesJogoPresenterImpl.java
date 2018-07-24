@@ -35,27 +35,6 @@ public class DetalhesJogoPresenterImpl implements DetalhesJogoPresenter {
             return numerosAcertos;
         }else{
 
-            if (resultado.getTipo().equals("Dupla-Sena")){
-
-                List<Integer> numerosSorteados = new ArrayList<>();
-                List<Integer> numsJogo1 = (ArrayList<Integer>) resultado.getSorteio().get(0);
-                List<Integer> numsJogo2 = (ArrayList<Integer>) resultado.getSorteio().get(1);
-
-                for (int i = 0; i < 6;i++){
-                    numerosSorteados.add(numsJogo1.get(i));
-                    numerosSorteados.add(numsJogo2.get(i));
-                }
-
-                for (int nums : numerosJogados) {
-                    for (Object numerosSorteado : numerosSorteados) {
-                        if (numerosSorteado.equals(nums)) {
-                            numerosAcertos.add(nums);
-                        }
-                    }
-                }
-                return numerosAcertos;
-
-            }else{
                 List<Object> numerosSorteados = resultado.getSorteio();
 
                 for (int nums : numerosJogados) {
@@ -68,6 +47,36 @@ public class DetalhesJogoPresenterImpl implements DetalhesJogoPresenter {
                 return numerosAcertos;
             }
         }
+
+    public ArrayList<ArrayList<Integer>> verificarNumerosAcertosDuplaSena(Resultado resultado,Jogo jogo) {
+
+        ArrayList<ArrayList<Integer>> numerosAcertos = new ArrayList<>();
+        numerosAcertos.add(new ArrayList<Integer>());
+        numerosAcertos.add(new ArrayList<Integer>());
+
+        int[] numerosJogados = GeradorDeNumeros.ParseToInt(jogo);
+
+            List<Integer> numsJogo1 = (ArrayList<Integer>) resultado.getSorteio().get(0);
+            List<Integer> numsJogo2 = (ArrayList<Integer>) resultado.getSorteio().get(1);
+
+
+            for (int nums : numerosJogados) {
+                for (Object numerosSorteado : numsJogo1) {
+                    if (numerosSorteado.equals(nums)) {
+                        numerosAcertos.get(0).add(nums);
+                    }
+                }
+            }
+
+            for (int nums : numerosJogados) {
+                for (Object numerosSorteado : numsJogo2) {
+                    if (numerosSorteado.equals(nums)) {
+                        numerosAcertos.get(1).add(nums);
+                    }
+                }
+            }
+
+            return numerosAcertos;
     }
 
     // verifica quanto a apsota rendeu em reais
@@ -81,6 +90,8 @@ public class DetalhesJogoPresenterImpl implements DetalhesJogoPresenter {
         int acertos = verificarNumerosAcertos(res,jogo).size();
 
         premiacaoes = jogoManager.getAcertos(jogo.tipoJogo.toLowerCase());
+
+
 
         //count = premiacaoes.length;
 
@@ -98,6 +109,45 @@ public class DetalhesJogoPresenterImpl implements DetalhesJogoPresenter {
         return valorPremio;
 
         }
+
+        public ArrayList<Float> verificarPremiacaoDuplaSena(Resultado res, Jogo jogo){
+
+            ArrayList<Float> valorPremio = new ArrayList<>();
+            int[] premiacaoes;
+            int count = 0;
+
+            int acertos1 = verificarNumerosAcertosDuplaSena(res,jogo).get(0).size();
+            int acertos2 = verificarNumerosAcertosDuplaSena(res,jogo).get(1).size();
+
+            ArrayList<Float> rateioJogo1 =  (ArrayList<Float>) res.getRateio().get(0);
+            ArrayList<Float> rateioJogo2 =  (ArrayList<Float>) res.getRateio().get(1);
+
+
+            premiacaoes = jogoManager.getAcertos(jogo.tipoJogo.toLowerCase());
+
+            for (int num: premiacaoes){
+
+                if (num == acertos1){
+
+                    valorPremio.add(rateioJogo1.get(count));
+
+                }else{
+                    count++;
+                }
+            }
+
+            for (int num: premiacaoes){
+
+                if (num == acertos2){
+
+                    valorPremio.add(rateioJogo2.get(count));
+                }else{
+                    count++;
+                }
+            }
+
+        return  valorPremio;
+    }
 
     @Override
     public Object verificarPremiacaoTime(Resultado resultado, Jogo jogo) {

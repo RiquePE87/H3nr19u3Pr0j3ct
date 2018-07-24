@@ -144,10 +144,8 @@ public class DetalhesJogo extends AppCompatActivity implements DetalhesJogoView 
                 toolbarDetalhes.setBackgroundColor(Color.parseColor("#af3869"));
                 break;
         }
-
         mostrarAposta();
         gerarGrid();
-
     }
 
     @Override
@@ -183,39 +181,108 @@ public class DetalhesJogo extends AppCompatActivity implements DetalhesJogoView 
     @Override
     public void gerarGrid() {
 
+        ArrayList<ArrayList<Integer>> numerosAcertadosDupla = new ArrayList<>();
+
         GridLayout tb = findViewById(R.id.glDetalhesJogoNumeros);
+        GridLayout tb2 = findViewById(R.id.glDetalhesJogoNumeros2);
+
         TableRow.LayoutParams lp = new TableRow.LayoutParams(160, 160);
 
         int[] nums = GeradorDeNumeros.ParseToInt(jogo);
 
-        numerosAcertados = detalhesJogoPresenter.verificarNumerosAcertos(res,jogo);
+        if (jogo.tipoJogo.equals("Dupla-Sena")){
 
-        for (int num : nums) {
+            numerosAcertadosDupla = detalhesJogoPresenter.verificarNumerosAcertosDuplaSena(res,jogo);
+        }else{
+            numerosAcertados = detalhesJogoPresenter.verificarNumerosAcertos(res,jogo);
+        }
 
-            TextView t = new TextView(this);
-            t.setText(String.valueOf(num));
-            t.setGravity(TextView.TEXT_ALIGNMENT_GRAVITY);
-            t.setLayoutParams(lp);
-            t.setGravity(Gravity.CENTER_VERTICAL | Gravity.CENTER_HORIZONTAL);
-            t.setTextSize(18);
-            t.setTextColor(Color.WHITE);
-            t.setTypeface(Typeface.DEFAULT_BOLD);
+        if (jogo.tipoJogo.equals("Dupla-Sena")) {
 
-            if (numerosAcertados.size() > 0) {
-                for (int n : numerosAcertados) {
+            for (int num : nums) {
 
-                    if (n == num) {
-                        t.setBackgroundResource(corBola);
-                        break;
-                    } else {
-                        t.setBackgroundResource(R.drawable.bolanaoac);
+                TextView t = new TextView(this);
+                t.setText(String.valueOf(num));
+                t.setGravity(TextView.TEXT_ALIGNMENT_GRAVITY);
+                t.setLayoutParams(lp);
+                t.setGravity(Gravity.CENTER_VERTICAL | Gravity.CENTER_HORIZONTAL);
+                t.setTextSize(18);
+                t.setTextColor(Color.WHITE);
+                t.setTypeface(Typeface.DEFAULT_BOLD);
 
+                if (numerosAcertadosDupla.get(0).size() > 0) {
+                    for (int n : numerosAcertadosDupla.get(0)) {
+
+                        if (n == num) {
+                            t.setBackgroundResource(corBola);
+                            break;
+                        } else {
+                            t.setBackgroundResource(R.drawable.bolanaoac);
+                        }
                     }
+                } else {
+                    t.setBackgroundResource(R.drawable.bolanaoac);
                 }
-            } else {
-                t.setBackgroundResource(R.drawable.bolanaoac);
+                tb.addView(t);
             }
-            tb.addView(t);
+
+            for (int num : nums) {
+
+                TextView t = new TextView(this);
+                t.setText(String.valueOf(num));
+                t.setGravity(TextView.TEXT_ALIGNMENT_GRAVITY);
+                t.setLayoutParams(lp);
+                t.setGravity(Gravity.CENTER_VERTICAL | Gravity.CENTER_HORIZONTAL);
+                t.setTextSize(18);
+                t.setTextColor(Color.WHITE);
+                t.setTypeface(Typeface.DEFAULT_BOLD);
+
+                if (numerosAcertadosDupla.get(1).size() > 0) {
+                    for (int n : numerosAcertadosDupla.get(1)) {
+
+                        if (n == num) {
+                            t.setBackgroundResource(corBola);
+                            break;
+                        } else {
+                            t.setBackgroundResource(R.drawable.bolanaoac);
+
+                        }
+                    }
+                } else {
+                    t.setBackgroundResource(R.drawable.bolanaoac);
+                }
+                tb2.addView(t);
+            }
+        }
+        else {
+
+            for (int num : nums) {
+
+                TextView t = new TextView(this);
+                t.setText(String.valueOf(num));
+                t.setGravity(TextView.TEXT_ALIGNMENT_GRAVITY);
+                t.setLayoutParams(lp);
+                t.setGravity(Gravity.CENTER_VERTICAL | Gravity.CENTER_HORIZONTAL);
+                t.setTextSize(18);
+                t.setTextColor(Color.WHITE);
+                t.setTypeface(Typeface.DEFAULT_BOLD);
+
+                if (numerosAcertados.size() > 0) {
+                    for (int n : numerosAcertados) {
+
+                        if (n == num) {
+                            t.setBackgroundResource(corBola);
+                            break;
+                        } else {
+                            t.setBackgroundResource(R.drawable.bolanaoac);
+
+                        }
+                    }
+                } else {
+                    t.setBackgroundResource(R.drawable.bolanaoac);
+                }
+                tb.addView(t);
+            }
         }
     }
 

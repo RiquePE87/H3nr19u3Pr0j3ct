@@ -19,6 +19,7 @@ public class DetalhesSorteioPresenterImpl implements DetalhesSorteioPresenter {
     public void preencherGanhadores(Resultado res) {
 
         detalhesSorteioView.removerLinhas();
+        rows = 1;
         int[] acertos = new JogoManager().getAcertos(res.getTipo().toLowerCase());
         String txt;
 
