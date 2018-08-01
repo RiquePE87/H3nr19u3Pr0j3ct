@@ -2,14 +2,11 @@ package com.example.luizhenrique.numerosloteria.Services;
 
 import android.content.Context;
 import android.widget.Toast;
-
 import com.example.luizhenrique.numerosloteria.Activities.AdicionarJogo;
 import com.example.luizhenrique.numerosloteria.Model.Jogo;
 import com.example.luizhenrique.numerosloteria.View.AdicionarJogoView;
-
 import java.util.List;
 import java.util.Random;
-
 import io.realm.Realm;
 import io.realm.RealmResults;
 
