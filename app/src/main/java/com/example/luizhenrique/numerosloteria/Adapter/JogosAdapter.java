@@ -109,6 +109,10 @@ public class JogosAdapter extends BaseAdapter {
                         case "Dupla-Sena":
                             t.setBackgroundResource(R.drawable.boladuplasena);
                             break;
+
+                        case "Dia-de-Sorte":
+                            t.setBackgroundResource(R.drawable.boladiadesorte);
+                            break;
                     }
                 }
 
@@ -132,6 +136,8 @@ public class JogosAdapter extends BaseAdapter {
                     case "Dupla-Sena":
                         tvTipoJogo.setTextColor(Color.parseColor("#af3869"));
                         break;
+                    case "Dia-de-Sorte":
+                        tvTipoJogo.setTextColor(Color.parseColor("#d3b315"));
                 }
 
             }catch (Exception ex){

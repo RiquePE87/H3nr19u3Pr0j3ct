@@ -76,6 +76,7 @@ public class DetalhesJogo extends AppCompatActivity implements DetalhesJogoView 
         mapBolas.put("Quina",R.drawable.bolaquina);
         mapBolas.put("LotoMania",R.drawable.bolalotomania);
         mapBolas.put("TimeMania",R.drawable.bolatimemania);
+        mapBolas.put("Dia-de-Sorte",R.drawable.boladiadesorte);
 
         tvTipoJogo = findViewById(R.id.tvTipoJogo);
         tvSorteio = findViewById(R.id.tvSorteio);
@@ -142,6 +143,11 @@ public class DetalhesJogo extends AppCompatActivity implements DetalhesJogoView 
             case "Dupla-Sena":
                 tvTipoJogo.setBackgroundColor(Color.parseColor("#af3869"));
                 toolbarDetalhes.setBackgroundColor(Color.parseColor("#af3869"));
+                break;
+
+            case "Dia-de-Sorte":
+                tvTipoJogo.setBackgroundColor(Color.parseColor("#d3b315"));
+                toolbarDetalhes.setBackgroundColor(Color.parseColor("#d3b315"));
                 break;
         }
         mostrarAposta();
