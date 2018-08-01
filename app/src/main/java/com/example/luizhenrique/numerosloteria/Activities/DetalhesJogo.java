@@ -148,6 +148,8 @@ public class DetalhesJogo extends AppCompatActivity implements DetalhesJogoView 
             case "Dia-de-Sorte":
                 tvTipoJogo.setBackgroundColor(Color.parseColor("#d3b315"));
                 toolbarDetalhes.setBackgroundColor(Color.parseColor("#d3b315"));
+                tvTimedoCoracao.setText(jogo.mesDeSorte);
+                tvTimedoCoracao.setVisibility(View.VISIBLE);
                 break;
         }
         mostrarAposta();
@@ -163,13 +165,17 @@ public class DetalhesJogo extends AppCompatActivity implements DetalhesJogoView 
 
         try {
 
-            if (res != null) {
+            if (res.getNumero() != null) {
 
                 tvAcertos.setText(String.valueOf(detalhesJogoPresenter.verificarNumerosAcertos(res, jogo).size()));
                 tvValorPremio.setText(String.valueOf("Você ganhou " + numberFormat.format(detalhesJogoPresenter.verificarPremiacao(res,jogo))));
 
                 if (res.getTipo().equals("TimeMania")){
                     tvPremioTimeCoracao.setText("Time do Coração "+ numberFormat.format(detalhesJogoPresenter.verificarPremiacaoTime(res,jogo)));
+                    tvPremioTimeCoracao.setVisibility(View.VISIBLE);
+
+                }else if (res.getTipo().equals("Dia-de-Sorte")){
+                    tvPremioTimeCoracao.setText("Mês de Sorte "+ numberFormat.format(detalhesJogoPresenter.verificarPremiacaoMes(res,jogo)));
                     tvPremioTimeCoracao.setVisibility(View.VISIBLE);
                 }
 

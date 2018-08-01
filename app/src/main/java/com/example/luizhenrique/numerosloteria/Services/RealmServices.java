@@ -57,6 +57,7 @@ public class RealmServices {
         jogo.sorteio = j.sorteio;
         jogo.timeDoCoracao = j.timeDoCoracao;
         jogo.tipoJogo = j.tipoJogo;
+        jogo.mesDeSorte = j.mesDeSorte;
         realm.commitTransaction();
 
         realm.close();

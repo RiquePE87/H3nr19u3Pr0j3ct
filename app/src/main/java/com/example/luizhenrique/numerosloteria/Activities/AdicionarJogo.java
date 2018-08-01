@@ -99,8 +99,6 @@ public class AdicionarJogo extends AppCompatActivity implements AdicionarJogoVie
         tvMeses = findViewById(R.id.txtMeses);
         spinnerTimes = findViewById(R.id.spinnerTimes);
         spinnerMeses = findViewById(R.id.spinnerMeses);
-
-
         progressDialog = findViewById(R.id.progressBarAdicionar);
         btnProximoConcurso = findViewById(R.id.btnProximoConcurso);
         btnCapturarNumeros = findViewById(R.id.buttonCapturarNumeros);
@@ -320,6 +318,8 @@ public class AdicionarJogo extends AppCompatActivity implements AdicionarJogoVie
             tvNumerosGerados.setText(numerosCapturados);
         }
     }
+
+
     @Override
     public void setSpinText(Spinner spin, String text)
     {

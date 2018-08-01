@@ -31,7 +31,8 @@ public class DetalhesJogoPresenterImpl implements DetalhesJogoPresenter {
 
         int[] numerosJogados = GeradorDeNumeros.ParseToInt(jogo);
 
-        if (resultado == null){
+        if (resultado.getNumero() == null){
+
             return numerosAcertos;
         }else{
 
@@ -161,6 +162,17 @@ public class DetalhesJogoPresenterImpl implements DetalhesJogoPresenter {
         }
 
         return premioTimeCoracao;
+    }
+
+    public Object verificarPremiacaoMes(Resultado resultado, Jogo jogo){
+
+        Object premiacaoMes = 0;
+
+        if (resultado.getMes().equals(jogo.mesDeSorte)){
+            premiacaoMes = resultado.getRateio().get(5);
+        }
+
+        return premiacaoMes;
     }
 
     @Override
