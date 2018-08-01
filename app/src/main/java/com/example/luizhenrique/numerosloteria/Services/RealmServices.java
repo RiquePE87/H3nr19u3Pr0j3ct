@@ -14,6 +14,7 @@ public class RealmServices {
 
     private Context context;
     //private Realm realm;
+    String cas;
 
     AdicionarJogoView adicionarJogoView;
 
