@@ -33,14 +33,17 @@ public class AdicionarJogo extends AppCompatActivity implements AdicionarJogoVie
     Spinner spinner_tipoJogo;
     Spinner spinner_NumeroDezenas;
     TextView tvNumerosGerados;
+    TextView tvMeses;
     EditText etSorteio;
     Button btnGerarNumeros;
     Button btnEscolherNumeros;
     Button btnMaisSorteados;
     Button btnProximoConcurso;
+    Button btnCapturarNumeros;
     Toolbar toolbar;
     TextView tvTimesdoCoracao;
     Spinner spinnerTimes;
+    Spinner spinnerMeses;
     ProgressBar progressDialog;
     ArrayAdapter<String> numeroDesenasJogo;
 
@@ -53,6 +56,8 @@ public class AdicionarJogo extends AppCompatActivity implements AdicionarJogoVie
     public String numeros;
 
     public String timeDoCoracao;
+
+    public String mesDeSorte;
 
     public static int[] dezenas;
 
@@ -91,9 +96,14 @@ public class AdicionarJogo extends AppCompatActivity implements AdicionarJogoVie
         btnEscolherNumeros = findViewById(R.id.buttonEscolher);
         btnMaisSorteados = findViewById(R.id.btnMaisSorteados);
         tvTimesdoCoracao = findViewById(R.id.txtTimesdoCoracao);
+        tvMeses = findViewById(R.id.txtMeses);
         spinnerTimes = findViewById(R.id.spinnerTimes);
+        spinnerMeses = findViewById(R.id.spinnerMeses);
+
+
         progressDialog = findViewById(R.id.progressBarAdicionar);
         btnProximoConcurso = findViewById(R.id.btnProximoConcurso);
+        btnCapturarNumeros = findViewById(R.id.buttonCapturarNumeros);
 
         mInterstitialAd = new InterstitialAd(this);
         mInterstitialAd.setAdUnitId("ca-app-pub-1281837718502232/9576019966");
@@ -150,6 +160,20 @@ public class AdicionarJogo extends AppCompatActivity implements AdicionarJogoVie
             }
         });
 
+        spinnerMeses.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+
+                mesDeSorte = spinnerMeses.getSelectedItem().toString();
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
         btnGerarNumeros.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -189,6 +213,15 @@ public class AdicionarJogo extends AppCompatActivity implements AdicionarJogoVie
             }
         });
 
+        btnCapturarNumeros.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent it = new Intent(AdicionarJogo.this,CameraOCRActivity.class);
+                startActivityForResult(it,2);
+            }
+        });
+
     }
 
     public void gerarTipoJogoView(){
@@ -202,6 +235,8 @@ public class AdicionarJogo extends AppCompatActivity implements AdicionarJogoVie
 
         spinnerTimes.setVisibility(View.GONE);
         tvTimesdoCoracao.setVisibility(View.GONE);
+        tvMeses.setVisibility(View.GONE);
+        spinnerMeses.setVisibility(View.GONE);
 
         String[] tipoJogoJogadas = jogoManager.getTipoJogoNumeros(tipoJogo.toLowerCase());
         int rangeTipoJogo = jogoManager.getRangeJogo(tipoJogo.toLowerCase());
@@ -214,7 +249,12 @@ public class AdicionarJogo extends AppCompatActivity implements AdicionarJogoVie
         if (tipoJogo.equals("TimeMania")){
             tvTimesdoCoracao.setVisibility(View.VISIBLE);
             spinnerTimes.setVisibility(View.VISIBLE);
+        }else if (tipoJogo.equals("Dia-de-Sorte")){
+
+            tvMeses.setVisibility(View.VISIBLE);
+            spinnerMeses.setVisibility(View.VISIBLE);
         }
+
     }
 
     @Override
@@ -274,6 +314,10 @@ public class AdicionarJogo extends AppCompatActivity implements AdicionarJogoVie
             numeros = data.getStringExtra("numerosSelec");
             tvNumerosGerados.setText(numeros);
 
+        }else if (requestCode == RESULT_OK && requestCode == 2){
+
+            String numerosCapturados = data.getStringExtra("numerosCapturados");
+            tvNumerosGerados.setText(numerosCapturados);
         }
     }
     @Override
@@ -318,6 +362,7 @@ public class AdicionarJogo extends AppCompatActivity implements AdicionarJogoVie
             setTitle("Atualizar Aposta");
             setSpinText(spinner_NumeroDezenas, String.valueOf(jogo.NumeroDezenas));
             setSpinText(spinner_tipoJogo, jogo.tipoJogo);
+            setSpinText(spinnerMeses,jogo.mesDeSorte);
             spinner_tipoJogo.setEnabled(false);
             spinner_NumeroDezenas.setEnabled(false);
             btnEscolherNumeros.setEnabled(false);
@@ -341,6 +386,7 @@ public class AdicionarJogo extends AppCompatActivity implements AdicionarJogoVie
         jogo.sorteio = Integer.valueOf(etSorteio.getText().toString());
         jogo.tipoJogo = tipoJogo;
         jogo.timeDoCoracao = timeDoCoracao;
+        jogo.mesDeSorte = mesDeSorte;
 
         return jogo;
     }

@@ -57,6 +57,7 @@ public class Resultado implements Serializable {
     private String proximoData;
     private String tipo;
     private String time;
+    private String mes;
     @JsonIgnore
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
@@ -184,5 +185,13 @@ public class Resultado implements Serializable {
 
     public void setTime(String time) {
         this.time = time;
+    }
+
+    public String getMes() {
+        return mes;
+    }
+
+    public void setMes(String mes) {
+        this.mes = mes;
     }
 }

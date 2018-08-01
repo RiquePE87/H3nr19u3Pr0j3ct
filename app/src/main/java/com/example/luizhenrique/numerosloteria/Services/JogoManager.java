@@ -10,6 +10,7 @@ public class JogoManager {
     public static String[] quina = { "5", "6", "7" };
     public static String[] lotomania = { "50" };
     public static String[] timemania = {"10"};
+    public static String[] diadesorte = {"7", "8", "9", "10", "11", "12", "13", "14", "15"};
 
     private HashMap<String,String[]> dicTipoJogos;
 
@@ -21,6 +22,8 @@ public class JogoManager {
     private static int rangeLotoFacil = 25;
     private static int rangeQuina = 80;
     private static int rangeTimeMania = 80;
+    private static int rangeDiaDeSorte = 31;
+
 
     private static int[] acertosMegaSena = {6,5,4};
     private  static int[] acertosDuplaSena = {6,5,4,3};
@@ -28,6 +31,8 @@ public class JogoManager {
     private static int[] acertosLotoMania = {20,19,18,17,16,15,0};
     private static int[] acertosQuina = {5,4,3,2};
     private static int[] acertosTimeMania = {7,6,5,4,3,2};
+    private static int[] acertosDiaDeSorte = {7,6,5,4,3};
+
 
     private HashMap<String,int[]> dicAcertos;
 
@@ -43,6 +48,8 @@ public class JogoManager {
         dicTipoJogos.put("quina",quina);
         dicTipoJogos.put("lotomania",lotomania);
         dicTipoJogos.put("timemania",timemania);
+        dicTipoJogos.put("dia-de-sorte",diadesorte);
+
 
         dicRangeJogos.put("mega-sena",rangeMegaSena);
         dicRangeJogos.put("dupla-sena",rangeDuplaSena);
@@ -50,6 +57,7 @@ public class JogoManager {
         dicRangeJogos.put("lotofacil",rangeLotoFacil);
         dicRangeJogos.put("quina",rangeQuina);
         dicRangeJogos.put("timemania",rangeTimeMania);
+        dicRangeJogos.put("dia-de-sorte",rangeDiaDeSorte);
 
         dicAcertos.put("mega-sena",acertosMegaSena);
         dicAcertos.put("dupla-sena", acertosDuplaSena);
@@ -57,6 +65,7 @@ public class JogoManager {
         dicAcertos.put("lotofacil", acertosLotoFacil);
         dicAcertos.put("quina", acertosQuina);
         dicAcertos.put("timemania", acertosTimeMania);
+        dicAcertos.put("dia-de-sorte",acertosDiaDeSorte);
 
 
     }

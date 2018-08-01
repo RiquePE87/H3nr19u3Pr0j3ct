@@ -39,6 +39,7 @@ public class DetalhesSorteio extends AppCompatActivity implements DetalhesSortei
     TextView tvTime;
     TextView tvAnterior;
     TextView tvProximo;
+    TextView tvMes;
     List<Resultado> listResultados;
     TableLayout tableDetalhes;
     int rows = 1;
@@ -133,6 +134,14 @@ public class DetalhesSorteio extends AppCompatActivity implements DetalhesSortei
         tvAnterior = findViewById(R.id.tvAnterior);
         tvProximo = findViewById(R.id.tvProximo);
         tableDetalhes = findViewById(R.id.tblDetalhes);
+        tvMes = findViewById(R.id.tvMes);
+
+        if (resultado.getTipo().equals("dia-de-sorte")){
+            tvMes.setText(resultado.getMes());
+        }
+        else {
+            tvMes.setVisibility(View.GONE);
+        }
 
         if (resultado.getNumero() == ultimoConcurso) {
 
@@ -219,6 +228,10 @@ public class DetalhesSorteio extends AppCompatActivity implements DetalhesSortei
 
                         t.setBackgroundResource(R.drawable.bolatimemania);
                         break;
+                    case "dia-de-sorte":
+
+                        t.setBackgroundResource(R.drawable.boladiadesorte);
+                        break;
                 }
             }
         }
@@ -245,9 +258,12 @@ public class DetalhesSorteio extends AppCompatActivity implements DetalhesSortei
             case "timemania":
                 tvJogo.setBackgroundColor(Color.parseColor("maroon"));
                 break;
-
             case "dupla-sena":
                 tvJogo.setBackgroundColor(Color.parseColor("#af3869"));
+                break;
+            case "dia-de-sorte":
+                tvJogo.setBackgroundColor(Color.parseColor("#d3b315"));
+                break;
         }
 
     }

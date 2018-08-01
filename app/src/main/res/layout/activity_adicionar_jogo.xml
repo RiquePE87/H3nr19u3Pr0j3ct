@@ -85,6 +85,28 @@
         </Spinner>
 
         <TextView
+            android:id="@+id/txtMeses"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="10dp"
+            android:text="Mês de Sorte"
+            android:textStyle="bold"
+            android:visibility="gone" />
+
+        <Spinner
+            android:id="@+id/spinnerMeses"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="5dp"
+            android:layout_marginStart="5dp"
+            android:entries="@array/meses"
+            android:visibility="gone">
+        </Spinner>
+
+        <TextView
             android:id="@+id/textView2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -143,6 +165,16 @@
                 android:layout_height="wrap_content"
                 android:elevation="0dp"
                 android:text="@string/escolher"
+                android:textColor="@color/secondaryDarkColor"
+                android:textSize="16sp" />
+
+            <Button
+                android:id="@+id/buttonCapturarNumeros"
+                style="?android:attr/borderlessButtonStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:elevation="0dp"
+                android:text="@string/gerar"
                 android:textColor="@color/secondaryDarkColor"
                 android:textSize="16sp" />
 

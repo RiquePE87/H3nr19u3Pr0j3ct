@@ -4,7 +4,7 @@
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
-
+    <uses-permission android:name="android.permission.CAMERA" />
 
     <application
         android:allowBackup="true"
@@ -13,7 +13,6 @@
         android:roundIcon="@mipmap/icone_numeros_da_sorte"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
-
         <activity
             android:name=".Activities.SplashActicity"
             android:theme="@style/SplashTheme">
@@ -23,23 +22,24 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Activities.AdicionarJogo"
-            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".Activities.AdicionarJogo"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".Activities.DetalhesJogo"
             android:noHistory="true" />
         <activity
             android:name=".Activities.MainActivity"
             android:label="@string/title_activity_main2"
-            android:theme="@style/AppTheme.NoActionBar">
-
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
             android:name=".Activities.DetalhesSorteio"
             android:label="@string/title_activity_detalhes_sorteio"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".Activities.SelecaoNumeros" />
+        <activity android:name=".Activities.CameraOCRActivity"></activity>
 
+        <meta-data android:name="com.google.android.gms.vision.DEPENDENCIES" android:value="ocr"/>
     </application>
 
 </manifest>

@@ -119,6 +119,10 @@ public class ResultadosAdapter extends BaseAdapter {
 
                                 t.setBackgroundResource(R.drawable.bolatimemania);
                                 break;
+                            case "dia-de-sorte":
+
+                                t.setBackgroundResource(R.drawable.boladiadesorte);
+                                break;
                         }
                     }
                 }
@@ -144,9 +148,11 @@ public class ResultadosAdapter extends BaseAdapter {
                     case "timemania":
                         tvResTipoJogo.setTextColor(Color.parseColor("maroon"));
                         break;
-
                     case "dupla-sena":
                         tvResTipoJogo.setTextColor(Color.parseColor("#af3869"));
+                        break;
+                    case "dia-de-sorte":
+                        tvResTipoJogo.setTextColor(Color.parseColor("#d3b315"));
                         break;
                 }
 

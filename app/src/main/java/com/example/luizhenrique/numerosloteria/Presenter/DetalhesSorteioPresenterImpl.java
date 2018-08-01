@@ -42,8 +42,11 @@ public class DetalhesSorteioPresenterImpl implements DetalhesSorteioPresenter {
                     if (res.getTipo().equals("timemania") && acertos[i] == 2) {
 
                         detalhesSorteioView.inserirLinha("Time do Coração ", String.valueOf(res.getGanhadores().get(i)), res.getRateio().get(i), rows,false);
-                    }
 
+                    }else if (res.getTipo().equals("dia-de-sorte") && acertos[i] == 3){
+
+                        detalhesSorteioView.inserirLinha("Mês ", String.valueOf(res.getGanhadores().get(i)), res.getRateio().get(i), rows,false);
+                    }
                     else{
                         detalhesSorteioView.inserirLinha(String.valueOf(acertos[i]), String.valueOf(res.getGanhadores().get(i)),res.getRateio().get(i),rows,false);
                         rows++;
