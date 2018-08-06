@@ -1,9 +1,9 @@
 package com.example.luizhenrique.numerosloteria.Presenter;
 
 import com.example.luizhenrique.numerosloteria.Model.Jogo;
-import com.example.luizhenrique.numerosloteria.Services.JogoManager;
 import com.example.luizhenrique.numerosloteria.Model.Resultado;
 import com.example.luizhenrique.numerosloteria.Services.GeradorDeNumeros;
+import com.example.luizhenrique.numerosloteria.Services.JogoManager;
 import com.example.luizhenrique.numerosloteria.Services.ResultadoService;
 import com.example.luizhenrique.numerosloteria.Services.ResultadoTask;
 import com.example.luizhenrique.numerosloteria.View.DetalhesJogoView;
@@ -169,7 +169,7 @@ public class DetalhesJogoPresenterImpl implements DetalhesJogoPresenter {
         Object premiacaoMes = 0;
 
         if (resultado.getMes().equals(jogo.mesDeSorte)){
-            premiacaoMes = resultado.getRateio().get(5);
+            premiacaoMes = resultado.getRateio().get(4);
         }
 
         return premiacaoMes;

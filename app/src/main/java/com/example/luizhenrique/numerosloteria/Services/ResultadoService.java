@@ -1,10 +1,7 @@
 package com.example.luizhenrique.numerosloteria.Services;
 
 import com.example.luizhenrique.numerosloteria.Model.Resultado;
-import com.example.luizhenrique.numerosloteria.Model.Sorteio;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -13,11 +10,11 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ExecutionException;
 
 public class ResultadoService {
+
 
     public static Resultado carregarResultado(String tipo, String sorteio) {
 
@@ -57,7 +54,14 @@ public class ResultadoService {
         ArrayList<Object> sorteios = new ArrayList<Object>() {
         };
         Map<Integer, Integer> numeros = new HashMap<Integer, Integer>();
-        int[] n = new int[range * 10];
+        int[] n;
+
+        if (tipo.equals("Dupla-Sena")){
+            n = new int[range * 20];
+        }else {
+            n = new int[range * 10];
+        }
+
         int count = 0;
         int[] maisSorteados;
 
@@ -80,19 +84,51 @@ public class ResultadoService {
             numSorteio--;
         }
 
-        for (Object num : sorteios) {
+        if (tipo.equals("Dupla-Sena")){
 
-            for (int i = 0; i < sorteios.size(); i++) {
-                n[count] = (int) num;
-                count++;
+            ArrayList<ArrayList<Integer>> nums;
+
+            for (Object num : sorteios){
+
+                nums = (ArrayList<ArrayList<Integer>>) num;
+
+                for (int j = 0; j < nums.size();j++){
+
+                    for (int i=0;i < range;i++){
+
+                        n[count] = nums.get(j).get(i);
+                        count++;
+                    }
+                }
+
+                nums = null;
             }
+
+            Arrays.sort(n);
+
+            maisSorteados = GeradorDeNumeros.gerarMaisSorteadas(n, dezenas, quantidade);
+
+            Arrays.sort(maisSorteados);
+
+        }else{
+            for (Object num : sorteios) {
+
+                ArrayList<Integer> nums = (ArrayList<Integer>) num;
+
+                for (int i = 0; i < nums.size(); i++) {
+                    n[count] = nums.get(i);
+                    count++;
+                }
+            }
+
+            Arrays.sort(n);
+
+            maisSorteados = GeradorDeNumeros.gerarMaisSorteadas(n, dezenas, quantidade);
+
+            Arrays.sort(maisSorteados);
         }
 
-        Arrays.sort(n);
 
-        maisSorteados = GeradorDeNumeros.gerarMaisSorteadas(n, dezenas, quantidade);
-
-        Arrays.sort(maisSorteados);
 
         return maisSorteados;
     }

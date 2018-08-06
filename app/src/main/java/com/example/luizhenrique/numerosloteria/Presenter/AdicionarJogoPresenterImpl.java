@@ -3,6 +3,7 @@ package com.example.luizhenrique.numerosloteria.Presenter;
 import android.text.TextUtils;
 
 import com.example.luizhenrique.numerosloteria.Model.Resultado;
+import com.example.luizhenrique.numerosloteria.Services.JogoManager;
 import com.example.luizhenrique.numerosloteria.Services.ResultadoService;
 import com.example.luizhenrique.numerosloteria.Services.ResultadoTask;
 import com.example.luizhenrique.numerosloteria.View.AdicionarJogoView;
@@ -62,8 +63,8 @@ public class AdicionarJogoPresenterImpl implements AdicionarJogoPresenter{
 
                 adicionarJogoView.exibirProgress(true);
                 resultadoAtual = new ResultadoTask().execute(tipoJogo).get();
-                intNumerosMaisSorteados = ResultadoService.verificarMaisSorteados(String.valueOf(resultadoAtual.getNumero()), tipoJogo, resultadoAtual.getSorteio().size(), numeroDezenas, minAposta);
 
+                intNumerosMaisSorteados = ResultadoService.verificarMaisSorteados(String.valueOf(resultadoAtual.getNumero()), tipoJogo,new JogoManager().getRangeSorteio(tipoJogo.toLowerCase()), numeroDezenas, minAposta);
 
         } catch (Exception ex) {
 

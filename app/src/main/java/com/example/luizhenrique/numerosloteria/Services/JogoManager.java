@@ -16,6 +16,8 @@ public class JogoManager {
 
     private  HashMap<String,Integer> dicRangeJogos;
 
+    private HashMap<String,Integer> dicRangeSorteios;
+
     private static int rangeMegaSena = 60;
     private static int rangeDuplaSena = 50;
     private static int rangeLotomania = 100;
@@ -24,6 +26,13 @@ public class JogoManager {
     private static int rangeTimeMania = 80;
     private static int rangeDiaDeSorte = 31;
 
+    private static int rangeSorteioMegaSena = 6;
+    private static int rangeSorteioDuplaSena = 6;
+    private static int rangeSorteioLotoMania = 20;
+    private static int rangeSorteioLotoFacil = 15;
+    private static int rangeSorteioQuina = 5;
+    private static int rangeSorteioTimeMania = 7;
+    private static int rangeSorteioDiadeSorte = 7;
 
     private static int[] acertosMegaSena = {6,5,4};
     private  static int[] acertosDuplaSena = {6,5,4,3};
@@ -41,6 +50,7 @@ public class JogoManager {
         dicRangeJogos = new HashMap<>();
         dicTipoJogos = new HashMap<>();
         dicAcertos = new HashMap<>();
+        dicRangeSorteios = new HashMap<>();
 
         dicTipoJogos.put("mega-sena",megasena);
         dicTipoJogos.put("dupla-sena",duplasena);
@@ -49,7 +59,6 @@ public class JogoManager {
         dicTipoJogos.put("lotomania",lotomania);
         dicTipoJogos.put("timemania",timemania);
         dicTipoJogos.put("dia-de-sorte",diadesorte);
-
 
         dicRangeJogos.put("mega-sena",rangeMegaSena);
         dicRangeJogos.put("dupla-sena",rangeDuplaSena);
@@ -67,7 +76,21 @@ public class JogoManager {
         dicAcertos.put("timemania", acertosTimeMania);
         dicAcertos.put("dia-de-sorte",acertosDiaDeSorte);
 
+        dicRangeSorteios.put("mega-sena",rangeSorteioMegaSena);
+        dicRangeSorteios.put("dupla-sena",rangeSorteioDuplaSena);
+        dicRangeSorteios.put("lotomania",rangeSorteioLotoMania);
+        dicRangeSorteios.put("lotofacil",rangeSorteioLotoFacil);
+        dicRangeSorteios.put("quina",rangeSorteioQuina);
+        dicRangeSorteios.put("timemania",rangeSorteioTimeMania);
+        dicRangeSorteios.put("dia-de-sorte",rangeSorteioMegaSena);
 
+    }
+
+    public int getRangeSorteio(String tipoJogo){
+
+        int range = dicRangeSorteios.get(tipoJogo);
+
+        return range;
     }
 
     public String[] getTipoJogoNumeros(String tipoJogo){
