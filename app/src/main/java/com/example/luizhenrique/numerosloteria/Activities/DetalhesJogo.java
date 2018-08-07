@@ -80,7 +80,7 @@ public class DetalhesJogo extends AppCompatActivity implements DetalhesJogoView 
 
         tvTipoJogo = findViewById(R.id.tvTipoJogo);
         tvSorteio = findViewById(R.id.tvSorteio);
-        tvNumeros = findViewById(R.id.tvNumeros);
+        //tvNumeros = findViewById(R.id.tvNumeros);
         tvAcertos = findViewById(R.id.tvAcertos);
         tvValorPremio = findViewById(R.id.tvValorPremio);
         toolbarDetalhes = findViewById((R.id.toolbar4));

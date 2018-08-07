@@ -135,10 +135,7 @@
                         android:background="@android:color/background_light"/>
                 </LinearLayout>
 
-
             </LinearLayout>
-
-
 
         </ScrollView>
 
