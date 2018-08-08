@@ -1,6 +1,9 @@
 package com.example.luizhenrique.numerosloteria.Activities;
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -46,6 +49,9 @@ public class AdicionarJogo extends AppCompatActivity implements AdicionarJogoVie
     Spinner spinnerMeses;
     ProgressBar progressDialog;
     ArrayAdapter<String> numeroDesenasJogo;
+    Context ctx;
+    public NetworkInfo info;
+
 
     private InterstitialAd mInterstitialAd;
 
@@ -73,6 +79,8 @@ public class AdicionarJogo extends AppCompatActivity implements AdicionarJogoVie
 
     JogoManager jogoManager;
 
+    ConnectivityManager cm;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -86,6 +94,12 @@ public class AdicionarJogo extends AppCompatActivity implements AdicionarJogoVie
         adicionarJogoPresenter = new AdicionarJogoPresenterImpl(this);
 
         it = getIntent();
+
+        ctx = getBaseContext();
+
+        cm = (ConnectivityManager) ctx.getSystemService(Context.CONNECTIVITY_SERVICE);
+
+        info = cm.getActiveNetworkInfo();
 
         spinner_tipoJogo = findViewById(R.id.spinnerJogo);
         spinner_NumeroDezenas = findViewById(R.id.spinnerDezenas);
@@ -199,7 +213,10 @@ public class AdicionarJogo extends AppCompatActivity implements AdicionarJogoVie
             @Override
             public void onClick(View v) {
 
+                if (info != null && info.isConnected())
                 tvNumerosGerados.setText(GeradorDeNumeros.ParseToString(adicionarJogoPresenter.numerosMaisSorteados(tipoJogo,numeroDezenas,minAposta)));
+                else
+                    Toast.makeText(ctx,"Para usar essa função, você precisa estar conectado a internet",Toast.LENGTH_LONG).show();
             }
         });
 
@@ -207,7 +224,11 @@ public class AdicionarJogo extends AppCompatActivity implements AdicionarJogoVie
             @Override
             public void onClick(View view) {
 
+                if (info != null && info.isConnected())
                 etSorteio.setText(String.valueOf(adicionarJogoPresenter.jogarProximoConcurso(tipoJogo)));
+                else
+                    Toast.makeText(ctx,"Para usar essa função, você precisa estar conectado a internet",Toast.LENGTH_LONG).show();
+
             }
         });
 

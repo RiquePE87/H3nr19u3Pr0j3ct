@@ -82,7 +82,7 @@ public class JogoManager {
         dicRangeSorteios.put("lotofacil",rangeSorteioLotoFacil);
         dicRangeSorteios.put("quina",rangeSorteioQuina);
         dicRangeSorteios.put("timemania",rangeSorteioTimeMania);
-        dicRangeSorteios.put("dia-de-sorte",rangeSorteioMegaSena);
+        dicRangeSorteios.put("dia-de-sorte",rangeSorteioDiadeSorte);
 
     }
 

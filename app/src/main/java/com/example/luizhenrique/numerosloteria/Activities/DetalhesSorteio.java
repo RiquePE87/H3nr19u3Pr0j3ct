@@ -63,6 +63,7 @@ public class DetalhesSorteio extends AppCompatActivity implements DetalhesSortei
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
 
+
         Intent it = getIntent();
         listResultados = new ArrayList<>();
 

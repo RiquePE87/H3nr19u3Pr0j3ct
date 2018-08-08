@@ -3,6 +3,7 @@ package com.example.luizhenrique.numerosloteria.Presenter;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.widget.Toast;
 
 import com.example.luizhenrique.numerosloteria.Adapter.ResultadosAdapter;
 import com.example.luizhenrique.numerosloteria.Model.Resultado;
@@ -46,6 +47,10 @@ public class FragmentSorteiosPresenterImpl implements FragmentSorteiosPresenter 
 
                 ex.printStackTrace();
             }
+
+
+        }else{
+            Toast.makeText(ctx,"Você está desconectado da internet!",Toast.LENGTH_LONG).show();
         }
 
          return resultadoList;
@@ -70,6 +75,4 @@ public class FragmentSorteiosPresenterImpl implements FragmentSorteiosPresenter 
 
         return info != null && info.isConnected();
     }
-
-
 }
