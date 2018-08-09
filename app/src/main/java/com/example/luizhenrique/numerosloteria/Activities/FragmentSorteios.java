@@ -63,9 +63,11 @@ public class FragmentSorteios extends ListFragment  {
 
                 Resultado res = (Resultado) listView.getItemAtPosition(position);
 
-                Intent it = new Intent(getContext(),DetalhesSorteio.class );
-                it.putExtra("tipoJogo",res.getTipo());
-                it.putExtra("ultimoSorteio", res.getNumero());
+                Intent it = new Intent(getContext(),DetalhesSorteio.class);
+//                it.putExtra("tipoJogo",res.getTipo());
+//                it.putExtra("ultimoSorteio", res.getNumero());
+                it.putExtra("flagConsulta",false);
+                it.putExtra("resultado",res);
                 startActivity(it);
             }
         });

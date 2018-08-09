@@ -1,5 +1,10 @@
 package com.example.luizhenrique.numerosloteria.Presenter;
 
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+
+import com.example.luizhenrique.numerosloteria.Model.Sorteio;
 import com.example.luizhenrique.numerosloteria.Services.JogoManager;
 import com.example.luizhenrique.numerosloteria.Model.Resultado;
 import com.example.luizhenrique.numerosloteria.View.DetalhesSorteioView;
@@ -10,10 +15,12 @@ public class DetalhesSorteioPresenterImpl implements DetalhesSorteioPresenter {
 
     private DetalhesSorteioView detalhesSorteioView;
     int rows = 1;
+    Context ctx;
 
-    public DetalhesSorteioPresenterImpl(DetalhesSorteioView detalhesSorteioView){
+    public DetalhesSorteioPresenterImpl(DetalhesSorteioView detalhesSorteioView, Context context){
 
         this.detalhesSorteioView = detalhesSorteioView;
+        this.ctx = context;
     }
 
     public void preencherGanhadores(Resultado res) {
@@ -63,5 +70,17 @@ public class DetalhesSorteioPresenterImpl implements DetalhesSorteioPresenter {
             detalhesSorteioView.inserirLinha(String.valueOf(acertos[i]),String.valueOf(ganhadores.get(i)),premioJogo.get(i),rows,flag);
             rows++;
         }
+    }
+
+    public boolean verificarConexao() {
+
+        ConnectivityManager cm;
+        NetworkInfo info;
+
+        cm = (ConnectivityManager) ctx.getSystemService(Context.CONNECTIVITY_SERVICE);
+
+        info = cm.getActiveNetworkInfo();
+
+        return info != null && info.isConnected();
     }
 }

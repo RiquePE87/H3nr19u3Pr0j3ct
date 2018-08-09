@@ -81,6 +81,7 @@ public class ConsultaSorteioFragment extends DialogFragment {
                     Intent it = new Intent(getActivity(),DetalhesSorteio.class);
                     it.putExtra("tipoJogo",tipoJogo);
                     it.putExtra("concurso", concurso);
+                    it.putExtra("flagConsulta",true);
                     startActivity(it);
                     dismiss();
                 }

@@ -8,6 +8,7 @@ import android.widget.Toast;
 import com.example.luizhenrique.numerosloteria.Adapter.ResultadosAdapter;
 import com.example.luizhenrique.numerosloteria.Model.Resultado;
 import com.example.luizhenrique.numerosloteria.Model.Sorteio;
+import com.example.luizhenrique.numerosloteria.Services.ResultadoService;
 import com.example.luizhenrique.numerosloteria.Services.ResultadoTask;
 
 import java.util.ArrayList;
@@ -50,7 +51,19 @@ public class FragmentSorteiosPresenterImpl implements FragmentSorteiosPresenter 
 
 
         }else{
-            Toast.makeText(ctx,"Você está desconectado da internet!",Toast.LENGTH_LONG).show();
+
+            try {
+                resultadoList.add(new ResultadoService().carregarResultadoOffline("dia-de-sorte"));
+                resultadoList.add(new ResultadoService().carregarResultadoOffline("mega-sena"));
+                resultadoList.add(new ResultadoService().carregarResultadoOffline("dupla-sena"));
+                resultadoList.add(new ResultadoService().carregarResultadoOffline("lotomania"));
+                resultadoList.add(new ResultadoService().carregarResultadoOffline("lotofacil"));
+                resultadoList.add(new ResultadoService().carregarResultadoOffline("quina"));
+                resultadoList.add(new ResultadoService().carregarResultadoOffline("timemania"));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
         }
 
          return resultadoList;

@@ -1,8 +1,16 @@
 package com.example.luizhenrique.numerosloteria.Services;
 
-import com.example.luizhenrique.numerosloteria.Model.Resultado;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import android.content.Context;
+import android.content.SharedPreferences;
 
+import com.example.luizhenrique.numerosloteria.BuildConfig;
+import com.example.luizhenrique.numerosloteria.Model.Resultado;
+import com.fasterxml.jackson.core.JsonGenerationException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.JsonObject;
+
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Reader;
@@ -15,11 +23,15 @@ import java.util.concurrent.ExecutionException;
 
 public class ResultadoService {
 
+    public Context context;
+    public static final String URL = "https://www.lotodicas.com.br/api/";
+    public static final String PATH = "/data/data/" + BuildConfig.APPLICATION_ID + "/files/";
+
 
     public static Resultado carregarResultado(String tipo, String sorteio) {
 
         Resultado res = new Resultado();
-        String url = "https://www.lotodicas.com.br/api/" + tipo.toLowerCase() + "/" + sorteio + "";
+        String url =  URL + tipo.toLowerCase() + "/" + sorteio;
 
         try {
             Reader reader = new InputStreamReader((new URL(url).openStream()));
@@ -35,18 +47,50 @@ public class ResultadoService {
     public static Resultado carregarResultado(String tipo) {
 
         Resultado res = new Resultado();
-        String url = "https://www.lotodicas.com.br/api/" + tipo.toLowerCase();
+        String url = URL + tipo.toLowerCase();
 
         try {
             Reader reader = new InputStreamReader((new URL(url).openStream()));
             ObjectMapper objectMapper = new ObjectMapper();
             res = objectMapper.readValue(reader, Resultado.class);
             res.setTipo(tipo);
+            salvarResultadosOffline(res);
+
         } catch (IOException e) {
             e.printStackTrace();
         }
         return res;
 
+    }
+
+    public static void salvarResultadosOffline(Resultado res){
+
+        ObjectMapper objectMapper = new ObjectMapper();
+
+        String filename = PATH+res.getTipo() + ".json";
+
+        try { objectMapper.writeValue(new File(filename),res);
+        } catch (JsonGenerationException e) {
+            e.printStackTrace();
+        } catch (JsonMappingException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public Resultado carregarResultadoOffline(String tipoJogo){
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        Resultado resultado = new Resultado();
+        String filename = PATH+tipoJogo+".json";
+
+        try {
+            resultado = objectMapper.readValue(new File(filename),Resultado.class);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return resultado;
     }
 
     public static int[] verificarMaisSorteados(String sorteio, String tipo, int range, int dezenas, int quantidade) {

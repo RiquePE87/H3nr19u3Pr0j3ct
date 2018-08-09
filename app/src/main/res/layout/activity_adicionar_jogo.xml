@@ -21,6 +21,12 @@
             android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
             app:titleTextColor="@android:color/background_light" />
 
+        <ProgressBar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:id="@+id/pbadicionarJogo"/>
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -220,13 +226,6 @@
             android:layout_marginTop="10dp"
             android:layout_weight="0.14"
             android:text="@string/escolhendo_os_n_meros_mais_sorteados_ser_gerada_as_dezenas_mais_sorteadas_nos_dez_ltimos_concursos" />
-
-        <ProgressBar
-            android:id="@+id/progressBarAdicionar"
-            style="?android:attr/progressBarStyle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:visibility="gone"/>
 
     </LinearLayout>
 </layout>

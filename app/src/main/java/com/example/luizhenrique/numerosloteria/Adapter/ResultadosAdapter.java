@@ -74,7 +74,7 @@ public class ResultadosAdapter extends BaseAdapter {
 
                 lp = new TableRow.LayoutParams(160, 160);
 
-                if (res.getTipo() == "dupla-sena") {
+                if (res.getTipo().equals("dupla-sena")) {
 
                     ArrayList<Integer> jogo1 = (ArrayList<Integer>) res.getSorteio().get(0);
                     ArrayList<Integer> jogo2 = (ArrayList<Integer>) res.getSorteio().get(1);

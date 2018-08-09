@@ -4,15 +4,19 @@ import android.os.AsyncTask;
 
 import com.example.luizhenrique.numerosloteria.Activities.AdicionarJogo;
 import com.example.luizhenrique.numerosloteria.Model.Resultado;
+import com.example.luizhenrique.numerosloteria.Presenter.AdicionarJogoPresenter;
 import com.example.luizhenrique.numerosloteria.View.AdicionarJogoView;
 
 public class ResultadoTask extends AsyncTask<String, Void, Resultado> {
 
+    AdicionarJogoView view = new AdicionarJogo();
 
     @Override
     protected void onPreExecute() {
 
         super.onPreExecute();
+//        if (view != null)
+//        view.exibirProgress(true);
 
     }
 
@@ -35,5 +39,8 @@ public class ResultadoTask extends AsyncTask<String, Void, Resultado> {
     @Override
     protected void onPostExecute(Resultado resultado) {
         super.onPostExecute(resultado);
+//        if (view != null)
+//            view.exibirProgress(false);
+
     }
 }

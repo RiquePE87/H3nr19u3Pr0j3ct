@@ -25,6 +25,7 @@ import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.concurrent.ExecutionException;
 
 public class DetalhesSorteio extends AppCompatActivity implements DetalhesSorteioView{
 
@@ -40,7 +41,6 @@ public class DetalhesSorteio extends AppCompatActivity implements DetalhesSortei
     TextView tvAnterior;
     TextView tvProximo;
     TextView tvMes;
-    List<Resultado> listResultados;
     TableLayout tableDetalhes;
     int rows = 1;
     private static final String TAG = "DetalhesSorteio";
@@ -50,6 +50,9 @@ public class DetalhesSorteio extends AppCompatActivity implements DetalhesSortei
     NumberFormat numberFormat;
     TableRow.LayoutParams lp;
     GridLayout gridLayout;
+    Intent it;
+    String tipo;
+    String concurso;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,73 +60,11 @@ public class DetalhesSorteio extends AppCompatActivity implements DetalhesSortei
 
         setContentView(R.layout.activity_detalhes_sorteio);
 
-        detalhesSorteioPresenter = new DetalhesSorteioPresenterImpl(this);
+        detalhesSorteioPresenter = new DetalhesSorteioPresenterImpl(this,getApplicationContext());
 
         mAdView = findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
-
-
-        Intent it = getIntent();
-        listResultados = new ArrayList<>();
-
-        final String tipo = it.getStringExtra("tipoJogo").toLowerCase();
-        final String concurso = it.getStringExtra("concurso");
-        ultimoConcurso = it.getIntExtra("ultimoSorteio",0);
-
-        if (concurso == null){
-            carregarSorteio(tipo,"");
-        }
-        else{
-            carregarSorteio(tipo,concurso);
-        }
-
-        tvAnterior.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                try {
-                    carregarSorteio(tipo,String.valueOf(resultado.getNumero()-1));
-                }catch (Exception ex){
-                    ex.printStackTrace();
-                }
-            }
-        });
-
-        tvProximo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                try {
-                    carregarSorteio(tipo,String.valueOf(resultado.getNumero()+1));
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-    }
-
-    public  void carregarSorteio(String tp, String sort){
-
-        try{
-
-            if (sort == ""){
-                resultado = new ResultadoTask().execute(tp).get();
-            }
-            else{
-                resultado = new ResultadoTask().execute(tp,sort).get();
-
-            }
-
-        }catch (Exception ec){
-            ec.printStackTrace();
-        }
-
-        Locale locale;
-        locale = Locale.forLanguageTag("pt-br");
-
-        numberFormat = NumberFormat.getCurrencyInstance(locale);
-
-        String JogoMaiuscula = resultado.getTipo().toUpperCase();
-
         tvJogo = findViewById(R.id.tvDetJogo);
         tvSorteio = findViewById(R.id.tvDetSorteio);
         tvAcumulou = findViewById(R.id.tvDetAcuulou);
@@ -136,6 +77,94 @@ public class DetalhesSorteio extends AppCompatActivity implements DetalhesSortei
         tvProximo = findViewById(R.id.tvProximo);
         tableDetalhes = findViewById(R.id.tblDetalhes);
         tvMes = findViewById(R.id.tvMes);
+
+        tvAnterior.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    resultado = new ResultadoTask().execute(tipo,String.valueOf(resultado.getNumero()-1)).get();
+                    carregarSorteio(resultado);
+                }catch (Exception ex){
+                    ex.printStackTrace();
+                }
+            }
+        });
+
+        tvProximo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    resultado = new ResultadoTask().execute(tipo,String.valueOf(resultado.getNumero()+1)).get();
+                    carregarSorteio(resultado);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        carregarResultado();
+    }
+
+    public void carregarResultado(){
+
+        it = getIntent();
+        boolean flag = it.getBooleanExtra("flagConsulta",false);
+
+//        resultado = (Resultado) it.getSerializableExtra("resultado");
+
+        if (flag == false){
+
+            resultado = (Resultado) it.getSerializableExtra("resultado");
+            tipo = resultado.getTipo();
+            concurso = String.valueOf(resultado.getNumero());
+            ultimoConcurso = resultado.getNumero();
+            carregarSorteio(resultado);
+
+        }else{
+
+            tipo = it.getStringExtra("tipoJogo").toLowerCase();
+            concurso = it.getStringExtra("concurso");
+            ultimoConcurso = it.getIntExtra("ultimoSorteio",0);
+            try {
+                resultado = new ResultadoTask().execute(tipo,concurso).get();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            } catch (ExecutionException e) {
+                e.printStackTrace();
+            }
+
+            carregarSorteio(resultado);
+        }
+
+//        if (concurso == null){
+//            carregarSorteio(tipo,"");
+//        }
+//        else{
+//            carregarSorteio(tipo,concurso);
+//        }
+
+    }
+
+    public  void carregarSorteio(Resultado res){
+
+//        try{
+//
+//            if (sort == ""){
+//                resultado = (Resultado) it.getSerializableExtra("resultado");
+//            }
+//            else{
+//                resultado = new ResultadoTask().execute(tp,sort).get();
+//            }
+//
+//        }catch (Exception ec){
+//            ec.printStackTrace();
+//        }
+
+        Locale locale;
+        locale = Locale.forLanguageTag("pt-br");
+
+        numberFormat = NumberFormat.getCurrencyInstance(locale);
+
+        String JogoMaiuscula = resultado.getTipo().toUpperCase();
 
         if (resultado.getTipo().equals("dia-de-sorte")){
             tvMes.setText(resultado.getMes());

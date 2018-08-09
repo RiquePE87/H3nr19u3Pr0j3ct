@@ -113,7 +113,7 @@ public class AdicionarJogo extends AppCompatActivity implements AdicionarJogoVie
         tvMeses = findViewById(R.id.txtMeses);
         spinnerTimes = findViewById(R.id.spinnerTimes);
         spinnerMeses = findViewById(R.id.spinnerMeses);
-        progressDialog = findViewById(R.id.progressBarAdicionar);
+        progressDialog = findViewById(R.id.pbadicionarJogo);
         btnProximoConcurso = findViewById(R.id.btnProximoConcurso);
         btnCapturarNumeros = findViewById(R.id.buttonCapturarNumeros);
 
@@ -383,7 +383,10 @@ public class AdicionarJogo extends AppCompatActivity implements AdicionarJogoVie
             setTitle("Atualizar Aposta");
             setSpinText(spinner_NumeroDezenas, String.valueOf(jogo.NumeroDezenas));
             setSpinText(spinner_tipoJogo, jogo.tipoJogo);
+
+            if (jogo.tipoJogo.equals("dia-de-sorte"))
             setSpinText(spinnerMeses,jogo.mesDeSorte);
+
             spinner_tipoJogo.setEnabled(false);
             spinner_NumeroDezenas.setEnabled(false);
             btnEscolherNumeros.setEnabled(false);
