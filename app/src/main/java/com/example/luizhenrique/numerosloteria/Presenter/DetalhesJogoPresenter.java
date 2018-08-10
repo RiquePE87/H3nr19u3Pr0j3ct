@@ -14,4 +14,5 @@ public interface DetalhesJogoPresenter {
     ArrayList<Float> verificarPremiacaoDuplaSena(Resultado res, Jogo jogo);
     ArrayList<ArrayList<Integer>> verificarNumerosAcertosDuplaSena(Resultado resultado,Jogo jogo);
     void getResultadoAnterior(String tipoJogo, int sorteio);
+    public boolean verificarConexao();
 }

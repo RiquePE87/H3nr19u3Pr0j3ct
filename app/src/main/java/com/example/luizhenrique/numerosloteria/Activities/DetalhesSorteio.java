@@ -11,6 +11,7 @@ import android.widget.GridLayout;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.luizhenrique.numerosloteria.Model.Resultado;
 import com.example.luizhenrique.numerosloteria.Presenter.DetalhesSorteioPresenterImpl;
@@ -81,27 +82,44 @@ public class DetalhesSorteio extends AppCompatActivity implements DetalhesSortei
         tvAnterior.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                try {
-                    resultado = new ResultadoTask().execute(tipo,String.valueOf(resultado.getNumero()-1)).get();
-                    carregarSorteio(resultado);
-                }catch (Exception ex){
-                    ex.printStackTrace();
+
+                if (detalhesSorteioPresenter.verificarConexao()){
+                    try {
+                        resultado = new ResultadoTask().execute(tipo,String.valueOf(resultado.getNumero()-1)).get();
+                        carregarSorteio();
+                    }catch (Exception ex){
+                        ex.printStackTrace();
+                    }
+                }else {
+                    exibirToast();
                 }
-            }
+                }
+
         });
 
         tvProximo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                try {
-                    resultado = new ResultadoTask().execute(tipo,String.valueOf(resultado.getNumero()+1)).get();
-                    carregarSorteio(resultado);
-                } catch (Exception e) {
-                    e.printStackTrace();
+                if (detalhesSorteioPresenter.verificarConexao() == true){
+                    try {
+                        resultado = new ResultadoTask().execute(tipo,String.valueOf(resultado.getNumero()+1)).get();
+                        carregarSorteio();
+                    }catch (Exception ex){
+                        ex.printStackTrace();
+                    }
+                }else {
+                    exibirToast();
                 }
             }
         });
+
         carregarResultado();
+    }
+
+    public void exibirToast(){
+
+        Toast.makeText(this,"Você precisa estar conectado à internet para usar essa função!",Toast.LENGTH_LONG).show();
+
     }
 
     public void carregarResultado(){
@@ -109,15 +127,13 @@ public class DetalhesSorteio extends AppCompatActivity implements DetalhesSortei
         it = getIntent();
         boolean flag = it.getBooleanExtra("flagConsulta",false);
 
-//        resultado = (Resultado) it.getSerializableExtra("resultado");
-
         if (flag == false){
 
             resultado = (Resultado) it.getSerializableExtra("resultado");
             tipo = resultado.getTipo();
             concurso = String.valueOf(resultado.getNumero());
             ultimoConcurso = resultado.getNumero();
-            carregarSorteio(resultado);
+            carregarSorteio();
 
         }else{
 
@@ -132,32 +148,12 @@ public class DetalhesSorteio extends AppCompatActivity implements DetalhesSortei
                 e.printStackTrace();
             }
 
-            carregarSorteio(resultado);
+            carregarSorteio();
         }
-
-//        if (concurso == null){
-//            carregarSorteio(tipo,"");
-//        }
-//        else{
-//            carregarSorteio(tipo,concurso);
-//        }
 
     }
 
-    public  void carregarSorteio(Resultado res){
-
-//        try{
-//
-//            if (sort == ""){
-//                resultado = (Resultado) it.getSerializableExtra("resultado");
-//            }
-//            else{
-//                resultado = new ResultadoTask().execute(tp,sort).get();
-//            }
-//
-//        }catch (Exception ec){
-//            ec.printStackTrace();
-//        }
+    public  void carregarSorteio(){
 
         Locale locale;
         locale = Locale.forLanguageTag("pt-br");

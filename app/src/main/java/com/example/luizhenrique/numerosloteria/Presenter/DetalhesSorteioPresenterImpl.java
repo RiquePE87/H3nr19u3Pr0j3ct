@@ -76,11 +76,16 @@ public class DetalhesSorteioPresenterImpl implements DetalhesSorteioPresenter {
 
         ConnectivityManager cm;
         NetworkInfo info;
-
         cm = (ConnectivityManager) ctx.getSystemService(Context.CONNECTIVITY_SERVICE);
-
         info = cm.getActiveNetworkInfo();
 
-        return info != null && info.isConnected();
+        if (info != null && info.isConnected()){
+
+            return true;
+        }
+        else {
+            return false;
+        }
+
     }
 }

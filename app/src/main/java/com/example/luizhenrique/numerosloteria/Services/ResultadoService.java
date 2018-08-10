@@ -38,6 +38,7 @@ public class ResultadoService {
             ObjectMapper objectMapper = new ObjectMapper();
             res = objectMapper.readValue(reader, Resultado.class);
             res.setTipo(tipo);
+            reader.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -55,6 +56,7 @@ public class ResultadoService {
             res = objectMapper.readValue(reader, Resultado.class);
             res.setTipo(tipo);
             salvarResultadosOffline(res);
+            reader.close();
 
         } catch (IOException e) {
             e.printStackTrace();

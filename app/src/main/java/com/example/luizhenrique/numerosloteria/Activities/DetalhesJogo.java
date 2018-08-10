@@ -33,12 +33,10 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.concurrent.ExecutionException;
 
-
 public class DetalhesJogo extends AppCompatActivity implements DetalhesJogoView {
 
     public TextView tvTipoJogo;
     public TextView tvSorteio;
-    public TextView tvNumeros;
     public TextView tvAcertos;
     public TextView tvTxtAcertoData;
     public TextView tvValorPremio;
@@ -64,7 +62,7 @@ public class DetalhesJogo extends AppCompatActivity implements DetalhesJogoView 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detalhes_jogo);
 
-        detalhesJogoPresenter = new DetalhesJogoPresenterImpl(this);
+        detalhesJogoPresenter = new DetalhesJogoPresenterImpl(this, getApplicationContext());
 
         realmServices = new RealmServices(this);
 
@@ -80,13 +78,13 @@ public class DetalhesJogo extends AppCompatActivity implements DetalhesJogoView 
 
         tvTipoJogo = findViewById(R.id.tvTipoJogo);
         tvSorteio = findViewById(R.id.tvSorteio);
-        //tvNumeros = findViewById(R.id.tvNumeros);
         tvAcertos = findViewById(R.id.tvAcertos);
         tvValorPremio = findViewById(R.id.tvValorPremio);
         toolbarDetalhes = findViewById((R.id.toolbar4));
         tvTxtAcertoData = findViewById(R.id.tvTxtAcertoData);
         tvTimedoCoracao = findViewById(R.id.txtTimeCoracao);
         tvPremioTimeCoracao = findViewById(R.id.premioTimeCoracao);
+
         setSupportActionBar(toolbarDetalhes);
 
         numerosAcertados = new ArrayList<>();
@@ -102,10 +100,12 @@ public class DetalhesJogo extends AppCompatActivity implements DetalhesJogoView 
 
         jogo = new RealmServices(this).getJogo(id);
 
-        try {
-            res = new ResultadoTask().execute(jogo.tipoJogo, String.valueOf(jogo.sorteio)).get();
-        } catch (InterruptedException | ExecutionException e) {
-            e.printStackTrace();
+        if (detalhesJogoPresenter.verificarConexao()){
+            try {
+                res = new ResultadoTask().execute(jogo.tipoJogo, String.valueOf(jogo.sorteio)).get();
+            } catch (InterruptedException | ExecutionException e) {
+                e.printStackTrace();
+            }
         }
 
         tvTipoJogo.setText(jogo.tipoJogo);
@@ -121,7 +121,6 @@ public class DetalhesJogo extends AppCompatActivity implements DetalhesJogoView 
                 tvTipoJogo.setBackgroundColor(Color.parseColor("#0f5935"));
                 toolbarDetalhes.setBackgroundColor(Color.parseColor("#0f5935"));
                 break;
-
             case "LotoMania":
                 tvTipoJogo.setBackgroundColor(Color.parseColor("#EC4526"));
                 toolbarDetalhes.setBackgroundColor(Color.parseColor("#EC4526"));
@@ -164,31 +163,31 @@ public class DetalhesJogo extends AppCompatActivity implements DetalhesJogoView 
     public void mostrarAposta() {
 
         try {
+                if (res.getNumero() != null) {
 
-            if (res.getNumero() != null) {
+                    tvAcertos.setText(String.valueOf(detalhesJogoPresenter.verificarNumerosAcertos(res, jogo).size()));
+                    tvValorPremio.setText(String.valueOf("Você ganhou " + numberFormat.format(detalhesJogoPresenter.verificarPremiacao(res, jogo))));
 
-                tvAcertos.setText(String.valueOf(detalhesJogoPresenter.verificarNumerosAcertos(res, jogo).size()));
-                tvValorPremio.setText(String.valueOf("Você ganhou " + numberFormat.format(detalhesJogoPresenter.verificarPremiacao(res,jogo))));
+                    if (res.getTipo().equals("TimeMania")) {
+                        tvPremioTimeCoracao.setText("Time do Coração " + numberFormat.format(detalhesJogoPresenter.verificarPremiacaoTime(res, jogo)));
+                        tvPremioTimeCoracao.setVisibility(View.VISIBLE);
 
-                if (res.getTipo().equals("TimeMania")){
-                    tvPremioTimeCoracao.setText("Time do Coração "+ numberFormat.format(detalhesJogoPresenter.verificarPremiacaoTime(res,jogo)));
-                    tvPremioTimeCoracao.setVisibility(View.VISIBLE);
+                    } else if (res.getTipo().equals("Dia-de-Sorte")) {
+                        tvPremioTimeCoracao.setText("Mês de Sorte " + numberFormat.format(detalhesJogoPresenter.verificarPremiacaoMes(res, jogo)));
+                        tvPremioTimeCoracao.setVisibility(View.VISIBLE);
+                    }
 
-                }else if (res.getTipo().equals("Dia-de-Sorte")){
-                    tvPremioTimeCoracao.setText("Mês de Sorte "+ numberFormat.format(detalhesJogoPresenter.verificarPremiacaoMes(res,jogo)));
-                    tvPremioTimeCoracao.setVisibility(View.VISIBLE);
+                } else {
+
+                    detalhesJogoPresenter.getResultadoAnterior(jogo.tipoJogo, jogo.sorteio);
                 }
 
-            } else {
+            } catch(Exception ex){
 
-                detalhesJogoPresenter.getResultadoAnterior(jogo.tipoJogo,jogo.sorteio);
+                Toast.makeText(DetalhesJogo.this, ex.getMessage(), Toast.LENGTH_LONG).show();
             }
-
-        } catch (Exception ex) {
-
-            Toast.makeText(DetalhesJogo.this, ex.getMessage(), Toast.LENGTH_LONG).show();
-        }
     }
+
 
     @Override
     public void gerarGrid() {

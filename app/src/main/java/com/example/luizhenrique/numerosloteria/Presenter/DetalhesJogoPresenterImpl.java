@@ -1,5 +1,9 @@
 package com.example.luizhenrique.numerosloteria.Presenter;
 
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+
 import com.example.luizhenrique.numerosloteria.Model.Jogo;
 import com.example.luizhenrique.numerosloteria.Model.Resultado;
 import com.example.luizhenrique.numerosloteria.Services.GeradorDeNumeros;
@@ -16,11 +20,13 @@ public class DetalhesJogoPresenterImpl implements DetalhesJogoPresenter {
 
     private JogoManager  jogoManager;
     private DetalhesJogoView detalhesJogoView;
+    private Context ctx;
 
-    public DetalhesJogoPresenterImpl(DetalhesJogoView detalhesJogoView){
+    public DetalhesJogoPresenterImpl(DetalhesJogoView detalhesJogoView, Context context){
 
         jogoManager = new JogoManager();
         this.detalhesJogoView = detalhesJogoView;
+        this.ctx = context;
     }
 
 // Verifica quais numeros jogados foram acertados
@@ -197,5 +203,21 @@ public class DetalhesJogoPresenterImpl implements DetalhesJogoPresenter {
 
         detalhesJogoView.setTextView(txt);
     }
-}
 
+    public boolean verificarConexao() {
+
+        ConnectivityManager cm;
+        NetworkInfo info;
+        cm = (ConnectivityManager) ctx.getSystemService(Context.CONNECTIVITY_SERVICE);
+        info = cm.getActiveNetworkInfo();
+
+        if (info != null && info.isConnected()){
+
+            return true;
+        }
+        else {
+            return false;
+        }
+
+    }
+}
