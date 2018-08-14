@@ -63,7 +63,6 @@ public class FragmentSorteiosPresenterImpl implements FragmentSorteiosPresenter 
             } catch (Exception e) {
                 e.printStackTrace();
             }
-
         }
 
          return resultadoList;

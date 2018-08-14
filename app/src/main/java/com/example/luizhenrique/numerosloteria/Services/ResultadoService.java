@@ -27,6 +27,21 @@ public class ResultadoService {
     public static final String URL = "https://www.lotodicas.com.br/api/";
     public static final String PATH = "/data/data/" + BuildConfig.APPLICATION_ID + "/files/";
 
+    public static String getFilename(String tipoJogo, String concurso){
+
+        String filename;
+
+        if (concurso == null){
+
+            filename = PATH+tipoJogo+ ".json";
+        }
+        else {
+            filename = PATH+tipoJogo +" "+concurso + ".json";
+        }
+
+        return filename;
+    }
+
 
     public static Resultado carregarResultado(String tipo, String sorteio) {
 
@@ -55,7 +70,8 @@ public class ResultadoService {
             ObjectMapper objectMapper = new ObjectMapper();
             res = objectMapper.readValue(reader, Resultado.class);
             res.setTipo(tipo);
-            salvarResultadosOffline(res);
+            salvarResultadosOffline(res,true);
+            salvarResultadosOffline(res,false);
             reader.close();
 
         } catch (IOException e) {
@@ -65,17 +81,22 @@ public class ResultadoService {
 
     }
 
-    public static void salvarResultadosOffline(Resultado res){
+    private static void salvarResultadosOffline(Resultado res, boolean isUltimoSorteio){
 
         ObjectMapper objectMapper = new ObjectMapper();
 
-        String filename = PATH+res.getTipo() + ".json";
+        String filename;
+
+        if (isUltimoSorteio){
+
+            filename = getFilename(res.getTipo(),null);
+
+        }
+        else {
+            filename = getFilename(res.getTipo(),String.valueOf(res.getNumero()));
+        }
 
         try { objectMapper.writeValue(new File(filename),res);
-        } catch (JsonGenerationException e) {
-            e.printStackTrace();
-        } catch (JsonMappingException e) {
-            e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -86,6 +107,20 @@ public class ResultadoService {
         ObjectMapper objectMapper = new ObjectMapper();
         Resultado resultado = new Resultado();
         String filename = PATH+tipoJogo+".json";
+
+        try {
+            resultado = objectMapper.readValue(new File(filename),Resultado.class);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return resultado;
+    }
+
+    public Resultado carregarResultadoOffline(String tipoJogo, String sorteio){
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        Resultado resultado = new Resultado();
+        String filename = PATH+tipoJogo+" "+sorteio+".json";
 
         try {
             resultado = objectMapper.readValue(new File(filename),Resultado.class);

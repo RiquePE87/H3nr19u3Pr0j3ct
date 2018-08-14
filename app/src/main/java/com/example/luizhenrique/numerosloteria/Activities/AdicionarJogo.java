@@ -27,6 +27,7 @@ import com.example.luizhenrique.numerosloteria.Presenter.AdicionarJogoPresenterI
 import com.example.luizhenrique.numerosloteria.R;
 import com.example.luizhenrique.numerosloteria.Services.GeradorDeNumeros;
 import com.example.luizhenrique.numerosloteria.Services.RealmServices;
+import com.example.luizhenrique.numerosloteria.Services.ResultadoService;
 import com.example.luizhenrique.numerosloteria.View.AdicionarJogoView;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.InterstitialAd;
@@ -411,6 +412,7 @@ public class AdicionarJogo extends AppCompatActivity implements AdicionarJogoVie
         jogo.tipoJogo = tipoJogo;
         jogo.timeDoCoracao = timeDoCoracao;
         jogo.mesDeSorte = mesDeSorte;
+        jogo.filename = ResultadoService.getFilename(tipoJogo,etSorteio.getText().toString());
 
         return jogo;
     }

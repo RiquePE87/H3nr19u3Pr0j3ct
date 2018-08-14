@@ -8,6 +8,7 @@ import com.example.luizhenrique.numerosloteria.Model.Jogo;
 import com.example.luizhenrique.numerosloteria.Model.Resultado;
 import com.example.luizhenrique.numerosloteria.Services.GeradorDeNumeros;
 import com.example.luizhenrique.numerosloteria.Services.JogoManager;
+import com.example.luizhenrique.numerosloteria.Services.RealmServices;
 import com.example.luizhenrique.numerosloteria.Services.ResultadoService;
 import com.example.luizhenrique.numerosloteria.Services.ResultadoTask;
 import com.example.luizhenrique.numerosloteria.View.DetalhesJogoView;
@@ -181,6 +182,11 @@ public class DetalhesJogoPresenterImpl implements DetalhesJogoPresenter {
         return premiacaoMes;
     }
 
+    public Jogo carregarRealmJogo(int id,Context context){
+
+        return new RealmServices(context).getJogo(id);
+    }
+
     @Override
     public void getResultadoAnterior(String tipoJogo, int sorteio) {
 
@@ -189,7 +195,7 @@ public class DetalhesJogoPresenterImpl implements DetalhesJogoPresenter {
         try {
             Resultado resAnt = new ResultadoTask().execute(tipoJogo, String.valueOf(sorteio-1)).get();
 
-            if (resAnt == null){
+            if (resAnt == null || verificarConexao() == false){
 
                 txt = "Sorteio não ocorreu ainda!";
             }
@@ -218,6 +224,5 @@ public class DetalhesJogoPresenterImpl implements DetalhesJogoPresenter {
         else {
             return false;
         }
-
     }
 }

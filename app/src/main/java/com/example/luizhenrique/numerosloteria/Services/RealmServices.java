@@ -57,6 +57,7 @@ public class RealmServices {
         jogo.timeDoCoracao = j.timeDoCoracao;
         jogo.tipoJogo = j.tipoJogo;
         jogo.mesDeSorte = j.mesDeSorte;
+        jogo.filename = j.filename;
         realm.commitTransaction();
 
         realm.close();

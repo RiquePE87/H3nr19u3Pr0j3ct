@@ -17,4 +17,5 @@ public class Jogo extends RealmObject implements Serializable {
     public int NumeroDezenas;
     public String timeDoCoracao;
     public String mesDeSorte;
+    public String filename;
 }

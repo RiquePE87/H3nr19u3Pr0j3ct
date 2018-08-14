@@ -64,8 +64,6 @@ public class DetalhesJogo extends AppCompatActivity implements DetalhesJogoView 
 
         detalhesJogoPresenter = new DetalhesJogoPresenterImpl(this, getApplicationContext());
 
-        realmServices = new RealmServices(this);
-
         mapBolas = new HashMap<>();
 
         mapBolas.put("Mega-Sena",R.drawable.bolamega);
@@ -98,7 +96,7 @@ public class DetalhesJogo extends AppCompatActivity implements DetalhesJogoView 
 
         int id = it.getIntExtra("id", 0);
 
-        jogo = new RealmServices(this).getJogo(id);
+        jogo = detalhesJogoPresenter.carregarRealmJogo(id,getBaseContext());
 
         if (detalhesJogoPresenter.verificarConexao()){
             try {
@@ -163,7 +161,7 @@ public class DetalhesJogo extends AppCompatActivity implements DetalhesJogoView 
     public void mostrarAposta() {
 
         try {
-                if (res.getNumero() != null) {
+                if (res.getNumero() != null && detalhesJogoPresenter.verificarConexao()) {
 
                     tvAcertos.setText(String.valueOf(detalhesJogoPresenter.verificarNumerosAcertos(res, jogo).size()));
                     tvValorPremio.setText(String.valueOf("Você ganhou " + numberFormat.format(detalhesJogoPresenter.verificarPremiacao(res, jogo))));
@@ -201,11 +199,14 @@ public class DetalhesJogo extends AppCompatActivity implements DetalhesJogoView 
 
         int[] nums = GeradorDeNumeros.ParseToInt(jogo);
 
-        if (jogo.tipoJogo.equals("Dupla-Sena")){
+        if (detalhesJogoPresenter.verificarConexao()) {
 
-            numerosAcertadosDupla = detalhesJogoPresenter.verificarNumerosAcertosDuplaSena(res,jogo);
-        }else{
-            numerosAcertados = detalhesJogoPresenter.verificarNumerosAcertos(res,jogo);
+            if (jogo.tipoJogo.equals("Dupla-Sena")) {
+
+                numerosAcertadosDupla = detalhesJogoPresenter.verificarNumerosAcertosDuplaSena(res, jogo);
+            } else {
+                numerosAcertados = detalhesJogoPresenter.verificarNumerosAcertos(res, jogo);
+            }
         }
 
         if (jogo.tipoJogo.equals("Dupla-Sena")) {

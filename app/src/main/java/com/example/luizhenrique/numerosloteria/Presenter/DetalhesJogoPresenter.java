@@ -1,5 +1,7 @@
 package com.example.luizhenrique.numerosloteria.Presenter;
 
+import android.content.Context;
+
 import com.example.luizhenrique.numerosloteria.Model.Jogo;
 import com.example.luizhenrique.numerosloteria.Model.Resultado;
 
@@ -15,4 +17,5 @@ public interface DetalhesJogoPresenter {
     ArrayList<ArrayList<Integer>> verificarNumerosAcertosDuplaSena(Resultado resultado,Jogo jogo);
     void getResultadoAnterior(String tipoJogo, int sorteio);
     public boolean verificarConexao();
+    public Jogo carregarRealmJogo(int id,Context context);
 }
