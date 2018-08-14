@@ -98,13 +98,7 @@ public class DetalhesJogo extends AppCompatActivity implements DetalhesJogoView 
 
         jogo = detalhesJogoPresenter.carregarRealmJogo(id,getBaseContext());
 
-        if (detalhesJogoPresenter.verificarConexao()){
-            try {
-                res = new ResultadoTask().execute(jogo.tipoJogo, String.valueOf(jogo.sorteio)).get();
-            } catch (InterruptedException | ExecutionException e) {
-                e.printStackTrace();
-            }
-        }
+        res = detalhesJogoPresenter.carregarResultadoOff(jogo.filename);
 
         tvTipoJogo.setText(jogo.tipoJogo);
         tvSorteio.setText(String.valueOf(jogo.sorteio));

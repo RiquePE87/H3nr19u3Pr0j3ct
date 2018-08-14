@@ -118,6 +118,13 @@ public class DetalhesJogoPresenterImpl implements DetalhesJogoPresenter {
 
         }
 
+        public Resultado carregarResultadoOff(String filename){
+
+        Resultado resultado = new ResultadoService().carregarResultadoOfflinebyFilename(filename);
+
+        return  resultado;
+        }
+
         public ArrayList<Float> verificarPremiacaoDuplaSena(Resultado res, Jogo jogo){
 
             ArrayList<Float> valorPremio = new ArrayList<>();

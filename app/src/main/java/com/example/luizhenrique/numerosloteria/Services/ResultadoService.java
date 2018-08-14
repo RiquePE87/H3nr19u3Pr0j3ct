@@ -130,6 +130,20 @@ public class ResultadoService {
         return resultado;
     }
 
+    public Resultado carregarResultadoOfflinebyFilename(String filename){
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        Resultado resultado = new Resultado();
+
+        try {
+            resultado = objectMapper.readValue(new File(filename),Resultado.class);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return resultado;
+
+    }
+
     public static int[] verificarMaisSorteados(String sorteio, String tipo, int range, int dezenas, int quantidade) {
 
         ArrayList<Object> sorteios = new ArrayList<Object>() {

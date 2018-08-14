@@ -74,7 +74,5 @@ public class AdicionarJogoPresenterImpl implements AdicionarJogoPresenter{
         adicionarJogoView.exibirProgress(false);
         adicionarJogoView.exibirPublicidade();
         return intNumerosMaisSorteados;
-
-
     }
 }

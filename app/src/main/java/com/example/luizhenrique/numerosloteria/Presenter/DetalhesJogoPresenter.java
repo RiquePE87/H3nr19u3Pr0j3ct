@@ -18,4 +18,5 @@ public interface DetalhesJogoPresenter {
     void getResultadoAnterior(String tipoJogo, int sorteio);
     public boolean verificarConexao();
     public Jogo carregarRealmJogo(int id,Context context);
+    public Resultado carregarResultadoOff(String filename);
 }
