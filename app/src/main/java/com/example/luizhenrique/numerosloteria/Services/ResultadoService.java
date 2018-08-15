@@ -96,9 +96,11 @@ public class ResultadoService {
             filename = getFilename(res.getTipo(),String.valueOf(res.getNumero()));
         }
 
-        try { objectMapper.writeValue(new File(filename),res);
-        } catch (IOException e) {
-            e.printStackTrace();
+        if (!new File(filename).exists()){
+            try { objectMapper.writeValue(new File(filename),res);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 
@@ -116,19 +118,34 @@ public class ResultadoService {
         return resultado;
     }
 
-    public Resultado carregarResultadoOffline(String tipoJogo, String sorteio){
+    public void salvarResultadoJogo(String tipo, String concurso){
 
-        ObjectMapper objectMapper = new ObjectMapper();
         Resultado resultado = new Resultado();
-        String filename = PATH+tipoJogo+" "+sorteio+".json";
 
         try {
-            resultado = objectMapper.readValue(new File(filename),Resultado.class);
-        } catch (IOException e) {
+             resultado = new ResultadoTask().execute(tipo,concurso).get();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
             e.printStackTrace();
         }
-        return resultado;
+
+        salvarResultadosOffline(resultado,false);
     }
+
+//    public Resultado carregarResultadoOffline(String tipoJogo, String sorteio){
+//
+//        ObjectMapper objectMapper = new ObjectMapper();
+//        Resultado resultado = new Resultado();
+//        String filename = PATH+tipoJogo+" "+sorteio+".json";
+//
+//        try {
+//            resultado = objectMapper.readValue(new File(filename),Resultado.class);
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//        return resultado;
+//    }
 
     public Resultado carregarResultadoOfflinebyFilename(String filename){
 

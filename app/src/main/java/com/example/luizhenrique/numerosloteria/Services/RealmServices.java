@@ -63,7 +63,7 @@ public class RealmServices {
         realm.close();
     }
 
-    public void atualizarJogo(int id, int sorteio) {
+    public void atualizarJogo(int id, int sorteio, String filename) {
 
        Jogo jogo = getJogo(id);
 
@@ -76,7 +76,10 @@ public class RealmServices {
             realm.beginTransaction();
 
             jogo.sorteio = sorteio;
+            jogo.filename = filename;
+
             realm.insertOrUpdate(jogo);
+
 
             realm.commitTransaction();
 

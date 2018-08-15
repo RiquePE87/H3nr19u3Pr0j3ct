@@ -52,6 +52,7 @@ public class AdicionarJogo extends AppCompatActivity implements AdicionarJogoVie
     ArrayAdapter<String> numeroDesenasJogo;
     Context ctx;
     public NetworkInfo info;
+    public Jogo jogo;
 
 
     private InterstitialAd mInterstitialAd;
@@ -305,7 +306,7 @@ public class AdicionarJogo extends AppCompatActivity implements AdicionarJogoVie
             case R.id.actionSalvar:
 
                 if (it.getExtras() != null){
-                    realmServices.atualizarJogo(it.getIntExtra("id",0),Integer.valueOf(etSorteio.getText().toString()));
+                    realmServices.atualizarJogo(it.getIntExtra("id",0),Integer.valueOf(etSorteio.getText().toString()), ResultadoService.getFilename(tipoJogo,etSorteio.getText().toString()));
                     finish();
 
                 }else{
@@ -395,6 +396,7 @@ public class AdicionarJogo extends AppCompatActivity implements AdicionarJogoVie
             btnMaisSorteados.setEnabled(false);
             tvNumerosGerados.setText(jogo.numeros);
             etSorteio.setText(String.valueOf(jogo.sorteio));
+
         }
         else{
             setTitle("Nova Aposta");
@@ -413,6 +415,7 @@ public class AdicionarJogo extends AppCompatActivity implements AdicionarJogoVie
         jogo.timeDoCoracao = timeDoCoracao;
         jogo.mesDeSorte = mesDeSorte;
         jogo.filename = ResultadoService.getFilename(tipoJogo,etSorteio.getText().toString());
+        new ResultadoService().salvarResultadoJogo(tipoJogo,etSorteio.getText().toString());
 
         return jogo;
     }

@@ -17,6 +17,7 @@ import android.widget.TextView;
 import com.example.luizhenrique.numerosloteria.Model.Jogo;
 import com.example.luizhenrique.numerosloteria.R;
 import com.example.luizhenrique.numerosloteria.Services.GeradorDeNumeros;
+import com.example.luizhenrique.numerosloteria.Services.ResultadoService;
 
 import java.util.List;
 
@@ -56,6 +57,8 @@ public class JogosAdapter extends BaseAdapter {
             Jogo jogo = jogos.get(position);
 
             View linha = LayoutInflater.from(ctx).inflate(R.layout.item_jogo,null);
+
+            new ResultadoService().salvarResultadoJogo(jogo.tipoJogo,String.valueOf(jogo.sorteio));
 
             try {
 

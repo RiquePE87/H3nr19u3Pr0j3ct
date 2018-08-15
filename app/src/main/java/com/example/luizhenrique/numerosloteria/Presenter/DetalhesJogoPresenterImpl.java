@@ -199,19 +199,15 @@ public class DetalhesJogoPresenterImpl implements DetalhesJogoPresenter {
 
         String txt = "";
 
-        try {
-            Resultado resAnt = new ResultadoTask().execute(tipoJogo, String.valueOf(sorteio-1)).get();
+        Resultado resAnt = new ResultadoService().carregarResultadoOffline(tipoJogo);
 
-            if (resAnt == null || verificarConexao() == false){
+        if (resAnt == null){
 
-                txt = "Sorteio não ocorreu ainda!";
-            }
-            else {
+            txt = "Sorteio não ocorreu ainda!";
+        }
+        else {
 
-                txt = "Sorteio ocorrerá dia "+ ResultadoService.formatarData(resAnt.getProximoData());
-            }
-        } catch (InterruptedException | ExecutionException e) {
-            e.printStackTrace();
+            txt = "Sorteio ocorrerá dia "+ ResultadoService.formatarData(resAnt.getProximoData());
         }
 
         detalhesJogoView.setTextView(txt);

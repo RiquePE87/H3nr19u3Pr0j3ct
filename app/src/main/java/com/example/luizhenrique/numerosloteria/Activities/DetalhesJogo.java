@@ -155,7 +155,7 @@ public class DetalhesJogo extends AppCompatActivity implements DetalhesJogoView 
     public void mostrarAposta() {
 
         try {
-                if (res.getNumero() != null && detalhesJogoPresenter.verificarConexao()) {
+                if (res.getNumero() != null) {
 
                     tvAcertos.setText(String.valueOf(detalhesJogoPresenter.verificarNumerosAcertos(res, jogo).size()));
                     tvValorPremio.setText(String.valueOf("Você ganhou " + numberFormat.format(detalhesJogoPresenter.verificarPremiacao(res, jogo))));
@@ -184,7 +184,7 @@ public class DetalhesJogo extends AppCompatActivity implements DetalhesJogoView 
     @Override
     public void gerarGrid() {
 
-        ArrayList<ArrayList<Integer>> numerosAcertadosDupla = new ArrayList<>();
+        ArrayList<ArrayList<Integer>> numerosAcertadosDupla = new ArrayList<ArrayList<Integer>>();
 
         GridLayout tb = findViewById(R.id.glDetalhesJogoNumeros);
         GridLayout tb2 = findViewById(R.id.glDetalhesJogoNumeros2);
@@ -193,7 +193,7 @@ public class DetalhesJogo extends AppCompatActivity implements DetalhesJogoView 
 
         int[] nums = GeradorDeNumeros.ParseToInt(jogo);
 
-        if (detalhesJogoPresenter.verificarConexao()) {
+        if (detalhesJogoPresenter.verificarConexao() && res.getNumero() != null) {
 
             if (jogo.tipoJogo.equals("Dupla-Sena")) {
 
@@ -216,19 +216,23 @@ public class DetalhesJogo extends AppCompatActivity implements DetalhesJogoView 
                 t.setTextColor(Color.WHITE);
                 t.setTypeface(Typeface.DEFAULT_BOLD);
 
-                if (numerosAcertadosDupla.get(0).size() > 0) {
-                    for (int n : numerosAcertadosDupla.get(0)) {
 
-                        if (n == num) {
-                            t.setBackgroundResource(corBola);
-                            break;
-                        } else {
-                            t.setBackgroundResource(R.drawable.bolanaoac);
+                if (res.getNumero() != null){
+
+                    if (numerosAcertadosDupla.get(0).size() > 0) {
+                        for (int n : numerosAcertadosDupla.get(0)) {
+
+                            if (n == num) {
+                                t.setBackgroundResource(corBola);
+                                break;
+                            } else {
+                                t.setBackgroundResource(R.drawable.bolanaoac);
+                            }
                         }
                     }
-                } else {
-                    t.setBackgroundResource(R.drawable.bolanaoac);
                 }
+
+                t.setBackgroundResource(R.drawable.bolanaoac);
                 tb.addView(t);
             }
 
@@ -243,20 +247,22 @@ public class DetalhesJogo extends AppCompatActivity implements DetalhesJogoView 
                 t.setTextColor(Color.WHITE);
                 t.setTypeface(Typeface.DEFAULT_BOLD);
 
-                if (numerosAcertadosDupla.get(1).size() > 0) {
-                    for (int n : numerosAcertadosDupla.get(1)) {
+                if (res.getNumero() != null){
 
-                        if (n == num) {
-                            t.setBackgroundResource(corBola);
-                            break;
-                        } else {
-                            t.setBackgroundResource(R.drawable.bolanaoac);
+                    if (numerosAcertadosDupla.get(1).size() > 0) {
+                        for (int n : numerosAcertadosDupla.get(1)) {
 
+                            if (n == num) {
+                                t.setBackgroundResource(corBola);
+                                break;
+                            } else {
+                                t.setBackgroundResource(R.drawable.bolanaoac);
+                            }
                         }
                     }
-                } else {
-                    t.setBackgroundResource(R.drawable.bolanaoac);
                 }
+
+                t.setBackgroundResource(R.drawable.bolanaoac);
                 tb2.addView(t);
             }
         }
