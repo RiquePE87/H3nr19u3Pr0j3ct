@@ -193,7 +193,7 @@ public class DetalhesJogo extends AppCompatActivity implements DetalhesJogoView 
 
         int[] nums = GeradorDeNumeros.ParseToInt(jogo);
 
-        if (detalhesJogoPresenter.verificarConexao() && res.getNumero() != null) {
+        if (res.getNumero() != null) {
 
             if (jogo.tipoJogo.equals("Dupla-Sena")) {
 

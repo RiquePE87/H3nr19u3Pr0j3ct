@@ -43,18 +43,18 @@ public class DetalhesJogoPresenterImpl implements DetalhesJogoPresenter {
             return numerosAcertos;
         }else{
 
-                List<Object> numerosSorteados = resultado.getSorteio();
+            List<Object> numerosSorteados = resultado.getSorteio();
 
-                for (int nums : numerosJogados) {
-                    for (Object numerosSorteado : numerosSorteados) {
-                        if (numerosSorteado.equals(nums)) {
-                            numerosAcertos.add(nums);
-                        }
+            for (int nums : numerosJogados) {
+                for (Object numerosSorteado : numerosSorteados) {
+                    if (numerosSorteado.equals(nums)) {
+                        numerosAcertos.add(nums);
                     }
                 }
-                return numerosAcertos;
             }
+            return numerosAcertos;
         }
+    }
 
     public ArrayList<ArrayList<Integer>> verificarNumerosAcertosDuplaSena(Resultado resultado,Jogo jogo) {
 
@@ -64,27 +64,27 @@ public class DetalhesJogoPresenterImpl implements DetalhesJogoPresenter {
 
         int[] numerosJogados = GeradorDeNumeros.ParseToInt(jogo);
 
-            List<Integer> numsJogo1 = (ArrayList<Integer>) resultado.getSorteio().get(0);
-            List<Integer> numsJogo2 = (ArrayList<Integer>) resultado.getSorteio().get(1);
+        List<Integer> numsJogo1 = (ArrayList<Integer>) resultado.getSorteio().get(0);
+        List<Integer> numsJogo2 = (ArrayList<Integer>) resultado.getSorteio().get(1);
 
 
-            for (int nums : numerosJogados) {
-                for (Object numerosSorteado : numsJogo1) {
-                    if (numerosSorteado.equals(nums)) {
-                        numerosAcertos.get(0).add(nums);
-                    }
+        for (int nums : numerosJogados) {
+            for (Object numerosSorteado : numsJogo1) {
+                if (numerosSorteado.equals(nums)) {
+                    numerosAcertos.get(0).add(nums);
                 }
             }
+        }
 
-            for (int nums : numerosJogados) {
-                for (Object numerosSorteado : numsJogo2) {
-                    if (numerosSorteado.equals(nums)) {
-                        numerosAcertos.get(1).add(nums);
-                    }
+        for (int nums : numerosJogados) {
+            for (Object numerosSorteado : numsJogo2) {
+                if (numerosSorteado.equals(nums)) {
+                    numerosAcertos.get(1).add(nums);
                 }
             }
+        }
 
-            return numerosAcertos;
+        return numerosAcertos;
     }
 
     // verifica quanto a apsota rendeu em reais
@@ -116,50 +116,50 @@ public class DetalhesJogoPresenterImpl implements DetalhesJogoPresenter {
 
         return valorPremio;
 
-        }
+    }
 
-        public Resultado carregarResultadoOff(String filename){
+    public Resultado carregarResultadoOff(String filename){
 
         Resultado resultado = new ResultadoService().carregarResultadoOfflinebyFilename(filename);
 
         return  resultado;
+    }
+
+    public ArrayList<Float> verificarPremiacaoDuplaSena(Resultado res, Jogo jogo){
+
+        ArrayList<Float> valorPremio = new ArrayList<>();
+        int[] premiacaoes;
+        int count = 0;
+
+        int acertos1 = verificarNumerosAcertosDuplaSena(res,jogo).get(0).size();
+        int acertos2 = verificarNumerosAcertosDuplaSena(res,jogo).get(1).size();
+
+        ArrayList<Float> rateioJogo1 =  (ArrayList<Float>) res.getRateio().get(0);
+        ArrayList<Float> rateioJogo2 =  (ArrayList<Float>) res.getRateio().get(1);
+
+
+        premiacaoes = jogoManager.getAcertos(jogo.tipoJogo.toLowerCase());
+
+        for (int num: premiacaoes){
+
+            if (num == acertos1){
+
+                valorPremio.add(rateioJogo1.get(count));
+
+            }else{
+                count++;
+            }
         }
 
-        public ArrayList<Float> verificarPremiacaoDuplaSena(Resultado res, Jogo jogo){
+        for (int num: premiacaoes){
 
-            ArrayList<Float> valorPremio = new ArrayList<>();
-            int[] premiacaoes;
-            int count = 0;
+            if (num == acertos2){
 
-            int acertos1 = verificarNumerosAcertosDuplaSena(res,jogo).get(0).size();
-            int acertos2 = verificarNumerosAcertosDuplaSena(res,jogo).get(1).size();
-
-            ArrayList<Float> rateioJogo1 =  (ArrayList<Float>) res.getRateio().get(0);
-            ArrayList<Float> rateioJogo2 =  (ArrayList<Float>) res.getRateio().get(1);
-
-
-            premiacaoes = jogoManager.getAcertos(jogo.tipoJogo.toLowerCase());
-
-            for (int num: premiacaoes){
-
-                if (num == acertos1){
-
-                    valorPremio.add(rateioJogo1.get(count));
-
-                }else{
-                    count++;
-                }
+                valorPremio.add(rateioJogo2.get(count));
+            }else{
+                count++;
             }
-
-            for (int num: premiacaoes){
-
-                if (num == acertos2){
-
-                    valorPremio.add(rateioJogo2.get(count));
-                }else{
-                    count++;
-                }
-            }
+        }
 
         return  valorPremio;
     }
@@ -201,13 +201,20 @@ public class DetalhesJogoPresenterImpl implements DetalhesJogoPresenter {
 
         Resultado resAnt = new ResultadoService().carregarResultadoOffline(tipoJogo);
 
-        if (resAnt == null){
+        if (resAnt.getNumero() != null &&resAnt.getNumero() < sorteio){
 
             txt = "Sorteio não ocorreu ainda!";
         }
-        else {
+        else if (resAnt.getNumero() != null && resAnt.getNumero() == sorteio-1){
 
             txt = "Sorteio ocorrerá dia "+ ResultadoService.formatarData(resAnt.getProximoData());
+        }
+        else if (resAnt.getNumero() != null && resAnt.getNumero() < sorteio || resAnt == null && verificarConexao() == false){
+
+            txt = "Conecte-se a internet para verificar resultados";
+        }
+        else {
+            txt = "Conecte-se a internet para verificar resultados";
         }
 
         detalhesJogoView.setTextView(txt);
@@ -220,12 +227,6 @@ public class DetalhesJogoPresenterImpl implements DetalhesJogoPresenter {
         cm = (ConnectivityManager) ctx.getSystemService(Context.CONNECTIVITY_SERVICE);
         info = cm.getActiveNetworkInfo();
 
-        if (info != null && info.isConnected()){
-
-            return true;
-        }
-        else {
-            return false;
-        }
+        return info != null && info.isConnected();
     }
 }
