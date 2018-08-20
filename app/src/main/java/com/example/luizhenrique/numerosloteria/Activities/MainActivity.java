@@ -165,6 +165,8 @@ public class MainActivity extends AppCompatActivity
 
             startActivity(new Intent(MainActivity.this, AdicionarJogo.class));
 
+        }else if (id == R.id.nav_adc_numero){
+            startActivity(new Intent(MainActivity.this,NumerosFavoritos.class));
         }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);

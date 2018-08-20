@@ -13,10 +13,7 @@
         android:roundIcon="@mipmap/icone_numeros_da_sorte"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
-        <activity
-            android:name=".Activities.SplashActicity"
-
-            >
+        <activity android:name=".Activities.SplashActicity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -32,15 +29,19 @@
         <activity
             android:name=".Activities.MainActivity"
             android:label="@string/title_activity_main2"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Activities.DetalhesSorteio"
             android:label="@string/title_activity_detalhes_sorteio"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".Activities.SelecaoNumeros" />
-        <activity android:name=".Activities.CameraOCRActivity"></activity>
+        <activity android:name=".Activities.CameraOCRActivity" />
 
-        <meta-data android:name="com.google.android.gms.vision.DEPENDENCIES" android:value="ocr"/>
+        <meta-data
+            android:name="com.google.android.gms.vision.DEPENDENCIES"
+            android:value="ocr" />
+
+        <activity android:name=".Activities.NumerosFavoritos"></activity>
     </application>
 
 </manifest>

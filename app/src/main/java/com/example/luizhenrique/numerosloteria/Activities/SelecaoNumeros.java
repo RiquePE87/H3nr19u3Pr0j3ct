@@ -1,7 +1,9 @@
 package com.example.luizhenrique.numerosloteria.Activities;
 
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -22,59 +24,48 @@ import android.widget.Toast;
 import com.example.luizhenrique.numerosloteria.R;
 import com.example.luizhenrique.numerosloteria.Services.GeradorDeNumeros;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 public class SelecaoNumeros extends AppCompatActivity {
 
     int[] numeros;
+    ArrayList<Integer> numerosFavoritos;
     int dezenas;
     int count = 0;
     int numeroDezenas;
     int i = 1;
     Toolbar toolbarSelecao;
     GridLayout gl;
+    Intent it;
+    Context context;
+    SharedPreferences sharedPref;
+    SharedPreferences.Editor editor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        Intent it = getIntent();
+        it = getIntent();
         setContentView(R.layout.selecao_numeros);
         toolbarSelecao = findViewById(R.id.toolbar_selecao);
         toolbarSelecao.setTitle("");
         gl = findViewById(R.id.gridSelecao);
         setSupportActionBar(toolbarSelecao);
-
+        sharedPref = getSharedPreferences("app",MODE_PRIVATE);
+         editor = sharedPref.edit();
 
         TableRow.LayoutParams lp = new TableRow.LayoutParams(160,160);
         String jogo = it.getStringExtra("jogo");
         dezenas = it.getIntExtra("dezenas",0);
         numeroDezenas = it.getIntExtra("numeroBolas",0);
 
-        numeros = new int[dezenas];
+        if (it.getExtras() == null){
 
-        if (jogo.equals("LotoMania")){
-            for (i = 0;i<numeroDezenas;i++) {
-
-                TextView t = new TextView(this);
-                t.setText(String.valueOf(i));
-                t.setGravity(TextView.TEXT_ALIGNMENT_GRAVITY);
-                t.setLayoutParams(lp);
-                t.setGravity(Gravity.CENTER_VERTICAL | Gravity.CENTER_HORIZONTAL);
-                t.setTextSize(18);
-                t.setTextColor(Color.DKGRAY);
-                t.setBackgroundResource(R.drawable.bola);
-                t.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        NumeroClicado(v);
-                    }
-                });
-                gl.addView(t);
-            }
-        }
-        else {
-
+            numeroDezenas = 99;
+            dezenas = 99;
+            numerosFavoritos = new ArrayList<>();
+            numeros = GeradorDeNumeros.ParseToInt(sharedPref.getString("meus_numeros_favoritos",""),sharedPref.getInt("dezenas",0));
 
             for (i = 1; i <= numeroDezenas; i++) {
 
@@ -84,25 +75,82 @@ public class SelecaoNumeros extends AppCompatActivity {
                 t.setLayoutParams(lp);
                 t.setGravity(Gravity.CENTER_VERTICAL | Gravity.CENTER_HORIZONTAL);
                 t.setTextSize(18);
-                t.setTextColor(Color.DKGRAY);
-                t.setBackgroundResource(R.drawable.bola);
+
+                for (int n : numeros){
+
+                    if (n == i){
+                        t.setBackgroundResource(R.drawable.bolaselecionada);
+                        ((TextView) t).setTextColor(Color.BLACK);
+                        ((TextView) t).setTypeface(null, Typeface.BOLD);
+                    }
+                    else {
+                        t.setTextColor(Color.DKGRAY);
+                        t.setBackgroundResource(R.drawable.bola);
+                    }
+                }
+
                 t.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        NumeroClicado(v);
+                        NumeroClicadoFavorito(v);
                     }
                 });
                 gl.addView(t);
             }
-        }
 
+
+        }
+        else {
+            numeros = new int[dezenas];
+
+            if (jogo.equals("LotoMania")){
+                for (i = 0;i<numeroDezenas;i++) {
+
+                    TextView t = new TextView(this);
+                    t.setText(String.valueOf(i));
+                    t.setGravity(TextView.TEXT_ALIGNMENT_GRAVITY);
+                    t.setLayoutParams(lp);
+                    t.setGravity(Gravity.CENTER_VERTICAL | Gravity.CENTER_HORIZONTAL);
+                    t.setTextSize(18);
+                    t.setTextColor(Color.DKGRAY);
+                    t.setBackgroundResource(R.drawable.bola);
+                    t.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            NumeroClicado(v);
+                        }
+                    });
+                    gl.addView(t);
+                }
+            }
+            else {
+
+                for (i = 1; i <= numeroDezenas; i++) {
+
+                    TextView t = new TextView(this);
+                    t.setText(String.valueOf(i));
+                    t.setGravity(TextView.TEXT_ALIGNMENT_GRAVITY);
+                    t.setLayoutParams(lp);
+                    t.setGravity(Gravity.CENTER_VERTICAL | Gravity.CENTER_HORIZONTAL);
+                    t.setTextSize(18);
+                    t.setTextColor(Color.DKGRAY);
+                    t.setBackgroundResource(R.drawable.bola);
+                    t.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            NumeroClicado(v);
+                        }
+                    });
+                    gl.addView(t);
+                }
+            }
+        }
     }
 
     public void NumeroClicado(View view){
 
         TextView texto = (TextView) view;
         int corDefault = ((TextView) view).getCurrentTextColor();
-
 
         if (count < dezenas) {
 
@@ -115,15 +163,12 @@ public class SelecaoNumeros extends AppCompatActivity {
                 count++;
                 toolbarSelecao.setTitle("Dezenas: "+String.valueOf(count));
 
-
-
             }else{
                 count--;
                 toolbarSelecao.setTitle("Dezenas: "+String.valueOf(count));
                 view.setBackgroundResource(R.drawable.bola);
                 ((TextView) view).setTextColor(Color.DKGRAY);
                 ((TextView) view).setTypeface(null,Typeface.NORMAL);
-
             }
         }
 
@@ -135,7 +180,42 @@ public class SelecaoNumeros extends AppCompatActivity {
             view.setBackgroundResource(R.drawable.bola);
             ((TextView) view).setTypeface(null,Typeface.NORMAL);
         }
+    }
 
+    public void NumeroClicadoFavorito(View view){
+
+        TextView texto = (TextView) view;
+        int corDefault = ((TextView) view).getCurrentTextColor();
+
+
+
+            if (corDefault != Color.BLACK){
+
+                numerosFavoritos.add(Integer.valueOf(String.valueOf(texto.getText())));
+                view.setBackgroundResource(R.drawable.bolaselecionada);
+                ((TextView) view).setTextColor(Color.BLACK);
+                ((TextView) view).setTypeface(null, Typeface.BOLD);
+                count++;
+                toolbarSelecao.setTitle("Dezenas: "+String.valueOf(count));
+
+            }else{
+                count--;
+                numerosFavoritos.remove(Integer.valueOf((String) ((TextView) view).getText()));
+                toolbarSelecao.setTitle("Dezenas: "+String.valueOf(count));
+                view.setBackgroundResource(R.drawable.bola);
+                ((TextView) view).setTextColor(Color.DKGRAY);
+                ((TextView) view).setTypeface(null,Typeface.NORMAL);
+            }
+
+
+//        if (count == dezenas && corDefault == Color.BLACK){
+//
+//            count--;
+//            toolbarSelecao.setTitle("Dezenas: "+String.valueOf(count));
+//            ((TextView) view).setTextColor(Color.DKGRAY);
+//            view.setBackgroundResource(R.drawable.bola);
+//            ((TextView) view).setTypeface(null,Typeface.NORMAL);
+//        }
     }
 
     public void limparDezenas(){
@@ -150,7 +230,6 @@ public class SelecaoNumeros extends AppCompatActivity {
                 child.setBackgroundResource(R.drawable.bola);
                 child.setTextColor(Color.DKGRAY);
                 child.setTypeface(null,Typeface.NORMAL);
-
 
             }
         }
@@ -170,7 +249,24 @@ public class SelecaoNumeros extends AppCompatActivity {
 
             case R.id.action_OKSelecao:
 
-                if (count == dezenas){
+                if (it.getExtras() == null){
+
+                    numeros = new int[count];
+
+                    int count = 0;
+                    for (int n : numerosFavoritos){
+
+                        numeros[count] = n;
+                        count++;
+                    }
+                    Arrays.sort(numeros);
+                    String numsSelec = GeradorDeNumeros.ParseToString(numeros);
+                    editor.putString("meus_numeros_favoritos",numsSelec);
+                    editor.putInt("dezenas",count);
+                    editor.apply();
+                    finish();
+
+                }else if (count == dezenas){
                     Intent itResult = new Intent();
                     Arrays.sort(numeros);
                     String numsSelec = GeradorDeNumeros.ParseToString(numeros);

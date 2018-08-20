@@ -12,6 +12,12 @@
             android:icon="@drawable/plus3"
             android:title="Adicionar Aposta" />
 
+        <item
+            android:id="@+id/nav_adc_numero"
+            android:icon="@drawable/bola_loteria"
+            android:title="Meus Números Favoritos"
+            />
+
     </group>
 
 </menu>

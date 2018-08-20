@@ -74,6 +74,29 @@ public class GeradorDeNumeros {
         return num;
     }
 
+    public static int[] ParseToInt(String numeros, int dezenas){
+
+        int[] inteiros = new int[dezenas];
+        String num = "";
+        int count = 0;
+
+        for (int i = 0; i < numeros.length(); i++)
+        {
+            if (!Character.isWhitespace(numeros.charAt(i)))
+            {
+                num += numeros.charAt(i);
+            }
+            else
+            {
+                inteiros[count] += Integer.parseInt(num);
+                count++;
+                num = "";
+            }
+        }
+
+        return inteiros;
+    }
+
     public static int[] ParseToInt(Jogo jogo){
 
         String numeros = jogo.numeros;
