@@ -41,7 +41,8 @@
             android:name="com.google.android.gms.vision.DEPENDENCIES"
             android:value="ocr" />
 
-        <activity android:name=".Activities.NumerosFavoritos"></activity>
+        <activity android:name=".Activities.NumerosFavoritos"
+            android:noHistory="true"></activity>
     </application>
 
 </manifest>

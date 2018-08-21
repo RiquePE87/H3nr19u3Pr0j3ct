@@ -53,7 +53,7 @@ public class SelecaoNumeros extends AppCompatActivity {
         gl = findViewById(R.id.gridSelecao);
         setSupportActionBar(toolbarSelecao);
         sharedPref = getSharedPreferences("app",MODE_PRIVATE);
-         editor = sharedPref.edit();
+        editor = sharedPref.edit();
 
         TableRow.LayoutParams lp = new TableRow.LayoutParams(160,160);
         String jogo = it.getStringExtra("jogo");
@@ -66,6 +66,8 @@ public class SelecaoNumeros extends AppCompatActivity {
             dezenas = 99;
             numerosFavoritos = new ArrayList<>();
             numeros = GeradorDeNumeros.ParseToInt(sharedPref.getString("meus_numeros_favoritos",""),sharedPref.getInt("dezenas",0));
+            count = sharedPref.getInt("dezenas",0);
+            toolbarSelecao.setTitle("Dezenas: "+String.valueOf(count));
 
             for (i = 1; i <= numeroDezenas; i++) {
 
@@ -75,19 +77,19 @@ public class SelecaoNumeros extends AppCompatActivity {
                 t.setLayoutParams(lp);
                 t.setGravity(Gravity.CENTER_VERTICAL | Gravity.CENTER_HORIZONTAL);
                 t.setTextSize(18);
-
-                for (int n : numeros){
-
-                    if (n == i){
-                        t.setBackgroundResource(R.drawable.bolaselecionada);
-                        ((TextView) t).setTextColor(Color.BLACK);
-                        ((TextView) t).setTypeface(null, Typeface.BOLD);
-                    }
-                    else {
-                        t.setTextColor(Color.DKGRAY);
-                        t.setBackgroundResource(R.drawable.bola);
-                    }
-                }
+                t.setTextColor(Color.DKGRAY);
+                t.setBackgroundResource(R.drawable.bola);
+//                for (int n : numeros){
+//
+//                    if (n == i){
+//                        t.setBackgroundResource(R.drawable.bolaselecionada);
+//                        ((TextView) t).setTextColor(Color.BLACK);
+//                        ((TextView) t).setTypeface(null, Typeface.BOLD);
+//                    }
+//                    else {
+//
+//                    }
+//                }
 
                 t.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -95,10 +97,9 @@ public class SelecaoNumeros extends AppCompatActivity {
                         NumeroClicadoFavorito(v);
                     }
                 });
+                carregarNumerosFavoritos(t);
                 gl.addView(t);
             }
-
-
         }
         else {
             numeros = new int[dezenas];
@@ -141,8 +142,25 @@ public class SelecaoNumeros extends AppCompatActivity {
                             NumeroClicado(v);
                         }
                     });
+
                     gl.addView(t);
                 }
+            }
+        }
+    }
+
+    public void carregarNumerosFavoritos(View v){
+
+        TextView t = (TextView) v;
+
+        for (int num : numeros){
+
+            if (num == Integer.valueOf((String) t.getText())){
+                t.setBackgroundResource(R.drawable.bolaselecionada);
+                ((TextView) t).setTextColor(Color.BLACK);
+                ((TextView) t).setTypeface(null, Typeface.BOLD);
+                numerosFavoritos.add(Integer.valueOf((String) t.getText()));
+
             }
         }
     }
@@ -238,7 +256,9 @@ public class SelecaoNumeros extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater menuInflater = getMenuInflater();
-        menuInflater.inflate(R.menu.toolbar_selecao,menu);
+        menuInflater.inflate(R.menu.toolbar_selecao, menu);
+        if (it.getExtras() == null)
+            menu.removeItem(R.id.action_limpar);
         return true;
     }
 
@@ -264,9 +284,11 @@ public class SelecaoNumeros extends AppCompatActivity {
                     editor.putString("meus_numeros_favoritos",numsSelec);
                     editor.putInt("dezenas",count);
                     editor.apply();
+                    startActivity(new Intent(SelecaoNumeros.this,NumerosFavoritos.class));
                     finish();
 
                 }else if (count == dezenas){
+
                     Intent itResult = new Intent();
                     Arrays.sort(numeros);
                     String numsSelec = GeradorDeNumeros.ParseToString(numeros);
@@ -274,6 +296,7 @@ public class SelecaoNumeros extends AppCompatActivity {
                     setResult(RESULT_OK,itResult);
                     finish();
                     return true;
+
                 }else{
                     Toast.makeText(this,"Selecione o restante das dezenas",Toast.LENGTH_SHORT).show();
                     break;
