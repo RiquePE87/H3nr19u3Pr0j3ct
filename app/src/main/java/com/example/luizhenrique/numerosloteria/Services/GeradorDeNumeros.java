@@ -21,6 +21,75 @@ import java.util.Set;
 
 public class GeradorDeNumeros {
 
+    public static int[] gerarNumerosByFavoritos(int[] numerosFavoritos, int quantidadeNumeros, int rangeNumeros){
+
+        int[] numeros = new int[quantidadeNumeros];
+        int[] numerosGerados = new int[quantidadeNumeros - numerosFavoritos.length];
+        Random rdm = new Random();
+        int count = 0;
+        int favoritoslenght = numerosFavoritos.length;
+        boolean isRepetido = true;
+
+        //numerosGerados = new int[]{13, 35, 45};
+
+//        for (int i: numerosFavoritos){
+//
+//            numeros[count] = i;
+//            count++;
+//        }
+
+        if (rangeNumeros == 100) {
+            for (int i = 0; i < numerosGerados.length; i++) {
+
+                numerosGerados[i] = rdm.nextInt(rangeNumeros);
+            }
+
+            Arrays.sort(numerosGerados);
+        } else {
+            for (int i = 0; i < numerosGerados.length; i++) {
+
+                numerosGerados[i] = rdm.nextInt(rangeNumeros)+1;
+            }
+            Arrays.sort(numerosGerados);
+        }
+
+       numerosGerados = checarNumerosIguais(numerosGerados,rangeNumeros);
+
+
+        while (isRepetido) {
+            for (int n : numerosFavoritos) {
+                for (int j : numerosGerados) {
+
+                    if (n == j) {
+                        j = rdm.nextInt(rangeNumeros) + 1;
+                        isRepetido = true;
+                    } else {
+
+                    }
+                }
+            }
+            isRepetido = false;
+        }
+
+
+        int contador = 0;
+
+        for ( int i=0; i < numeros.length;i++){
+
+            if (i < numerosFavoritos.length){
+                numeros[i] = numerosFavoritos[i];
+            }else {
+
+                numeros[i] = numerosGerados[contador];
+                contador++;
+            }
+        }
+
+     Arrays.sort(numeros);
+
+        return numeros;
+    }
+
     public static int[] gerarNumeros(int quantidadeNumeros, int rangeNumeros) {
 
         int[] numeros = new int[quantidadeNumeros];
