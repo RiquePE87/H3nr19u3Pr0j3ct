@@ -29,14 +29,7 @@ public class GeradorDeNumeros {
         int count = 0;
         int favoritoslenght = numerosFavoritos.length;
         boolean isRepetido = true;
-
-        //numerosGerados = new int[]{13, 35, 45};
-
-//        for (int i: numerosFavoritos){
-//
-//            numeros[count] = i;
-//            count++;
-//        }
+        int contadorWhile = 1;
 
         if (rangeNumeros == 100) {
             for (int i = 0; i < numerosGerados.length; i++) {
@@ -55,22 +48,23 @@ public class GeradorDeNumeros {
 
        numerosGerados = checarNumerosIguais(numerosGerados,rangeNumeros);
 
+      int[] copiaNumerosGerados = numerosGerados;
 
-        while (isRepetido) {
+
+        while (contadorWhile != 0) {
+
+            contadorWhile = 0;
+
             for (int n : numerosFavoritos) {
                 for (int j : numerosGerados) {
 
                     if (n == j) {
-                        j = rdm.nextInt(rangeNumeros) + 1;
-                        isRepetido = true;
-                    } else {
-
+                        copiaNumerosGerados[Arrays.binarySearch(numerosGerados,j)] = rdm.nextInt(rangeNumeros);
+                        contadorWhile++;
                     }
                 }
             }
-            isRepetido = false;
         }
-
 
         int contador = 0;
 
@@ -80,7 +74,7 @@ public class GeradorDeNumeros {
                 numeros[i] = numerosFavoritos[i];
             }else {
 
-                numeros[i] = numerosGerados[contador];
+                numeros[i] = copiaNumerosGerados[contador];
                 contador++;
             }
         }

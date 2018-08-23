@@ -19,14 +19,12 @@ import android.widget.Toast;
 
 import com.example.luizhenrique.numerosloteria.Adapter.AbasPagerAdapter;
 import com.example.luizhenrique.numerosloteria.R;
-import com.example.luizhenrique.numerosloteria.Services.GeradorDeNumeros;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.microsoft.appcenter.AppCenter;
 import com.microsoft.appcenter.analytics.Analytics;
 import com.microsoft.appcenter.crashes.Crashes;
 
-import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -43,8 +41,6 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
 
@@ -56,19 +52,6 @@ public class MainActivity extends AppCompatActivity
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-        int[] nums = {12,34,45};
-        int quantidade = 6;
-        int range = 60;
-
-        ArrayList<int[]> lista = new ArrayList<>();
-
-        for (int i = 0; i < 30;i++){
-            lista.add(GeradorDeNumeros.gerarNumerosByFavoritos(nums,quantidade,range));
-        }
-
-
-
 
         fab = findViewById(R.id.fab);
         fab.setVisibility(View.INVISIBLE);
@@ -90,7 +73,6 @@ public class MainActivity extends AppCompatActivity
 
         tabs = findViewById(R.id.tabs);
         ViewPager pager = findViewById(R.id.pager);
-
 
         AbasPagerAdapter adapter = new AbasPagerAdapter(getSupportFragmentManager());
 
