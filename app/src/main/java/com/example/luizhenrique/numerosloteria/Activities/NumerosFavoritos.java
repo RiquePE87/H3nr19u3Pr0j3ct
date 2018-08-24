@@ -8,11 +8,16 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.GridLayout;
+import android.widget.LinearLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
+import android.widget.Toolbar;
 
 import com.example.luizhenrique.numerosloteria.R;
 import com.example.luizhenrique.numerosloteria.Services.GeradorDeNumeros;
@@ -25,8 +30,10 @@ public class NumerosFavoritos extends AppCompatActivity {
 
     ArrayList<Integer> numerosSelecionados;
     FloatingActionButton fab_adicionar;
+    android.support.v7.widget.Toolbar toolbarFavoritos;
     Button btnGerarNumeros;
     TextView tvNumeros;
+    LinearLayout linearLayout;
     int[] numeroDezenas;
     int[] numerosJogo;
     String numeros;
@@ -51,7 +58,17 @@ public class NumerosFavoritos extends AppCompatActivity {
         fab_adicionar = findViewById(R.id.fab_adc_numero);
         btnGerarNumeros = findViewById(R.id.btnGerarNumeros);
         tvNumeros = findViewById(R.id.numerosSelecionados);
+        toolbarFavoritos = findViewById(R.id.toolbar_favoritos);
+        linearLayout = findViewById(R.id.linearFavoritos);
 
+        setSupportActionBar(toolbarFavoritos);
+
+        if (it.getExtras() != null){
+
+            fab_adicionar.setVisibility(View.GONE);
+
+        }
+        linearLayout.setVisibility(View.GONE);
         GridLayout gridLayoutMeusNumeros = findViewById(R.id.gridNumerosFavoritos);
         TableRow.LayoutParams lp = new TableRow.LayoutParams(160,160);
 
@@ -77,9 +94,32 @@ public class NumerosFavoritos extends AppCompatActivity {
 
         if (sharedPreferences.contains("meus_numeros_favoritos")) {
 
-            for (int i = 0; i < numeroDezenas.length; i++) {
+            if (it.getExtras() != null){
 
-                if (numeroDezenas[i] < rangeJogo){
+                for (int i = 0; i < numeroDezenas.length; i++) {
+
+                    if (numeroDezenas[i] < rangeJogo){
+                        TextView t = new TextView(this);
+                        t.setText(String.valueOf(numeroDezenas[i]));
+                        t.setGravity(TextView.TEXT_ALIGNMENT_GRAVITY);
+                        t.setLayoutParams(lp);
+                        t.setGravity(Gravity.CENTER_VERTICAL | Gravity.CENTER_HORIZONTAL);
+                        t.setTextSize(18);
+                        t.setTextColor(Color.DKGRAY);
+                        t.setBackgroundResource(R.drawable.bola);
+                        t.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                NumeroClicado(v);
+                            }
+                        });
+                        gridLayoutMeusNumeros.addView(t);
+                    }
+                }
+            }else {
+
+                for (int i = 0; i < numeroDezenas.length; i++) {
+
                     TextView t = new TextView(this);
                     t.setText(String.valueOf(numeroDezenas[i]));
                     t.setGravity(TextView.TEXT_ALIGNMENT_GRAVITY);
@@ -153,6 +193,19 @@ public class NumerosFavoritos extends AppCompatActivity {
             view.setBackgroundResource(R.drawable.bola);
             ((TextView) view).setTypeface(null,Typeface.NORMAL);
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.toolbarfavoritos,menu);
+
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        return super.onOptionsItemSelected(item);
     }
 }
 

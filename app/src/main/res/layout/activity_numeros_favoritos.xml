@@ -1,44 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.luizhenrique.numerosloteria.Activities.NumerosFavoritos">
 
-    <LinearLayout
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar_favoritos"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Números"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="18sp"
-            android:id="@+id/numerosSelecionados"/>
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/btnGerarNumeros"
-            android:text="Gerar Números Restantes"
-            android:layout_gravity="center_horizontal"/>
-
-        <GridLayout
-        android:id="@+id/gridNumerosFavoritos"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:columnCount="6"
-        android:layout_centerHorizontal="true"
-        android:textAlignment="center">
-    </GridLayout>
-
-    </LinearLayout>
+        android:background="@color/primaryDarkColor"
+        android:elevation="4dp"
+        android:minHeight="?attr/actionBarSize"
+        android:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        android:theme="@style/AppTheme.ActionBar"
+        app:title="Nova Aposta"
+        app:titleTextColor="@android:color/background_light"
+        android:layoutMode="opticalBounds"
+        />
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab_adc_numero"
@@ -54,4 +34,49 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-</android.support.constraint.ConstraintLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/toolbar_favoritos"
+        android:orientation="vertical"
+        android:id="@+id/linearFavoritos">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Números" />
+
+        <TextView
+            android:id="@+id/numerosSelecionados"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp" />
+
+        <Button
+            android:id="@+id/btnGerarNumeros"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="Gerar Números Restantes" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="160dp"
+        android:orientation="vertical">
+
+        <GridLayout
+            android:id="@+id/gridNumerosFavoritos"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:columnCount="6"
+            android:textAlignment="center"></GridLayout>
+    </LinearLayout>
+
+</RelativeLayout>

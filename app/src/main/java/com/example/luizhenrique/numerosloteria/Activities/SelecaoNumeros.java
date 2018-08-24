@@ -17,6 +17,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.GridLayout;
+import android.widget.LinearLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -30,6 +31,7 @@ import java.util.Arrays;
 public class SelecaoNumeros extends AppCompatActivity {
 
     int[] numeros;
+    LinearLayout linearLayout;
     ArrayList<Integer> numerosFavoritos;
     int dezenas;
     int count = 0;
@@ -49,6 +51,7 @@ public class SelecaoNumeros extends AppCompatActivity {
         it = getIntent();
         setContentView(R.layout.selecao_numeros);
         toolbarSelecao = findViewById(R.id.toolbar_selecao);
+
         toolbarSelecao.setTitle("");
         gl = findViewById(R.id.gridSelecao);
         setSupportActionBar(toolbarSelecao);

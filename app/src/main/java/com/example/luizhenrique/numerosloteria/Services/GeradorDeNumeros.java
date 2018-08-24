@@ -2,6 +2,7 @@ package com.example.luizhenrique.numerosloteria.Services;
 
 import com.example.luizhenrique.numerosloteria.Model.Jogo;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
@@ -91,31 +92,46 @@ public class GeradorDeNumeros {
         Random rdm = new Random();
         int[] numeros = new int[quantidade];
 
-        int[] copiaNumerosGerados = arrayGer;
+        ArrayList<Integer> copiaNumerosGerados = new ArrayList<>();
+
+        for (int n: arrayGer){
+            copiaNumerosGerados.add(n);
+        }
 
         try {
             while (contadorWhile != 0) {
 
                 contadorWhile = 0;
-                Arrays.sort(copiaNumerosGerados);
+                copiaNumerosGerados.sort(Comparator.<Integer>naturalOrder());
+                checarNumerosIguais(copiaNumerosGerados,rangeNumeros);
 
 
                 for (int n : arrayFav) {
-                    for (int j : arrayGer) {
+                    for (int j : copiaNumerosGerados) {
 
-                        if (n == j) {
-                            copiaNumerosGerados = checarNumerosIguais(arrayGer,rangeNumeros);
-                            copiaNumerosGerados[Arrays.binarySearch(copiaNumerosGerados,j)] = rdm.nextInt(rangeNumeros);
-                            contadorWhile++;
+                        if (rangeNumeros == 100){
+
+                            if (n == j) {
+
+                                copiaNumerosGerados.set(copiaNumerosGerados.indexOf(j),rdm.nextInt(rangeNumeros));
+                                contadorWhile++;
+                            }
+                        }else{
+
+                            if (n == j) {
+
+                                copiaNumerosGerados.set(copiaNumerosGerados.indexOf(j),rdm.nextInt(rangeNumeros)+1);
+                                contadorWhile++;
+                            }
                         }
+
+
                     }
                 }
             }
         }catch (Exception ex){
             ex.printStackTrace();
         }
-
-
 
         int contador = 0;
 
@@ -125,7 +141,7 @@ public class GeradorDeNumeros {
                 numeros[i] = arrayFav[i];
             }else {
 
-                numeros[i] = copiaNumerosGerados[contador];
+                numeros[i] = copiaNumerosGerados.get(contador);
                 contador++;
             }
         }
@@ -184,6 +200,38 @@ public class GeradorDeNumeros {
 
                 } else {
                     temp = num[a];
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return num;
+    }
+
+    public static ArrayList<Integer> checarNumerosIguais(ArrayList<Integer> num, int rangeNumeros) {
+
+        int temp = num.get(0);
+        Random rdm = new Random();
+
+        try {
+            for (int a = 1; a < num.size(); a++) {
+
+                if (num.get(a) == temp) {
+
+                    if (rangeNumeros == 100) {
+                        num.set(a,rdm.nextInt(rangeNumeros));
+                        a = 0;
+                        num.sort(Comparator.naturalOrder());
+                        temp = num.get(0);
+                    } else {
+                        num.set(a,rdm.nextInt(rangeNumeros)+1);
+                        a = 0;
+                        num.sort(Comparator.naturalOrder());
+                        temp = num.get(0);
+                    }
+
+                } else {
+                    temp = num.get(a);
                 }
             }
         } catch (Exception e) {
