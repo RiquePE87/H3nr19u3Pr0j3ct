@@ -48,30 +48,81 @@ public class GeradorDeNumeros {
 
        numerosGerados = checarNumerosIguais(numerosGerados,rangeNumeros);
 
-      int[] copiaNumerosGerados = numerosGerados;
+        return verificarNumerosIguais(numerosFavoritos,numerosGerados,rangeNumeros,quantidadeNumeros);
+
+//      int[] copiaNumerosGerados = numerosGerados;
+//
+//        while (contadorWhile != 0) {
+//
+//            contadorWhile = 0;
+//
+//            for (int n : numerosFavoritos) {
+//                for (int j : numerosGerados) {
+//
+//                    if (n == j) {
+//                        copiaNumerosGerados[Arrays.binarySearch(numerosGerados,j)] = rdm.nextInt(rangeNumeros);
+//                        contadorWhile++;
+//                    }
+//                }
+//            }
+//        }
+//
+//        int contador = 0;
+//
+//        for ( int i=0; i < numeros.length;i++){
+//
+//            if (i < numerosFavoritos.length){
+//                numeros[i] = numerosFavoritos[i];
+//            }else {
+//
+//                numeros[i] = copiaNumerosGerados[contador];
+//                contador++;
+//            }
+//        }
+//
+//     Arrays.sort(numeros);
+//
+//        return numeros;
+    }
+
+    public static int[] verificarNumerosIguais(int[] arrayFav, int[] arrayGer, int rangeNumeros, int quantidade){
+
+        int contadorWhile = 1;
+        Random rdm = new Random();
+        int[] numeros = new int[quantidade];
+
+        int[] copiaNumerosGerados = arrayGer;
+
+        try {
+            while (contadorWhile != 0) {
+
+                contadorWhile = 0;
+                Arrays.sort(copiaNumerosGerados);
 
 
-        while (contadorWhile != 0) {
+                for (int n : arrayFav) {
+                    for (int j : arrayGer) {
 
-            contadorWhile = 0;
-
-            for (int n : numerosFavoritos) {
-                for (int j : numerosGerados) {
-
-                    if (n == j) {
-                        copiaNumerosGerados[Arrays.binarySearch(numerosGerados,j)] = rdm.nextInt(rangeNumeros);
-                        contadorWhile++;
+                        if (n == j) {
+                            copiaNumerosGerados = checarNumerosIguais(arrayGer,rangeNumeros);
+                            copiaNumerosGerados[Arrays.binarySearch(copiaNumerosGerados,j)] = rdm.nextInt(rangeNumeros);
+                            contadorWhile++;
+                        }
                     }
                 }
             }
+        }catch (Exception ex){
+            ex.printStackTrace();
         }
+
+
 
         int contador = 0;
 
         for ( int i=0; i < numeros.length;i++){
 
-            if (i < numerosFavoritos.length){
-                numeros[i] = numerosFavoritos[i];
+            if (i < arrayFav.length){
+                numeros[i] = arrayFav[i];
             }else {
 
                 numeros[i] = copiaNumerosGerados[contador];
@@ -79,7 +130,7 @@ public class GeradorDeNumeros {
             }
         }
 
-     Arrays.sort(numeros);
+        Arrays.sort(numeros);
 
         return numeros;
     }
@@ -114,25 +165,29 @@ public class GeradorDeNumeros {
         Random rdm = new Random();
 
 
-        for (int a = 1; a < num.length; a++) {
+        try {
+            for (int a = 1; a < num.length; a++) {
 
-            if (num[a] == temp) {
+                if (num[a] == temp) {
 
-                if (rangeNumeros == 100) {
-                    num[a] = rdm.nextInt(rangeNumeros);
-                    a = 0;
-                    Arrays.sort(num);
-                    temp = num[0];
+                    if (rangeNumeros == 100) {
+                        num[a] = rdm.nextInt(rangeNumeros);
+                        a = 0;
+                        Arrays.sort(num);
+                        temp = num[0];
+                    } else {
+                        num[a] = rdm.nextInt(rangeNumeros)+1;
+                        a = 0;
+                        Arrays.sort(num);
+                        temp = num[0];
+                    }
+
                 } else {
-                    num[a] = rdm.nextInt(rangeNumeros)+1;
-                    a = 0;
-                    Arrays.sort(num);
-                    temp = num[0];
+                    temp = num[a];
                 }
-
-            } else {
-                temp = num[a];
             }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         return num;
     }
