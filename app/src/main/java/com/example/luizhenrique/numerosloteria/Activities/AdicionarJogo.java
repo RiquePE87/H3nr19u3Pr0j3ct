@@ -353,7 +353,7 @@ public class AdicionarJogo extends AppCompatActivity implements AdicionarJogoVie
             String numerosCapturados = data.getStringExtra("numerosCapturados");
             tvNumerosGerados.setText(numerosCapturados);
         }
-        else if (requestCode == RESULT_OK && requestCode == 3){
+        else if (requestCode == 3){
 
             String numerosFavoritos = data.getStringExtra("numerosFavoritos");
             tvNumerosGerados.setText(numerosFavoritos);

@@ -67,8 +67,10 @@ public class NumerosFavoritos extends AppCompatActivity {
 
             fab_adicionar.setVisibility(View.GONE);
 
+        }else {
+            linearLayout.setVisibility(View.GONE);
         }
-        linearLayout.setVisibility(View.GONE);
+
         GridLayout gridLayoutMeusNumeros = findViewById(R.id.gridNumerosFavoritos);
         TableRow.LayoutParams lp = new TableRow.LayoutParams(160,160);
 
@@ -205,6 +207,19 @@ public class NumerosFavoritos extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId()){
+
+            case R.id.action_OKFavoritos:
+
+                Intent itResult = new Intent();
+                itResult.putExtra("numerosFavoritos", numeros);
+                setResult(RESULT_OK,itResult);
+                finish();
+                return true;
+
+        }
+
         return super.onOptionsItemSelected(item);
     }
 }

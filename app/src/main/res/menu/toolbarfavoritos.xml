@@ -13,7 +13,7 @@
     </item>
 
     <item android:title="OK"
-        android:id="@+id/action_OKSelecao"
+        android:id="@+id/action_OKFavoritos"
         app:showAsAction="always">
 
     </item>
