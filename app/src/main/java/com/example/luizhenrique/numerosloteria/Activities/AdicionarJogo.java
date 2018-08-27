@@ -44,7 +44,6 @@ public class AdicionarJogo extends AppCompatActivity implements AdicionarJogoVie
     Button btnMaisSorteados;
     Button btnProximoConcurso;
     Button btnCapturarNumeros;
-    Button btnFavoritos;
     Toolbar toolbar;
     TextView tvTimesdoCoracao;
     Spinner spinnerTimes;
@@ -119,7 +118,7 @@ public class AdicionarJogo extends AppCompatActivity implements AdicionarJogoVie
         progressDialog = findViewById(R.id.pbadicionarJogo);
         btnProximoConcurso = findViewById(R.id.btnProximoConcurso);
         btnCapturarNumeros = findViewById(R.id.buttonCapturarNumeros);
-        btnFavoritos = findViewById(R.id.buttonFavoritos);
+
 
         mInterstitialAd = new InterstitialAd(this);
         mInterstitialAd.setAdUnitId("ca-app-pub-1281837718502232/9576019966");
@@ -194,10 +193,15 @@ public class AdicionarJogo extends AppCompatActivity implements AdicionarJogoVie
             @Override
             public void onClick(View v) {
 
-                dezenas = GeradorDeNumeros.gerarNumeros(numeroDezenas, rangeJogo);
-                numeros = GeradorDeNumeros.ParseToString(dezenas);
-
-                tvNumerosGerados.setText(numeros);
+//                dezenas = GeradorDeNumeros.gerarNumeros(numeroDezenas, rangeJogo);
+//                numeros = GeradorDeNumeros.ParseToString(dezenas);
+//
+//                tvNumerosGerados.setText(numeros);
+                Intent it = new Intent(AdicionarJogo.this, NumerosFavoritos.class);
+                it.putExtra("jogo", tipoJogo);
+                it.putExtra("dezenas", numeroDezenas);
+                it.putExtra("numeroBolas", rangeJogo);
+                startActivityForResult(it, 3);
 
             }
         });
@@ -210,17 +214,6 @@ public class AdicionarJogo extends AppCompatActivity implements AdicionarJogoVie
                 it.putExtra("dezenas", numeroDezenas);
                 it.putExtra("numeroBolas", rangeJogo);
                 startActivityForResult(it, 1);
-            }
-        });
-
-        btnFavoritos.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent it = new Intent(AdicionarJogo.this, NumerosFavoritos.class);
-                it.putExtra("jogo", tipoJogo);
-                it.putExtra("dezenas", numeroDezenas);
-                it.putExtra("numeroBolas", rangeJogo);
-                startActivityForResult(it, 3);
             }
         });
 

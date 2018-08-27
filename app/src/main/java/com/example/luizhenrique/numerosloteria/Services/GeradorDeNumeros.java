@@ -24,66 +24,54 @@ public class GeradorDeNumeros {
 
     public static int[] gerarNumerosByFavoritos(int[] numerosFavoritos, int quantidadeNumeros, int rangeNumeros){
 
-        int[] numeros = new int[quantidadeNumeros];
-        int[] numerosGerados = new int[quantidadeNumeros - numerosFavoritos.length];
+        int[] numerosGerados = new int[Math.abs(numerosFavoritos.length - quantidadeNumeros)];
         Random rdm = new Random();
-        int count = 0;
-        int favoritoslenght = numerosFavoritos.length;
-        boolean isRepetido = true;
-        int contadorWhile = 1;
 
-        if (rangeNumeros == 100) {
-            for (int i = 0; i < numerosGerados.length; i++) {
 
-                numerosGerados[i] = rdm.nextInt(rangeNumeros);
+        if (numerosFavoritos.length == quantidadeNumeros){
+
+            return numerosFavoritos;
+
+        }else if (numerosFavoritos.length < quantidadeNumeros){
+            if (rangeNumeros == 100) {
+                for (int i = 0; i < numerosGerados.length; i++) {
+
+                    numerosGerados[i] = rdm.nextInt(rangeNumeros);
+                }
+
+                Arrays.sort(numerosGerados);
+            } else {
+                for (int i = 0; i < numerosGerados.length; i++) {
+
+                    numerosGerados[i] = rdm.nextInt(rangeNumeros)+1;
+                }
+                Arrays.sort(numerosGerados);
+            }
+        }else if (numerosFavoritos.length > quantidadeNumeros){
+
+            List<Integer> list = new ArrayList<>();
+            int[] nums = new int[quantidadeNumeros];
+
+            for (int i: numerosFavoritos){
+                list.add(i);
             }
 
-            Arrays.sort(numerosGerados);
-        } else {
-            for (int i = 0; i < numerosGerados.length; i++) {
+            Collections.shuffle(list);
 
-                numerosGerados[i] = rdm.nextInt(rangeNumeros)+1;
+            for (int i=0; i < quantidadeNumeros;i++) {
+
+                nums[i] = list.get(i);
             }
-            Arrays.sort(numerosGerados);
+            Arrays.sort(nums);
+
+
+            return nums;
         }
 
        numerosGerados = checarNumerosIguais(numerosGerados,rangeNumeros);
 
         return verificarNumerosIguais(numerosFavoritos,numerosGerados,rangeNumeros,quantidadeNumeros);
 
-//      int[] copiaNumerosGerados = numerosGerados;
-//
-//        while (contadorWhile != 0) {
-//
-//            contadorWhile = 0;
-//
-//            for (int n : numerosFavoritos) {
-//                for (int j : numerosGerados) {
-//
-//                    if (n == j) {
-//                        copiaNumerosGerados[Arrays.binarySearch(numerosGerados,j)] = rdm.nextInt(rangeNumeros);
-//                        contadorWhile++;
-//                    }
-//                }
-//            }
-//        }
-//
-//        int contador = 0;
-//
-//        for ( int i=0; i < numeros.length;i++){
-//
-//            if (i < numerosFavoritos.length){
-//                numeros[i] = numerosFavoritos[i];
-//            }else {
-//
-//                numeros[i] = copiaNumerosGerados[contador];
-//                contador++;
-//            }
-//        }
-//
-//     Arrays.sort(numeros);
-//
-//        return numeros;
     }
 
     public static int[] verificarNumerosIguais(int[] arrayFav, int[] arrayGer, int rangeNumeros, int quantidade){

@@ -6,12 +6,6 @@
     app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
     android:theme="@style/AppTheme.ActionBar">
 
-    <item android:title="Limpar"
-        android:id="@+id/action_limpar"
-        app:showAsAction="always">
-
-    </item>
-
     <item android:title="OK"
         android:id="@+id/action_OKFavoritos"
         app:showAsAction="always">

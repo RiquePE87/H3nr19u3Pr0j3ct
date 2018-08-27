@@ -25,8 +25,6 @@ import java.util.ArrayList;
 
 public class NumerosFavoritos extends AppCompatActivity {
 
-
-
     ArrayList<Integer> numerosSelecionados;
     FloatingActionButton fab_adicionar;
     android.support.v7.widget.Toolbar toolbarFavoritos;
@@ -69,6 +67,8 @@ public class NumerosFavoritos extends AppCompatActivity {
 
         }else {
             linearLayout.setVisibility(View.GONE);
+            btnGerarNumeros.setVisibility(View.GONE);
+            toolbarFavoritos.setTitle("Meus Números Favoritos");
         }
 
         GridLayout gridLayoutMeusNumeros = findViewById(R.id.gridNumerosFavoritos);
