@@ -10,12 +10,10 @@ import com.example.luizhenrique.numerosloteria.Services.GeradorDeNumeros;
 import com.example.luizhenrique.numerosloteria.Services.JogoManager;
 import com.example.luizhenrique.numerosloteria.Services.RealmServices;
 import com.example.luizhenrique.numerosloteria.Services.ResultadoService;
-import com.example.luizhenrique.numerosloteria.Services.ResultadoTask;
 import com.example.luizhenrique.numerosloteria.View.DetalhesJogoView;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.ExecutionException;
 
 public class DetalhesJogoPresenterImpl implements DetalhesJogoPresenter {
 

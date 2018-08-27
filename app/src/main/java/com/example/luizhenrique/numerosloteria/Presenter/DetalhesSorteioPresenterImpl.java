@@ -4,9 +4,8 @@ import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
-import com.example.luizhenrique.numerosloteria.Model.Sorteio;
-import com.example.luizhenrique.numerosloteria.Services.JogoManager;
 import com.example.luizhenrique.numerosloteria.Model.Resultado;
+import com.example.luizhenrique.numerosloteria.Services.JogoManager;
 import com.example.luizhenrique.numerosloteria.View.DetalhesSorteioView;
 
 import java.util.ArrayList;

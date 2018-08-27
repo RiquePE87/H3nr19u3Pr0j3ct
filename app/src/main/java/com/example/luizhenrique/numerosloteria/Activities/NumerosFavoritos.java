@@ -17,7 +17,6 @@ import android.widget.GridLayout;
 import android.widget.LinearLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
-import android.widget.Toolbar;
 
 import com.example.luizhenrique.numerosloteria.R;
 import com.example.luizhenrique.numerosloteria.Services.GeradorDeNumeros;
@@ -37,6 +36,7 @@ public class NumerosFavoritos extends AppCompatActivity {
     int[] numeroDezenas;
     int[] numerosJogo;
     String numeros;
+    String numerosGerados;
     String tipoJogo;
     int rangeJogo;
     int dezenas;
@@ -154,9 +154,9 @@ public class NumerosFavoritos extends AppCompatActivity {
                     count++;
                 }
 
-                String numeros = GeradorDeNumeros.ParseToString(GeradorDeNumeros.gerarNumerosByFavoritos(numerosJogo,dezenas,rangeJogo));
+                numerosGerados = GeradorDeNumeros.ParseToString(GeradorDeNumeros.gerarNumerosByFavoritos(numerosJogo,dezenas,rangeJogo));
 
-                tvNumeros.setText(numeros);
+                tvNumeros.setText(numerosGerados);
             }
         });
     }
@@ -213,7 +213,7 @@ public class NumerosFavoritos extends AppCompatActivity {
             case R.id.action_OKFavoritos:
 
                 Intent itResult = new Intent();
-                itResult.putExtra("numerosFavoritos", numeros);
+                itResult.putExtra("numerosFavoritos", numerosGerados);
                 setResult(RESULT_OK,itResult);
                 finish();
                 return true;

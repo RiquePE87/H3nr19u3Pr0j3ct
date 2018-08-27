@@ -13,16 +13,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 import com.example.luizhenrique.numerosloteria.Model.Resultado;
 import com.example.luizhenrique.numerosloteria.R;
 import com.example.luizhenrique.numerosloteria.Services.ResultadoService;
-import com.example.luizhenrique.numerosloteria.Services.ResultadoTask;
 
 import java.util.Timer;
-import java.util.TimerTask;
-import java.util.concurrent.ExecutionException;
 
 /**
  * Created by luizhenrique on 01/10/2017.

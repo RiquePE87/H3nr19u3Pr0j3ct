@@ -21,11 +21,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.luizhenrique.numerosloteria.Model.Jogo;
-import com.example.luizhenrique.numerosloteria.Services.JogoManager;
 import com.example.luizhenrique.numerosloteria.Presenter.AdicionarJogoPresenter;
 import com.example.luizhenrique.numerosloteria.Presenter.AdicionarJogoPresenterImpl;
 import com.example.luizhenrique.numerosloteria.R;
 import com.example.luizhenrique.numerosloteria.Services.GeradorDeNumeros;
+import com.example.luizhenrique.numerosloteria.Services.JogoManager;
 import com.example.luizhenrique.numerosloteria.Services.RealmServices;
 import com.example.luizhenrique.numerosloteria.Services.ResultadoService;
 import com.example.luizhenrique.numerosloteria.View.AdicionarJogoView;
@@ -348,12 +348,12 @@ public class AdicionarJogo extends AppCompatActivity implements AdicionarJogoVie
             numeros = data.getStringExtra("numerosSelec");
             tvNumerosGerados.setText(numeros);
 
-        }else if (requestCode == RESULT_OK && requestCode == 2){
+        }else if (resultCode == RESULT_OK && requestCode == 2){
 
             String numerosCapturados = data.getStringExtra("numerosCapturados");
             tvNumerosGerados.setText(numerosCapturados);
         }
-        else if (requestCode == 3){
+        else if (requestCode == 3 && resultCode == RESULT_OK){
 
             String numerosFavoritos = data.getStringExtra("numerosFavoritos");
             tvNumerosGerados.setText(numerosFavoritos);

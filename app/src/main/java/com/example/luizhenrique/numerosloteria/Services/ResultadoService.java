@@ -1,14 +1,10 @@
 package com.example.luizhenrique.numerosloteria.Services;
 
 import android.content.Context;
-import android.content.SharedPreferences;
 
 import com.example.luizhenrique.numerosloteria.BuildConfig;
 import com.example.luizhenrique.numerosloteria.Model.Resultado;
-import com.fasterxml.jackson.core.JsonGenerationException;
-import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.gson.JsonObject;
 
 import java.io.File;
 import java.io.IOException;

@@ -23,15 +23,12 @@ import com.example.luizhenrique.numerosloteria.Presenter.DetalhesJogoPresenterIm
 import com.example.luizhenrique.numerosloteria.R;
 import com.example.luizhenrique.numerosloteria.Services.GeradorDeNumeros;
 import com.example.luizhenrique.numerosloteria.Services.RealmServices;
-import com.example.luizhenrique.numerosloteria.Services.ResultadoService;
-import com.example.luizhenrique.numerosloteria.Services.ResultadoTask;
 import com.example.luizhenrique.numerosloteria.View.DetalhesJogoView;
 
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Locale;
-import java.util.concurrent.ExecutionException;
 
 public class DetalhesJogo extends AppCompatActivity implements DetalhesJogoView {
 
