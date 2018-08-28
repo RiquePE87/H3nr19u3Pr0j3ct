@@ -31,7 +31,6 @@ import java.util.Arrays;
 public class SelecaoNumeros extends AppCompatActivity {
 
     int[] numeros;
-    LinearLayout linearLayout;
     ArrayList<Integer> numerosFavoritos;
     int dezenas;
     int count = 0;
@@ -160,7 +159,7 @@ public class SelecaoNumeros extends AppCompatActivity {
 
             if (num == Integer.valueOf((String) t.getText())){
                 t.setBackgroundResource(R.drawable.bolaselecionada);
-                ((TextView) t).setTextColor(Color.BLACK);
+                ((TextView) t).setTextColor(Color.WHITE);
                 ((TextView) t).setTypeface(null, Typeface.BOLD);
                 numerosFavoritos.add(Integer.valueOf((String) t.getText()));
 
@@ -175,11 +174,11 @@ public class SelecaoNumeros extends AppCompatActivity {
 
         if (count < dezenas) {
 
-            if (corDefault != Color.BLACK){
+            if (corDefault != Color.WHITE){
 
                 numeros[count] = Integer.valueOf(String.valueOf(texto.getText()));
                 view.setBackgroundResource(R.drawable.bolaselecionada);
-                ((TextView) view).setTextColor(Color.BLACK);
+                ((TextView) view).setTextColor(Color.WHITE);
                 ((TextView) view).setTypeface(null, Typeface.BOLD);
                 count++;
                 toolbarSelecao.setTitle("Dezenas: "+String.valueOf(count));
@@ -193,7 +192,7 @@ public class SelecaoNumeros extends AppCompatActivity {
             }
         }
 
-        if (count == dezenas && corDefault == Color.BLACK){
+        if (count == dezenas && corDefault == Color.WHITE){
 
             count--;
             toolbarSelecao.setTitle("Dezenas: "+String.valueOf(count));
@@ -210,11 +209,11 @@ public class SelecaoNumeros extends AppCompatActivity {
 
 
 
-            if (corDefault != Color.BLACK){
+            if (corDefault != Color.WHITE){
 
                 numerosFavoritos.add(Integer.valueOf(String.valueOf(texto.getText())));
                 view.setBackgroundResource(R.drawable.bolaselecionada);
-                ((TextView) view).setTextColor(Color.BLACK);
+                ((TextView) view).setTextColor(Color.WHITE);
                 ((TextView) view).setTypeface(null, Typeface.BOLD);
                 count++;
                 toolbarSelecao.setTitle("Dezenas: "+String.valueOf(count));
@@ -227,16 +226,6 @@ public class SelecaoNumeros extends AppCompatActivity {
                 ((TextView) view).setTextColor(Color.DKGRAY);
                 ((TextView) view).setTypeface(null,Typeface.NORMAL);
             }
-
-
-//        if (count == dezenas && corDefault == Color.BLACK){
-//
-//            count--;
-//            toolbarSelecao.setTitle("Dezenas: "+String.valueOf(count));
-//            ((TextView) view).setTextColor(Color.DKGRAY);
-//            view.setBackgroundResource(R.drawable.bola);
-//            ((TextView) view).setTypeface(null,Typeface.NORMAL);
-//        }
     }
 
     public void limparDezenas(){

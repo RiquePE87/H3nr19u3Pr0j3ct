@@ -173,7 +173,7 @@ public class NumerosFavoritos extends AppCompatActivity {
 
                 numerosSelecionados.add(Integer.valueOf(String.valueOf(texto.getText())));
                 view.setBackgroundResource(R.drawable.bolaselecionada);
-                ((TextView) view).setTextColor(Color.BLACK);
+                ((TextView) view).setTextColor(Color.WHITE);
                 ((TextView) view).setTypeface(null, Typeface.BOLD);
                 count++;
                 //toolbarSelecao.setTitle("Dezenas: "+String.valueOf(count));
@@ -187,7 +187,7 @@ public class NumerosFavoritos extends AppCompatActivity {
             }
         }
 
-        if (count == dezenas && corDefault == Color.BLACK){
+        if (count == dezenas && corDefault == Color.WHITE){
 
             count--;
             //toolbarSelecao.setTitle("Dezenas: "+String.valueOf(count));
