@@ -30,6 +30,7 @@ public class NumerosFavoritos extends AppCompatActivity {
     android.support.v7.widget.Toolbar toolbarFavoritos;
     Button btnGerarNumeros;
     TextView tvNumeros;
+    TextView tvNumerosFav;
     LinearLayout linearLayout;
     int[] numeroDezenas;
     int[] numerosJogo;
@@ -56,6 +57,7 @@ public class NumerosFavoritos extends AppCompatActivity {
         fab_adicionar = findViewById(R.id.fab_adc_numero);
         btnGerarNumeros = findViewById(R.id.btnGerarNumeros);
         tvNumeros = findViewById(R.id.numerosSelecionados);
+        tvNumerosFav = findViewById(R.id.tvNumerosFav);
         toolbarFavoritos = findViewById(R.id.toolbar_favoritos);
         linearLayout = findViewById(R.id.linearFavoritos);
 
@@ -69,6 +71,7 @@ public class NumerosFavoritos extends AppCompatActivity {
             linearLayout.setVisibility(View.GONE);
             btnGerarNumeros.setVisibility(View.GONE);
             toolbarFavoritos.setTitle("Meus Números Favoritos");
+            tvNumerosFav.setVisibility(View.GONE);
         }
 
         GridLayout gridLayoutMeusNumeros = findViewById(R.id.gridNumerosFavoritos);
@@ -107,7 +110,6 @@ public class NumerosFavoritos extends AppCompatActivity {
                         t.setLayoutParams(lp);
                         t.setGravity(Gravity.CENTER_VERTICAL | Gravity.CENTER_HORIZONTAL);
                         t.setTextSize(18);
-                        t.setTextColor(Color.DKGRAY);
                         t.setBackgroundResource(R.drawable.bola);
                         t.setOnClickListener(new View.OnClickListener() {
                             @Override
@@ -128,7 +130,6 @@ public class NumerosFavoritos extends AppCompatActivity {
                     t.setLayoutParams(lp);
                     t.setGravity(Gravity.CENTER_VERTICAL | Gravity.CENTER_HORIZONTAL);
                     t.setTextSize(18);
-                    t.setTextColor(Color.DKGRAY);
                     t.setBackgroundResource(R.drawable.bola);
                     t.setOnClickListener(new View.OnClickListener() {
                         @Override
@@ -169,7 +170,7 @@ public class NumerosFavoritos extends AppCompatActivity {
 
         if (count < dezenas) {
 
-            if (corDefault != Color.BLACK){
+            if (corDefault != Color.WHITE){
 
                 numerosSelecionados.add(Integer.valueOf(String.valueOf(texto.getText())));
                 view.setBackgroundResource(R.drawable.bolaselecionada);
@@ -180,9 +181,10 @@ public class NumerosFavoritos extends AppCompatActivity {
 
             }else{
                 count--;
+                numerosSelecionados.remove(Integer.valueOf(String.valueOf(texto.getText())));
                 //toolbarSelecao.setTitle("Dezenas: "+String.valueOf(count));
                 view.setBackgroundResource(R.drawable.bola);
-                ((TextView) view).setTextColor(Color.DKGRAY);
+                ((TextView) view).setTextColor(Color.BLACK);
                 ((TextView) view).setTypeface(null,Typeface.NORMAL);
             }
         }
@@ -191,7 +193,7 @@ public class NumerosFavoritos extends AppCompatActivity {
 
             count--;
             //toolbarSelecao.setTitle("Dezenas: "+String.valueOf(count));
-            ((TextView) view).setTextColor(Color.DKGRAY);
+            ((TextView) view).setTextColor(Color.BLACK);
             view.setBackgroundResource(R.drawable.bola);
             ((TextView) view).setTypeface(null,Typeface.NORMAL);
         }
@@ -202,6 +204,10 @@ public class NumerosFavoritos extends AppCompatActivity {
         MenuInflater menuInflater = getMenuInflater();
         menuInflater.inflate(R.menu.toolbarfavoritos,menu);
 
+        if (it.getExtras() == null){
+
+            menu.removeItem(R.id.action_OKFavoritos);
+        }
         return true;
     }
 

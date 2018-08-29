@@ -13,6 +13,7 @@
         android:roundIcon="@mipmap/icone_numeros_da_sorte"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
+
         <activity android:name=".Activities.SplashActicity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
