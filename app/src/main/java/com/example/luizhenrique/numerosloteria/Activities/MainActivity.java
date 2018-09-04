@@ -25,6 +25,7 @@ import com.example.luizhenrique.numerosloteria.Adapter.AbasPagerAdapter;
 import com.example.luizhenrique.numerosloteria.R;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
 import com.microsoft.appcenter.AppCenter;
 import com.microsoft.appcenter.analytics.Analytics;
 import com.microsoft.appcenter.crashes.Crashes;
@@ -47,6 +48,7 @@ public class MainActivity extends AppCompatActivity
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
+        MobileAds.initialize(this,"ca-app-pub-1281837718502232~4895886117");
 
         AppCenter.start(getApplication(), "c030fb40-e0b0-48ed-b3df-c5946e208d63", Analytics.class, Crashes.class);
 
@@ -170,6 +172,9 @@ public class MainActivity extends AppCompatActivity
 
         }else if (id == R.id.nav_adc_numero){
             startActivity(new Intent(MainActivity.this,NumerosFavoritos.class));
+        }
+        else if (id == R.id.nav_configuracoes){
+            startActivity(new Intent(this,Configuracoes.class));
         }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);

@@ -24,6 +24,8 @@ import com.example.luizhenrique.numerosloteria.R;
 import com.example.luizhenrique.numerosloteria.Services.GeradorDeNumeros;
 import com.example.luizhenrique.numerosloteria.Services.RealmServices;
 import com.example.luizhenrique.numerosloteria.View.DetalhesJogoView;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 
 import java.text.NumberFormat;
 import java.util.ArrayList;
@@ -46,6 +48,8 @@ public class DetalhesJogo extends AppCompatActivity implements DetalhesJogoView 
     Jogo jogo;
     public NumberFormat numberFormat;
     float premioTimeCoracao;
+    AdView adView;
+    AdRequest adRequest;
 
     public ArrayList<Integer> numerosAcertados;
 
@@ -79,6 +83,10 @@ public class DetalhesJogo extends AppCompatActivity implements DetalhesJogoView 
         tvTxtAcertoData = findViewById(R.id.tvTxtAcertoData);
         tvTimedoCoracao = findViewById(R.id.txtTimeCoracao);
         tvPremioTimeCoracao = findViewById(R.id.premioTimeCoracao);
+        adView = findViewById(R.id.adViewJogo);
+
+        adRequest = new AdRequest.Builder().build();
+        adView.loadAd(adRequest);
 
         setSupportActionBar(toolbarDetalhes);
 

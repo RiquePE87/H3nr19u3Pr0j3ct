@@ -4,8 +4,8 @@
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.CAMERA" />
 
+    <!-- <uses-permission android:name="android.permission.CAMERA" /> -->
     <application
         android:allowBackup="true"
         android:icon="@mipmap/icone_numeros_da_sorte"
@@ -13,7 +13,6 @@
         android:roundIcon="@mipmap/icone_numeros_da_sorte"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
-
         <activity android:name=".Activities.SplashActicity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -36,14 +35,21 @@
             android:label="@string/title_activity_detalhes_sorteio"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".Activities.SelecaoNumeros" />
-        <activity android:name=".Activities.CameraOCRActivity" />
+        <!-- <activity android:name=".Activities.CameraOCRActivity" /> -->
 
         <meta-data
-            android:name="com.google.android.gms.vision.DEPENDENCIES"
-            android:value="ocr" />
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-1281837718502232~4895886117" />
 
-        <activity android:name=".Activities.NumerosFavoritos"
-            android:noHistory="true"></activity>
+        <!-- <meta-data -->
+        <!-- android:name="com.google.android.gms.vision.DEPENDENCIES" -->
+        <!-- android:value="ocr" -->
+        <!-- /> -->
+
+        <activity
+            android:name=".Activities.NumerosFavoritos"
+            android:noHistory="true" />
+        <activity android:name=".Activities.Configuracoes"></activity>
     </application>
 
 </manifest>

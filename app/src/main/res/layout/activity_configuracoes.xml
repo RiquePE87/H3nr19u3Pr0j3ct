@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.example.luizhenrique.numerosloteria.Activities.Configuracoes">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Mostrar:"/>
+
+    <CheckBox
+        android:id="@+id/chkMega"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Mega-Sena"
+        android:onClick="onCheckBoxClicked"
+        android:checked="false"/>
+    <CheckBox
+        android:id="@+id/chkLotofacil"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="LotoFacil"
+        android:onClick="onCheckBoxClicked"
+        android:checked="false"/>
+    <CheckBox
+        android:id="@+id/chkLotomania"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="LotoMania"
+        android:onClick="onCheckBoxClicked"
+        android:checked="false"/>
+    <CheckBox
+        android:id="@+id/chkQuina"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Quina"
+        android:onClick="onCheckBoxClicked"
+        android:checked="false"/>
+    <CheckBox
+        android:id="@+id/chkDupla"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Dupla-Sena"
+        android:onClick="onCheckBoxClicked"
+        android:checked="false"/>
+    <CheckBox
+        android:id="@+id/chkTime"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="TimeMania"
+        android:onClick="onCheckBoxClicked"
+        android:checked="false"/>
+    <CheckBox
+        android:id="@+id/chkdia"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Dia-de-Sorte"
+        android:onClick="onCheckBoxClicked"
+        android:checked="false"/>
+
+</LinearLayout>

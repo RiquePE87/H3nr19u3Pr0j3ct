@@ -1,6 +1,7 @@
 package com.example.luizhenrique.numerosloteria.Presenter;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
@@ -9,9 +10,14 @@ import com.example.luizhenrique.numerosloteria.Model.Resultado;
 import com.example.luizhenrique.numerosloteria.Model.Sorteio;
 import com.example.luizhenrique.numerosloteria.Services.ResultadoService;
 import com.example.luizhenrique.numerosloteria.Services.ResultadoTask;
+import com.google.android.gms.common.util.ArrayUtils;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
+
+import static android.content.Context.MODE_PRIVATE;
 
 public class FragmentSorteiosPresenterImpl implements FragmentSorteiosPresenter {
 
@@ -21,6 +27,8 @@ public class FragmentSorteiosPresenterImpl implements FragmentSorteiosPresenter 
     public NetworkInfo info;
     public ConnectivityManager cm;
     Sorteio sorteio;
+    SharedPreferences sharedPreferences;
+    SharedPreferences.Editor editor;
 
     public FragmentSorteiosPresenterImpl(Context ctx){
 
@@ -29,36 +37,33 @@ public class FragmentSorteiosPresenterImpl implements FragmentSorteiosPresenter 
 
      public List<Resultado> carregarResultados(){
 
+         sharedPreferences = ctx.getSharedPreferences("app",MODE_PRIVATE);
+         Set<String> jogos = sharedPreferences.getStringSet("jogos",null);
+
+         ArrayList<String> j = ArrayUtils.toArrayList(jogos);
 
         List<Resultado> resultadoList = new ArrayList<Resultado>();
 
         if (verificarConexao() == true){
             try{
 
-                resultadoList.add(new ResultadoTask().execute("dia-de-sorte").get());
-                resultadoList.add(new ResultadoTask().execute("mega-sena").get());
-                resultadoList.add(new ResultadoTask().execute("dupla-sena").get());
-                resultadoList.add(new ResultadoTask().execute("lotomania").get());
-                resultadoList.add(new ResultadoTask().execute("lotofacil").get());
-                resultadoList.add(new ResultadoTask().execute("quina").get());
-                resultadoList.add(new ResultadoTask().execute("timemania").get());
+                for (String s: jogos){
+                    resultadoList.add(new ResultadoTask().execute(s.toLowerCase()).get());
+                }
 
             }catch (Exception ex){
 
                 ex.printStackTrace();
             }
 
-
         }else{
 
             try {
-                resultadoList.add(new ResultadoService().carregarResultadoOffline("dia-de-sorte"));
-                resultadoList.add(new ResultadoService().carregarResultadoOffline("mega-sena"));
-                resultadoList.add(new ResultadoService().carregarResultadoOffline("dupla-sena"));
-                resultadoList.add(new ResultadoService().carregarResultadoOffline("lotomania"));
-                resultadoList.add(new ResultadoService().carregarResultadoOffline("lotofacil"));
-                resultadoList.add(new ResultadoService().carregarResultadoOffline("quina"));
-                resultadoList.add(new ResultadoService().carregarResultadoOffline("timemania"));
+
+                for (String s: jogos){
+                    resultadoList.add(new ResultadoService().carregarResultadoOffline(s.toLowerCase()));
+                }
+
             } catch (Exception e) {
                 e.printStackTrace();
             }

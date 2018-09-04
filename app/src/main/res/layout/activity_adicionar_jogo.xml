@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    >
+    xmlns:ads="http://schemas.android.com/tools">
     <LinearLayout
         android:id="@+id/cbConsecutivo"
         android:layout_width="match_parent"
@@ -226,6 +226,15 @@
             android:layout_marginTop="10dp"
             android:layout_weight="0.14"
             android:text="@string/escolhendo_os_n_meros_mais_sorteados_ser_gerada_as_dezenas_mais_sorteadas_nos_dez_ltimos_concursos" />
+
+        <com.google.android.gms.ads.AdView
+            xmlns:ads="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/adViewAdicionar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            ads:adSize="SMART_BANNER"
+            ads:adUnitId="@string/banner_ad_adicionar">
+        </com.google.android.gms.ads.AdView>
 
     </LinearLayout>
 </layout>

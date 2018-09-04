@@ -218,11 +218,15 @@ public class NumerosFavoritos extends AppCompatActivity {
 
             case R.id.action_OKFavoritos:
 
-                Intent itResult = new Intent();
-                itResult.putExtra("numerosFavoritos", numerosGerados);
-                setResult(RESULT_OK,itResult);
-                finish();
-                return true;
+                try {
+                    Intent itResult = new Intent();
+                    itResult.putExtra("numerosFavoritos", numerosGerados);
+                    setResult(RESULT_OK,itResult);
+                    finish();
+                    return true;
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
 
         }
 

@@ -12,7 +12,11 @@ import android.widget.Toast;
 
 import com.example.luizhenrique.numerosloteria.BuildConfig;
 import com.example.luizhenrique.numerosloteria.R;
+import com.google.android.gms.common.util.ArrayUtils;
 
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -22,6 +26,7 @@ public class SplashActicity extends AppCompatActivity {
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
     Boolean isFirstRun = false;
+    Set<String> jogos;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +38,21 @@ public class SplashActicity extends AppCompatActivity {
         tvVersao = findViewById(R.id.tvVersao);
         tvVersao.setText("Versão "+BuildConfig.VERSION_NAME);
 
+        if (!sharedPreferences.contains("jogos")){
+            jogos = new HashSet<>();
+
+            jogos.add("Mega-Sena");
+            jogos.add("LotoFacil");
+            jogos.add("LotoMania");
+            jogos.add("Quina");
+            jogos.add("Dupla-Sena");
+            jogos.add("TimeMania");
+            jogos.add("Dia-de-Sorte");
+
+            editor.putStringSet("jogos",jogos);
+            editor.commit();
+        }
+
         if (!sharedPreferences.contains("firstRun") && verificarConexao() == false){
 
             Toast.makeText(this,"Você precisa estar conectado para usar o aplicativo pela primeira vez",Toast.LENGTH_LONG).show();
@@ -43,10 +63,12 @@ public class SplashActicity extends AppCompatActivity {
                    finish();
                 }
             },5000);
+
         }else{
 
             editor.putBoolean("firstRun",isFirstRun);
             editor.commit();
+
             new Timer().schedule(new TimerTask() {
                 @Override
                 public void run() {

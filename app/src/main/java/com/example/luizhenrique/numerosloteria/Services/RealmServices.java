@@ -6,7 +6,9 @@ import android.widget.Toast;
 import com.example.luizhenrique.numerosloteria.Activities.AdicionarJogo;
 import com.example.luizhenrique.numerosloteria.Model.Jogo;
 import com.example.luizhenrique.numerosloteria.View.AdicionarJogoView;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
+import java.io.File;
 import java.util.List;
 import java.util.Random;
 
@@ -82,7 +84,6 @@ public class RealmServices {
 
             realm.insertOrUpdate(jogo);
 
-
             realm.commitTransaction();
 
             realm.close();
@@ -114,7 +115,6 @@ public class RealmServices {
         Realm.init(context);
 
         Realm realm = Realm.getDefaultInstance();
-
 
         isValido = realm.where(Jogo.class).equalTo("id", id).findFirst() == null;
 
@@ -154,6 +154,12 @@ public class RealmServices {
             realm.executeTransaction(new Realm.Transaction() {
                 @Override
                 public void execute(Realm realm) {
+
+                    File file = new File(jogo.filename);
+
+                    if (file.exists()){
+                        file.delete();
+                    }
 
                     RealmResults<Jogo> result = realm.where(Jogo.class).equalTo("id",jogo.id).findAll();
                     result.deleteAllFromRealm();

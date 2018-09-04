@@ -30,6 +30,7 @@ import com.example.luizhenrique.numerosloteria.Services.RealmServices;
 import com.example.luizhenrique.numerosloteria.Services.ResultadoService;
 import com.example.luizhenrique.numerosloteria.View.AdicionarJogoView;
 import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.InterstitialAd;
 
 public class AdicionarJogo extends AppCompatActivity implements AdicionarJogoView {
@@ -53,6 +54,7 @@ public class AdicionarJogo extends AppCompatActivity implements AdicionarJogoVie
     Context ctx;
     public NetworkInfo info;
     public Jogo jogo;
+    AdView adView;
 
 
     private InterstitialAd mInterstitialAd;
@@ -118,7 +120,10 @@ public class AdicionarJogo extends AppCompatActivity implements AdicionarJogoVie
         progressDialog = findViewById(R.id.pbadicionarJogo);
         btnProximoConcurso = findViewById(R.id.btnProximoConcurso);
         btnCapturarNumeros = findViewById(R.id.buttonCapturarNumeros);
+        adView = findViewById(R.id.adViewAdicionar);
 
+        AdRequest adRequest = new AdRequest.Builder().build();
+        adView.loadAd(adRequest);
 
         mInterstitialAd = new InterstitialAd(this);
         mInterstitialAd.setAdUnitId("ca-app-pub-1281837718502232/9576019966");
@@ -240,14 +245,14 @@ public class AdicionarJogo extends AppCompatActivity implements AdicionarJogoVie
             }
         });
 
-        btnCapturarNumeros.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                Intent it = new Intent(AdicionarJogo.this,CameraOCRActivity.class);
-                startActivityForResult(it,2);
-            }
-        });
+//        btnCapturarNumeros.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//
+//                Intent it = new Intent(AdicionarJogo.this,CameraOCRActivity.class);
+//                startActivityForResult(it,2);
+//            }
+//        });
 
     }
 

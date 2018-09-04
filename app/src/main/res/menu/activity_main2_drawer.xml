@@ -18,6 +18,12 @@
             android:title="Meus Números Favoritos"
             />
 
+        <item
+            android:id="@+id/nav_configuracoes"
+            android:icon="@drawable/ic_menu_send"
+            android:title="Configurações"
+            />
+
     </group>
 
 </menu>

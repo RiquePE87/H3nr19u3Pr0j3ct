@@ -67,7 +67,6 @@ public class ResultadoService {
             res = objectMapper.readValue(reader, Resultado.class);
             res.setTipo(tipo);
             salvarResultadosOffline(res,true);
-            salvarResultadosOffline(res,false);
             reader.close();
 
         } catch (IOException e) {
@@ -129,19 +128,6 @@ public class ResultadoService {
         salvarResultadosOffline(resultado,false);
     }
 
-//    public Resultado carregarResultadoOffline(String tipoJogo, String sorteio){
-//
-//        ObjectMapper objectMapper = new ObjectMapper();
-//        Resultado resultado = new Resultado();
-//        String filename = PATH+tipoJogo+" "+sorteio+".json";
-//
-//        try {
-//            resultado = objectMapper.readValue(new File(filename),Resultado.class);
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//        return resultado;
-//    }
 
     public Resultado carregarResultadoOfflinebyFilename(String filename){
 
@@ -236,8 +222,6 @@ public class ResultadoService {
             Arrays.sort(maisSorteados);
         }
 
-
-
         return maisSorteados;
     }
 
@@ -248,4 +232,3 @@ public class ResultadoService {
         return dataFormatada;
     }
 }
-
