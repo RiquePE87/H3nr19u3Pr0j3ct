@@ -26,7 +26,6 @@ public class FragmentSorteiosPresenterImpl implements FragmentSorteiosPresenter 
     public ResultadosAdapter adapter;
     public NetworkInfo info;
     public ConnectivityManager cm;
-    Sorteio sorteio;
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
 
@@ -39,8 +38,6 @@ public class FragmentSorteiosPresenterImpl implements FragmentSorteiosPresenter 
 
          sharedPreferences = ctx.getSharedPreferences("app",MODE_PRIVATE);
          Set<String> jogos = sharedPreferences.getStringSet("jogos",null);
-
-         ArrayList<String> j = ArrayUtils.toArrayList(jogos);
 
         List<Resultado> resultadoList = new ArrayList<Resultado>();
 

@@ -23,15 +23,6 @@
             app:title="Minha Aposta"
             app:titleTextColor="@android:color/background_light"/>
 
-    <com.google.android.gms.ads.AdView
-        xmlns:ads="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/adViewJogo"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        ads:adSize="SMART_BANNER"
-        ads:adUnitId="ca-app-pub-1281837718502232/2005237426">
-    </com.google.android.gms.ads.AdView>
-
     <TextView
         android:id="@+id/tvTipoJogo"
         android:layout_width="match_parent"
@@ -43,6 +34,15 @@
         android:textColor="@android:color/background_light"
         android:textSize="30sp"
         android:textStyle="bold" />
+
+    <com.google.android.gms.ads.AdView
+        xmlns:ads="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/adViewJogo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        ads:adSize="SMART_BANNER"
+        ads:adUnitId="ca-app-pub-1281837718502232/2005237426">
+    </com.google.android.gms.ads.AdView>
 
         <ScrollView
             android:layout_width="match_parent"

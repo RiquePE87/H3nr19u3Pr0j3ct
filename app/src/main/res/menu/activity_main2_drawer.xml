@@ -20,7 +20,7 @@
 
         <item
             android:id="@+id/nav_configuracoes"
-            android:icon="@drawable/ic_menu_send"
+            android:icon="@drawable/setting"
             android:title="Configurações"
             />
 
