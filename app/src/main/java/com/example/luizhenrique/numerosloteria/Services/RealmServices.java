@@ -6,7 +6,6 @@ import android.widget.Toast;
 import com.example.luizhenrique.numerosloteria.Activities.AdicionarJogo;
 import com.example.luizhenrique.numerosloteria.Model.Jogo;
 import com.example.luizhenrique.numerosloteria.View.AdicionarJogoView;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.File;
 import java.util.List;
@@ -18,9 +17,6 @@ import io.realm.RealmResults;
 public class RealmServices {
 
     private Context context;
-    //private Realm realm;
-    String cas;
-
     AdicionarJogoView adicionarJogoView;
 
    public RealmServices(Context ctx){

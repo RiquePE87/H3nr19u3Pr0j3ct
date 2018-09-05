@@ -12,11 +12,11 @@ public interface DetalhesJogoPresenter {
     ArrayList<Integer> verificarNumerosAcertos(Resultado resultado, Jogo jogo);
     Object verificarPremiacao(Resultado resultado, Jogo jogo);
     Object verificarPremiacaoTime(Resultado resultado, Jogo jogo);
-    public Object verificarPremiacaoMes(Resultado resultado, Jogo jogo);
+    Object verificarPremiacaoMes(Resultado resultado, Jogo jogo);
     ArrayList<Float> verificarPremiacaoDuplaSena(Resultado res, Jogo jogo);
     ArrayList<ArrayList<Integer>> verificarNumerosAcertosDuplaSena(Resultado resultado,Jogo jogo);
     void getResultadoAnterior(String tipoJogo, int sorteio);
-    public boolean verificarConexao();
-    public Jogo carregarRealmJogo(int id,Context context);
-    public Resultado carregarResultadoOff(String filename);
+    boolean verificarConexao();
+    Jogo carregarRealmJogo(int id, Context context);
+    Resultado carregarResultadoOff(String filename);
 }

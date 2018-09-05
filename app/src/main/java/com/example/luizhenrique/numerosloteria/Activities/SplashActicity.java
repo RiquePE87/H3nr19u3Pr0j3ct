@@ -12,9 +12,7 @@ import android.widget.Toast;
 
 import com.example.luizhenrique.numerosloteria.BuildConfig;
 import com.example.luizhenrique.numerosloteria.R;
-import com.google.android.gms.common.util.ArrayUtils;
 
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.Timer;
@@ -90,12 +88,6 @@ public class SplashActicity extends AppCompatActivity {
         cm = (ConnectivityManager) ctx.getSystemService(Context.CONNECTIVITY_SERVICE);
         info = cm.getActiveNetworkInfo();
 
-        if (info != null && info.isConnected()){
-
-            return true;
-        }
-        else {
-            return false;
-        }
+        return info != null && info.isConnected();
     }
 }

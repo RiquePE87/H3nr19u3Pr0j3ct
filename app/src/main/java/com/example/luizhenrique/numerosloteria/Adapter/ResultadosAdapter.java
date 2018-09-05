@@ -28,7 +28,6 @@ public class ResultadosAdapter extends BaseAdapter {
     List<Resultado> resultados;
     View linha;
     GridLayout gridLayout;
-    GridLayout gridLayoutJogo2;
     TableRow.LayoutParams lp;
 
      public ResultadosAdapter(Context ctx,List<Resultado> resultados){

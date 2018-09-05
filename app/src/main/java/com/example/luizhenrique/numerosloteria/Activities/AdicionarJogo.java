@@ -69,8 +69,6 @@ public class AdicionarJogo extends AppCompatActivity implements AdicionarJogoVie
 
     public String mesDeSorte;
 
-    public static int[] dezenas;
-
     public int rangeJogo;
 
     public int numeroDezenas;
@@ -198,10 +196,6 @@ public class AdicionarJogo extends AppCompatActivity implements AdicionarJogoVie
             @Override
             public void onClick(View v) {
 
-//                dezenas = GeradorDeNumeros.gerarNumeros(numeroDezenas, rangeJogo);
-//                numeros = GeradorDeNumeros.ParseToString(dezenas);
-//
-//                tvNumerosGerados.setText(numeros);
                 Intent it = new Intent(AdicionarJogo.this, NumerosFavoritos.class);
                 it.putExtra("jogo", tipoJogo);
                 it.putExtra("dezenas", numeroDezenas);

@@ -90,7 +90,7 @@ public class GeradorDeNumeros {
             while (contadorWhile != 0) {
 
                 contadorWhile = 0;
-                copiaNumerosGerados.sort(Comparator.<Integer>naturalOrder());
+                copiaNumerosGerados.sort(Comparator.naturalOrder());
                 checarNumerosIguais(copiaNumerosGerados,rangeNumeros);
 
 

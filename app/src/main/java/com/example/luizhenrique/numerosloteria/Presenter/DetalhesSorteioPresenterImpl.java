@@ -27,7 +27,6 @@ public class DetalhesSorteioPresenterImpl implements DetalhesSorteioPresenter {
         detalhesSorteioView.removerLinhas();
         rows = 1;
         int[] acertos = new JogoManager().getAcertos(res.getTipo().toLowerCase());
-        String txt;
 
         if (detalhesSorteioView != null) {
 
@@ -78,13 +77,7 @@ public class DetalhesSorteioPresenterImpl implements DetalhesSorteioPresenter {
         cm = (ConnectivityManager) ctx.getSystemService(Context.CONNECTIVITY_SERVICE);
         info = cm.getActiveNetworkInfo();
 
-        if (info != null && info.isConnected()){
-
-            return true;
-        }
-        else {
-            return false;
-        }
+        return info != null && info.isConnected();
 
     }
 }

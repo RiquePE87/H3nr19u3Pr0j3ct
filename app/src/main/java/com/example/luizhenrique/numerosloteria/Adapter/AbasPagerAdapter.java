@@ -3,7 +3,6 @@ package com.example.luizhenrique.numerosloteria.Adapter;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.view.View;
 
 import com.example.luizhenrique.numerosloteria.Activities.FragmentConsultaJogos;
 import com.example.luizhenrique.numerosloteria.Activities.FragmentSorteios;
@@ -15,7 +14,6 @@ import com.example.luizhenrique.numerosloteria.Activities.FragmentSorteios;
 public class AbasPagerAdapter extends FragmentPagerAdapter {
 
     private static final int NUM_TABS = 2;
-    View fab;
 
     public AbasPagerAdapter(FragmentManager fm) {
         super(fm);

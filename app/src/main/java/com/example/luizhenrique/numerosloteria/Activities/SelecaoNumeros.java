@@ -1,7 +1,6 @@
 package com.example.luizhenrique.numerosloteria.Activities;
 
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
@@ -17,7 +16,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.GridLayout;
-import android.widget.LinearLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -39,7 +37,6 @@ public class SelecaoNumeros extends AppCompatActivity {
     Toolbar toolbarSelecao;
     GridLayout gl;
     Intent it;
-    Context context;
     SharedPreferences sharedPref;
     SharedPreferences.Editor editor;
 
@@ -159,8 +156,8 @@ public class SelecaoNumeros extends AppCompatActivity {
 
             if (num == Integer.valueOf((String) t.getText())){
                 t.setBackgroundResource(R.drawable.bolaselecionada);
-                ((TextView) t).setTextColor(Color.WHITE);
-                ((TextView) t).setTypeface(null, Typeface.BOLD);
+                t.setTextColor(Color.WHITE);
+                t.setTypeface(null, Typeface.BOLD);
                 numerosFavoritos.add(Integer.valueOf((String) t.getText()));
 
             }

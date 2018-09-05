@@ -18,8 +18,6 @@ import com.example.luizhenrique.numerosloteria.Model.Resultado;
 import com.example.luizhenrique.numerosloteria.R;
 import com.example.luizhenrique.numerosloteria.Services.ResultadoService;
 
-import java.util.Timer;
-
 /**
  * Created by luizhenrique on 01/10/2017.
  */
@@ -31,7 +29,7 @@ public class ConsultaSorteioFragment extends DialogFragment {
     private String tipoJogo;
     private String concurso;
     Resultado result = new Resultado();
-    Timer timer = new Timer();
+
     @Override
     public Dialog onCreateDialog(final Bundle savedInstanceState) {
 

@@ -1,6 +1,5 @@
 package com.example.luizhenrique.numerosloteria.Activities;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -11,26 +10,18 @@ import android.support.v4.app.ListFragment;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.luizhenrique.numerosloteria.Adapter.JogosAdapter;
 import com.example.luizhenrique.numerosloteria.Model.Jogo;
 import com.example.luizhenrique.numerosloteria.Presenter.FragmentConsultaJogosPresenter;
 import com.example.luizhenrique.numerosloteria.Presenter.FragmentConsultaJogosPresenterImpl;
 import com.example.luizhenrique.numerosloteria.Services.RealmServices;
 
-import java.util.List;
-
 
 public class FragmentConsultaJogos extends ListFragment {
 
-    public List<Jogo> jogos;
-    public JogosAdapter adapter;
-    TextView tvAposta;
     View layout;
     ListView listView;
-    boolean isLongClick = false;
     FragmentConsultaJogosPresenter fragmentConsultaJogosPresenter;
 
     public FragmentConsultaJogos() {
@@ -74,7 +65,7 @@ public class FragmentConsultaJogos extends ListFragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                Activity activity = getActivity();
+               // Activity activity = getActivity();
 
                 Jogo jogo = (Jogo)listView.getItemAtPosition(position);
 

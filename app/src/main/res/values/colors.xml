@@ -3,15 +3,8 @@
     <color name="colorPrimary">#1565c0</color>
     <color name="colorPrimaryDark">#1a237e</color>
     <color name="colorAccent">#4063ff</color>
-    <color name="TabColor">#4A9470</color>
     <color name="BackGroundColor">#eeeeee</color>
-    <color name="primaryColor">#558b2f</color>
     <color name="primaryLightColor">#5e92f3</color>
     <color name="primaryDarkColor">#003c8f</color>
-    <color name="secondaryColor">#1a237e</color>
-    <color name="secondaryLightColor">#534bae</color>
     <color name="secondaryDarkColor">#000051</color>
-    <color name="primaryTextColor">#000000</color>
-    <color name="secondaryTextColor">#FFFFFF</color>
-    <color name="teste">#FF0F4B11</color>
 </resources>

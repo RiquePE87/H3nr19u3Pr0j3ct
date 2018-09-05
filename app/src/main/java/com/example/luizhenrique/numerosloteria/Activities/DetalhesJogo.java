@@ -43,8 +43,6 @@ public class DetalhesJogo extends AppCompatActivity implements DetalhesJogoView 
     public TextView tvPremioTimeCoracao;
     public Toolbar toolbarDetalhes;
     Resultado res;
-    RealmServices realmServices;
-    int acertos = 0;
     Jogo jogo;
     public NumberFormat numberFormat;
     float premioTimeCoracao;

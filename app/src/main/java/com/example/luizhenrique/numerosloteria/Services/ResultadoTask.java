@@ -8,8 +8,6 @@ import com.example.luizhenrique.numerosloteria.View.AdicionarJogoView;
 
 public class ResultadoTask extends AsyncTask<String, Void, Resultado> {
 
-    AdicionarJogoView view = new AdicionarJogo();
-
     @Override
     protected void onPreExecute() {
 

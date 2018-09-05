@@ -7,13 +7,11 @@ import android.net.NetworkInfo;
 
 import com.example.luizhenrique.numerosloteria.Adapter.ResultadosAdapter;
 import com.example.luizhenrique.numerosloteria.Model.Resultado;
-import com.example.luizhenrique.numerosloteria.Model.Sorteio;
 import com.example.luizhenrique.numerosloteria.Services.ResultadoService;
 import com.example.luizhenrique.numerosloteria.Services.ResultadoTask;
-import com.google.android.gms.common.util.ArrayUtils;
 
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
@@ -27,7 +25,6 @@ public class FragmentSorteiosPresenterImpl implements FragmentSorteiosPresenter 
     public NetworkInfo info;
     public ConnectivityManager cm;
     SharedPreferences sharedPreferences;
-    SharedPreferences.Editor editor;
 
     public FragmentSorteiosPresenterImpl(Context ctx){
 
@@ -39,12 +36,16 @@ public class FragmentSorteiosPresenterImpl implements FragmentSorteiosPresenter 
          sharedPreferences = ctx.getSharedPreferences("app",MODE_PRIVATE);
          Set<String> jogos = sharedPreferences.getStringSet("jogos",null);
 
+         List<String> j = new ArrayList<>(jogos);
+
+         Collections.sort(j);
+
         List<Resultado> resultadoList = new ArrayList<Resultado>();
 
         if (verificarConexao() == true){
             try{
 
-                for (String s: jogos){
+                for (String s: j){
                     resultadoList.add(new ResultadoTask().execute(s.toLowerCase()).get());
                 }
 
@@ -57,7 +58,7 @@ public class FragmentSorteiosPresenterImpl implements FragmentSorteiosPresenter 
 
             try {
 
-                for (String s: jogos){
+                for (String s: j){
                     resultadoList.add(new ResultadoService().carregarResultadoOffline(s.toLowerCase()));
                 }
 

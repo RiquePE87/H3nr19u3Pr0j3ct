@@ -42,7 +42,6 @@ public class DetalhesSorteio extends AppCompatActivity implements DetalhesSortei
     TextView tvProximo;
     TextView tvMes;
     TableLayout tableDetalhes;
-    int rows = 1;
     private static final String TAG = "DetalhesSorteio";
     private AdView mAdView;
     public int ultimoConcurso;

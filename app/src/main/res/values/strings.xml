@@ -1,19 +1,9 @@
 <resources>
     <string name="app_name">Números da Loteria</string>
-    <string name="title_activity_adicionar_jogo">adicionarJogo</string>
-
-    <string name="opcao_novoJogo">Novo Jogo</string>
-    <string name="opcao_meusJogos">Meus Jogos</string>
-    <string name="opcao_consultaSorteios">Ver Sorteios</string>
 
     <string name="banner_ad_unit_id">ca-app-pub-1281837718502232/2098332383</string>
     <string name="banner_ad_detalhes">ca-app-pub-1281837718502232/6409601151</string>
     <string name="banner_ad_adicionar">ca-app-pub-1281837718502232/2795682713</string>
-
-    <string-array name="secoes">
-        <item>Minhas Apostas</item>
-        <item>Sorteios</item>
-    </string-array>
 
     <string-array name="tipoJogo">
         <item>Mega-Sena</item>
@@ -122,13 +112,11 @@
     </string-array>
 
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_main2">Números da Loteria</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
-    <string name="action_settings">Settings</string>
     <string name="title_activity_detalhes_sorteio">DetalhesSorteio</string>
     <string name="concurso">Concurso</string>
     <string name="escolhendo_os_n_meros_mais_sorteados_ser_gerada_as_dezenas_mais_sorteadas_nos_dez_ltimos_concursos">Escolhendo os números mais sorteados será gerada as dezenas mais sorteadas nos dez últimos concursos.</string>

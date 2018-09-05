@@ -1,11 +1,7 @@
 package com.example.luizhenrique.numerosloteria.Activities;
 
 import android.app.DialogFragment;
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -19,6 +15,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.luizhenrique.numerosloteria.Adapter.AbasPagerAdapter;
@@ -37,6 +34,7 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private static final String TAG = "MainActivity";
+    TextView tvVersao;
     TabLayout tabs;
     FloatingActionButton fab;
     int backPressedCount = 0;
