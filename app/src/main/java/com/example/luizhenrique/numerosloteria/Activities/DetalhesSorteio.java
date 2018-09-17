@@ -21,6 +21,7 @@ import com.example.luizhenrique.numerosloteria.Services.ResultadoTask;
 import com.example.luizhenrique.numerosloteria.View.DetalhesSorteioView;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.InterstitialAd;
 
 import java.text.NumberFormat;
 import java.util.ArrayList;
@@ -52,6 +53,7 @@ public class DetalhesSorteio extends AppCompatActivity implements DetalhesSortei
     Intent it;
     String tipo;
     String concurso;
+    InterstitialAd interstitialAd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,6 +78,10 @@ public class DetalhesSorteio extends AppCompatActivity implements DetalhesSortei
         tvProximo = findViewById(R.id.tvProximo);
         tableDetalhes = findViewById(R.id.tblDetalhes);
         tvMes = findViewById(R.id.tvMes);
+
+        interstitialAd = new InterstitialAd(this);
+        interstitialAd.setAdUnitId("ca-app-pub-1281837718502232/6892506093");
+        interstitialAd.loadAd(new AdRequest.Builder().build());
 
         tvAnterior.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -112,6 +118,12 @@ public class DetalhesSorteio extends AppCompatActivity implements DetalhesSortei
         });
 
         carregarResultado();
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        interstitialAd.show();
     }
 
     public void exibirToast(){

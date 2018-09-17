@@ -26,6 +26,7 @@ import com.example.luizhenrique.numerosloteria.Services.RealmServices;
 import com.example.luizhenrique.numerosloteria.View.DetalhesJogoView;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.InterstitialAd;
 
 import java.text.NumberFormat;
 import java.util.ArrayList;
@@ -48,6 +49,7 @@ public class DetalhesJogo extends AppCompatActivity implements DetalhesJogoView 
     float premioTimeCoracao;
     AdView adView;
     AdRequest adRequest;
+    InterstitialAd interstitialAd;
 
     public ArrayList<Integer> numerosAcertados;
 
@@ -82,6 +84,9 @@ public class DetalhesJogo extends AppCompatActivity implements DetalhesJogoView 
         tvTimedoCoracao = findViewById(R.id.txtTimeCoracao);
         tvPremioTimeCoracao = findViewById(R.id.premioTimeCoracao);
         adView = findViewById(R.id.adViewJogo);
+        interstitialAd = new InterstitialAd(this);
+        interstitialAd.setAdUnitId("ca-app-pub-1281837718502232/6892506093");
+        interstitialAd.loadAd(new AdRequest.Builder().build());
 
         adRequest = new AdRequest.Builder().build();
         adView.loadAd(adRequest);
@@ -153,6 +158,12 @@ public class DetalhesJogo extends AppCompatActivity implements DetalhesJogoView 
     @Override
     public void carregarJogo() {
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        interstitialAd.show();
     }
 
     public void mostrarAposta() {

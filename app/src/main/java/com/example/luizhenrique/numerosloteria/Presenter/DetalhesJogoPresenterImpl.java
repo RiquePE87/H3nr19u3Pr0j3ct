@@ -197,9 +197,9 @@ public class DetalhesJogoPresenterImpl implements DetalhesJogoPresenter {
 
         String txt = "";
 
-        Resultado resAnt = new ResultadoService().carregarResultadoOffline(tipoJogo);
+        Resultado resAnt = new ResultadoService().carregarResultadoOffline(tipoJogo.toLowerCase());
 
-        if (resAnt.getNumero() != null &&resAnt.getNumero() < sorteio){
+        if (resAnt.getNumero() != null && resAnt.getNumero() < sorteio && resAnt.getNumero() != sorteio-1){
 
             txt = "Sorteio não ocorreu ainda!";
         }
