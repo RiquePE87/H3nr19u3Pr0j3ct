@@ -90,9 +90,8 @@ public class GeradorDeNumeros {
             while (contadorWhile != 0) {
 
                 contadorWhile = 0;
-                copiaNumerosGerados.sort(Comparator.naturalOrder());
+                Collections.sort(copiaNumerosGerados);
                 checarNumerosIguais(copiaNumerosGerados,rangeNumeros);
-
 
                 for (int n : arrayFav) {
                     for (int j : copiaNumerosGerados) {
@@ -139,29 +138,28 @@ public class GeradorDeNumeros {
         return numeros;
     }
 
-    public static int[] gerarNumeros(int quantidadeNumeros, int rangeNumeros) {
-
-        int[] numeros = new int[quantidadeNumeros];
-        Random rdm = new Random();
-
-
-        if (rangeNumeros == 100) {
-            for (int i = 0; i < numeros.length; i++) {
-
-                numeros[i] = rdm.nextInt(rangeNumeros);
-            }
-
-            Arrays.sort(numeros);
-        } else {
-            for (int i = 0; i < numeros.length; i++) {
-
-                numeros[i] = rdm.nextInt(rangeNumeros)+1;
-            }
-            Arrays.sort(numeros);
-        }
-
-        return checarNumerosIguais(numeros, rangeNumeros);
-    }
+//    public static int[] gerarNumeros(int quantidadeNumeros, int rangeNumeros) {
+//
+//        int[] numeros = new int[quantidadeNumeros];
+//        Random rdm = new Random();
+//
+//        if (rangeNumeros == 100) {
+//            for (int i = 0; i < numeros.length; i++) {
+//
+//                numeros[i] = rdm.nextInt(rangeNumeros);
+//            }
+//
+//            Arrays.sort(numeros);
+//        } else {
+//            for (int i = 0; i < numeros.length; i++) {
+//
+//                numeros[i] = rdm.nextInt(rangeNumeros)+1;
+//            }
+//            Arrays.sort(numeros);
+//        }
+//
+//        return checarNumerosIguais(numeros, rangeNumeros);
+//    }
 
     public static int[] checarNumerosIguais(int[] num, int rangeNumeros) {
 
@@ -209,12 +207,12 @@ public class GeradorDeNumeros {
                     if (rangeNumeros == 100) {
                         num.set(a,rdm.nextInt(rangeNumeros));
                         a = 0;
-                        num.sort(Comparator.naturalOrder());
+                        Collections.sort(num);
                         temp = num.get(0);
                     } else {
                         num.set(a,rdm.nextInt(rangeNumeros)+1);
                         a = 0;
-                        num.sort(Comparator.naturalOrder());
+                        Collections.sort(num);
                         temp = num.get(0);
                     }
 
@@ -376,4 +374,3 @@ public class GeradorDeNumeros {
         return maisSorteados;
     }
 }
-
