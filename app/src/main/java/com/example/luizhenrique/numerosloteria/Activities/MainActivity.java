@@ -1,7 +1,13 @@
 package com.example.luizhenrique.numerosloteria.Activities;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.app.DialogFragment;
+import android.content.ActivityNotFoundException;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -38,6 +44,7 @@ public class MainActivity extends AppCompatActivity
     TabLayout tabs;
     FloatingActionButton fab;
     int backPressedCount = 0;
+    Context context;
 
     private AdView mAdView;
 
@@ -47,6 +54,8 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
         MobileAds.initialize(this,"ca-app-pub-1281837718502232~4895886117");
+
+        context = getApplicationContext();
 
         AppCenter.start(getApplication(), "c030fb40-e0b0-48ed-b3df-c5946e208d63", Analytics.class, Crashes.class);
 
@@ -103,6 +112,10 @@ public class MainActivity extends AppCompatActivity
 
             }
         });
+
+        DialogAvaliar dialogAvaliar = new DialogAvaliar();
+
+        dialogAvaliar.show(getFragmentManager(),"Avaliar");
     }
 
     @Override
@@ -174,9 +187,69 @@ public class MainActivity extends AppCompatActivity
         else if (id == R.id.nav_configuracoes){
             startActivity(new Intent(this,Configuracoes.class));
         }
+        else if (id == R.id.nav_rate){
+            rateApp();
+        }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    public void rateApp(){
+
+        Uri uri = Uri.parse("market://details?id=" + context.getPackageName());
+        Intent goToMarket = new Intent(Intent.ACTION_VIEW, uri);
+        // To count with Play market backstack, After pressing back button,
+        // to taken back to our application, we need to add following flags to intent.
+        goToMarket.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY |
+                Intent.FLAG_ACTIVITY_NEW_DOCUMENT |
+                Intent.FLAG_ACTIVITY_MULTIPLE_TASK);
+        try {
+            startActivity(goToMarket);
+        } catch (ActivityNotFoundException e) {
+            startActivity(new Intent(Intent.ACTION_VIEW,
+                    Uri.parse("http://play.google.com/store/apps/details?id=" + context.getPackageName())));
+        }
+    }
+
+    public static class DialogAvaliar extends DialogFragment{
+
+        Context context = getContext();
+
+        @Override
+        public Dialog onCreateDialog(Bundle savedInstanceState) {
+
+            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+
+            builder.setMessage("Deseja avaliar o aplicativo?")
+            .setPositiveButton("Avaliar", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+
+                    Uri uri = Uri.parse("market://details?id=" + context.getPackageName());
+                    Intent goToMarket = new Intent(Intent.ACTION_VIEW, uri);
+                    // To count with Play market backstack, After pressing back button,
+                    // to taken back to our application, we need to add following flags to intent.
+//                    goToMarket.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY |
+//                            Intent.FLAG_ACTIVITY_NEW_DOCUMENT |
+//                            Intent.FLAG_ACTIVITY_MULTIPLE_TASK);
+                    try {
+                        startActivity(goToMarket);
+                    } catch (ActivityNotFoundException e) {
+                        startActivity(new Intent(Intent.ACTION_VIEW,
+                                Uri.parse("http://play.google.com/store/apps/details?id=" + context.getPackageName())));
+                    }
+                }
+            })
+                    .setNegativeButton("Agora Não", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                        }
+                    });
+
+            return builder.create();
+
+        }
     }
 }

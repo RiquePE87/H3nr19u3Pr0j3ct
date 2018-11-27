@@ -44,7 +44,7 @@ public class AdicionarJogoPresenterImpl implements AdicionarJogoPresenter{
         int proximoConcurso = 0;
 
         try {
-            res = new ResultadoTask().execute(tipoJogo.toLowerCase()).get();
+            res = new ResultadoTask(adicionarJogoView).execute(tipoJogo.toLowerCase()).get();
             proximoConcurso = res.getNumero() + 1;
         } catch (InterruptedException | ExecutionException e) {
             e.printStackTrace();
@@ -61,7 +61,7 @@ public class AdicionarJogoPresenterImpl implements AdicionarJogoPresenter{
 
             try {
 
-                adicionarJogoView.exibirProgress(true);
+                //adicionarJogoView.exibirProgress(true);
                 resultadoAtual = new ResultadoTask().execute(tipoJogo).get();
 
                 intNumerosMaisSorteados = ResultadoService.verificarMaisSorteados(String.valueOf(resultadoAtual.getNumero()), tipoJogo,new JogoManager().getRangeSorteio(tipoJogo.toLowerCase()), numeroDezenas, minAposta);
@@ -71,7 +71,6 @@ public class AdicionarJogoPresenterImpl implements AdicionarJogoPresenter{
             adicionarJogoView.exibirToast(ex.getMessage());
         }
 
-        adicionarJogoView.exibirProgress(false);
         adicionarJogoView.exibirPublicidade();
         return intNumerosMaisSorteados;
     }

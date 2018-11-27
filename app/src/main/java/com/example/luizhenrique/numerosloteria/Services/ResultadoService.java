@@ -20,8 +20,8 @@ import java.util.concurrent.ExecutionException;
 public class ResultadoService {
 
     public Context context;
-    public static final String URL = "https://www.lotodicas.com.br/api/";
-    public static final String PATH = "/data/data/" + BuildConfig.APPLICATION_ID + "/files/";
+    private static final String URL = "https://www.lotodicas.com.br/api/";
+    private static final String PATH = "/data/data/" + BuildConfig.APPLICATION_ID + "/files/";
 
     public static String getFilename(String tipoJogo, String concurso){
 

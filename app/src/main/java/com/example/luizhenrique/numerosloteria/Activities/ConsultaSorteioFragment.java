@@ -43,7 +43,6 @@ public class ConsultaSorteioFragment extends DialogFragment {
 
         builder.setView(layout)
 
-
                 .setPositiveButton("OK", null)
                 .setNegativeButton("Cancelar", null);
 

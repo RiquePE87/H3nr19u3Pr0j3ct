@@ -15,6 +15,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.GridLayout;
 import android.widget.LinearLayout;
+import android.widget.QuickContactBadge;
 import android.widget.TableRow;
 import android.widget.TextView;
 
@@ -29,6 +30,7 @@ public class NumerosFavoritos extends AppCompatActivity {
     FloatingActionButton fab_adicionar;
     android.support.v7.widget.Toolbar toolbarFavoritos;
     Button btnGerarNumeros;
+    Button btnFavoritos;
     TextView tvNumeros;
     TextView tvNumerosFav;
     LinearLayout linearLayout;
@@ -54,20 +56,18 @@ public class NumerosFavoritos extends AppCompatActivity {
         rangeJogo = it.getIntExtra("numeroBolas",0);
         dezenas = it.getIntExtra("dezenas",0);
 
-        fab_adicionar = findViewById(R.id.fab_adc_numero);
+        //fab_adicionar = findViewById(R.id.fab_adc_numero);
         btnGerarNumeros = findViewById(R.id.btnGerarNumeros);
         tvNumeros = findViewById(R.id.numerosSelecionados);
         tvNumerosFav = findViewById(R.id.tvNumerosFav);
         toolbarFavoritos = findViewById(R.id.toolbar_favoritos);
         linearLayout = findViewById(R.id.linearFavoritos);
+        btnFavoritos = findViewById(R.id.btFavoritos);
 
         setSupportActionBar(toolbarFavoritos);
 
-        if (it.getExtras() != null){
+        if (it.getExtras() == null){
 
-            fab_adicionar.setVisibility(View.GONE);
-
-        }else {
             linearLayout.setVisibility(View.GONE);
             btnGerarNumeros.setVisibility(View.GONE);
             toolbarFavoritos.setTitle("Meus Números Favoritos");
@@ -88,11 +88,12 @@ public class NumerosFavoritos extends AppCompatActivity {
             numeroDezenas = new int[1];
         }
 
-        fab_adicionar.setOnClickListener(new View.OnClickListener() {
+        btnFavoritos.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 Intent it = new Intent(NumerosFavoritos.this,SelecaoNumeros.class);
+                Intent intent = getIntent();
+                it.putExtra("Intent",intent);
                 startActivity(it);
             }
         });
@@ -218,17 +219,16 @@ public class NumerosFavoritos extends AppCompatActivity {
 
             case R.id.action_OKFavoritos:
 
-                try {
-                    Intent itResult = new Intent();
-                    itResult.putExtra("numerosFavoritos", numerosGerados);
-                    setResult(RESULT_OK,itResult);
-                    finish();
-                    return true;
-                } catch (Exception e) {
-                    e.printStackTrace();
+                    try {
+                        Intent itResult = new Intent();
+                        itResult.putExtra("numerosFavoritos", numerosGerados);
+                        setResult(RESULT_OK,itResult);
+                        finish();
+                        return true;
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                 }
-
-        }
 
         return super.onOptionsItemSelected(item);
     }

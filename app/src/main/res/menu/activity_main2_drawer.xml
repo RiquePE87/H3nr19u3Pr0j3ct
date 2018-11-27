@@ -24,6 +24,12 @@
             android:title="Configurações"
             />
 
+        <item
+            android:id="@+id/nav_rate"
+            android:icon="@drawable/search"
+            android:title="Avaliar Números da Loteria"
+            />
+
     </group>
 
 </menu>

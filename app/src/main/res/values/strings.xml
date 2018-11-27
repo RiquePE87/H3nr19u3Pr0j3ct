@@ -128,5 +128,8 @@
     <string name="selecione_o_jogo">Selecione o jogo</string>
     <string name="Entrarcomnumeroconcurso">Digite o número do concurso</string>
 
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
 
 </resources>

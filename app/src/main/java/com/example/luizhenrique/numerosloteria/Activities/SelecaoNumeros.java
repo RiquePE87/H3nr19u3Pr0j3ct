@@ -37,6 +37,7 @@ public class SelecaoNumeros extends AppCompatActivity {
     Toolbar toolbarSelecao;
     GridLayout gl;
     Intent it;
+    Intent intent;
     SharedPreferences sharedPref;
     SharedPreferences.Editor editor;
 
@@ -59,7 +60,9 @@ public class SelecaoNumeros extends AppCompatActivity {
         dezenas = it.getIntExtra("dezenas",0);
         numeroDezenas = it.getIntExtra("numeroBolas",0);
 
-        if (it.getExtras() == null){
+        if (it.getExtras().containsKey("Intent")){
+
+            intent = it.getParcelableExtra("Intent");
 
             numeroDezenas = 99;
             dezenas = 99;
@@ -231,7 +234,7 @@ public class SelecaoNumeros extends AppCompatActivity {
 
             TextView child = (TextView) gl.getChildAt(i);
 
-            if (child.getCurrentTextColor() == Color.BLACK){
+            if (child.getCurrentTextColor() == Color.WHITE){
 
                 child.setBackgroundResource(R.drawable.bola);
                 child.setBackgroundResource(R.drawable.bola);
@@ -246,7 +249,7 @@ public class SelecaoNumeros extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater menuInflater = getMenuInflater();
         menuInflater.inflate(R.menu.toolbar_selecao, menu);
-        if (it.getExtras() == null)
+        if (it.getExtras().containsKey("Intent"))
             menu.removeItem(R.id.action_limpar);
         return true;
     }
@@ -258,7 +261,7 @@ public class SelecaoNumeros extends AppCompatActivity {
 
             case R.id.action_OKSelecao:
 
-                if (it.getExtras() == null){
+                if (it.getExtras().containsKey("Intent")){
 
                     numeros = new int[count];
 
@@ -273,7 +276,7 @@ public class SelecaoNumeros extends AppCompatActivity {
                     editor.putString("meus_numeros_favoritos",numsSelec);
                     editor.putInt("dezenas",count);
                     editor.apply();
-                    startActivity(new Intent(SelecaoNumeros.this,NumerosFavoritos.class));
+                    startActivity(intent);
                     finish();
 
                 }else if (count == dezenas){
@@ -290,6 +293,7 @@ public class SelecaoNumeros extends AppCompatActivity {
                     Toast.makeText(this,"Selecione o restante das dezenas",Toast.LENGTH_SHORT).show();
                     break;
                 }
+
             case R.id.action_limpar:
                 limparDezenas();
                 numeros = new int[dezenas];

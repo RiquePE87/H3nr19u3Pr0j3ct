@@ -230,12 +230,13 @@ public class AdicionarJogo extends AppCompatActivity implements AdicionarJogoVie
         btnProximoConcurso.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+               // progressDialog.setVisibility(View.VISIBLE);
+                if (info != null && info.isConnected()) {
 
-                if (info != null && info.isConnected())
-                etSorteio.setText(String.valueOf(adicionarJogoPresenter.jogarProximoConcurso(tipoJogo)));
+                    etSorteio.setText(String.valueOf(adicionarJogoPresenter.jogarProximoConcurso(tipoJogo)));
+                }
                 else
                     Toast.makeText(ctx,"Para usar essa função, você precisa estar conectado a internet",Toast.LENGTH_LONG).show();
-
             }
         });
 
