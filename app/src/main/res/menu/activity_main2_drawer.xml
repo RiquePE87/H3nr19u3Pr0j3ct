@@ -14,7 +14,7 @@
 
         <item
             android:id="@+id/nav_adc_numero"
-            android:icon="@drawable/bola_loteria"
+            android:icon="@drawable/bola"
             android:title="Meus Números Favoritos"
             />
 
@@ -26,7 +26,7 @@
 
         <item
             android:id="@+id/nav_rate"
-            android:icon="@drawable/search"
+            android:icon="@drawable/rate"
             android:title="Avaliar Números da Loteria"
             />
 

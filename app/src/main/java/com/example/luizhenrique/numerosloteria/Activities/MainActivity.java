@@ -7,6 +7,7 @@ import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -45,6 +46,8 @@ public class MainActivity extends AppCompatActivity
     FloatingActionButton fab;
     int backPressedCount = 0;
     Context context;
+    SharedPreferences prefs;
+    SharedPreferences.Editor editor;
 
     private AdView mAdView;
 
@@ -56,6 +59,9 @@ public class MainActivity extends AppCompatActivity
         MobileAds.initialize(this,"ca-app-pub-1281837718502232~4895886117");
 
         context = getApplicationContext();
+
+        prefs = getSharedPreferences("app", MODE_PRIVATE);
+        editor = prefs.edit();
 
         AppCenter.start(getApplication(), "c030fb40-e0b0-48ed-b3df-c5946e208d63", Analytics.class, Crashes.class);
 
@@ -113,9 +119,16 @@ public class MainActivity extends AppCompatActivity
             }
         });
 
-        DialogAvaliar dialogAvaliar = new DialogAvaliar();
+        boolean isRated = prefs.getBoolean("isRated", false);
+        boolean isFirstRun = prefs.getBoolean("isFirstRun",false);
+        int contador = prefs.getInt("contadorUso",0);
 
-        dialogAvaliar.show(getFragmentManager(),"Avaliar");
+        if (!isRated && !isFirstRun && contador == 2){
+
+            DialogAvaliar dialogAvaliar = new DialogAvaliar();
+
+            dialogAvaliar.show(getFragmentManager(),"Avaliar");
+        }
     }
 
     @Override
@@ -215,10 +228,17 @@ public class MainActivity extends AppCompatActivity
 
     public static class DialogAvaliar extends DialogFragment{
 
-        Context context = getContext();
+        Context context;
+        SharedPreferences prefs;
+        SharedPreferences.Editor editor;
 
         @Override
         public Dialog onCreateDialog(Bundle savedInstanceState) {
+
+            context = getContext();
+
+            prefs = context.getSharedPreferences("app", MODE_PRIVATE);
+            editor = prefs.edit();
 
             AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
@@ -227,24 +247,35 @@ public class MainActivity extends AppCompatActivity
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {
 
-                    Uri uri = Uri.parse("market://details?id=" + context.getPackageName());
-                    Intent goToMarket = new Intent(Intent.ACTION_VIEW, uri);
-                    // To count with Play market backstack, After pressing back button,
-                    // to taken back to our application, we need to add following flags to intent.
-//                    goToMarket.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY |
-//                            Intent.FLAG_ACTIVITY_NEW_DOCUMENT |
-//                            Intent.FLAG_ACTIVITY_MULTIPLE_TASK);
                     try {
-                        startActivity(goToMarket);
-                    } catch (ActivityNotFoundException e) {
-                        startActivity(new Intent(Intent.ACTION_VIEW,
-                                Uri.parse("http://play.google.com/store/apps/details?id=" + context.getPackageName())));
+                        editor.putBoolean("isRated",true);
+                        editor.commit();
+                        Uri uri = Uri.parse("market://details?id=" + context.getPackageName());
+                        Intent goToMarket = new Intent(Intent.ACTION_VIEW, uri);
+                        // To count with Play market backstack, After pressing back button,
+                        // to taken back to our application, we need to add following flags to intent.
+                    goToMarket.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY |
+                            Intent.FLAG_ACTIVITY_NEW_DOCUMENT |
+                            Intent.FLAG_ACTIVITY_MULTIPLE_TASK);
+
+
+                        try {
+                            context.startActivity(goToMarket);
+                        } catch (ActivityNotFoundException e) {
+                            context.startActivity(new Intent(Intent.ACTION_VIEW,
+                                    Uri.parse("http://play.google.com/store/apps/details?id=" + context.getPackageName())));
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
                     }
                 }
             })
                     .setNegativeButton("Agora Não", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
+
+                            editor.putInt("contadorUso",0);
+                            editor.commit();
                         }
                     });
 

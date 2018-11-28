@@ -23,7 +23,9 @@ public class SplashActicity extends AppCompatActivity {
     TextView tvVersao;
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
-    Boolean isFirstRun = false;
+    Boolean isFirstRun = true;
+    Boolean isRated = false;
+    int contadorUso;
     Set<String> jogos;
 
     @Override
@@ -37,6 +39,8 @@ public class SplashActicity extends AppCompatActivity {
         tvVersao.setText("Versão "+BuildConfig.VERSION_NAME);
 
         if (!sharedPreferences.contains("jogos")){
+
+            contadorUso = 0;
             jogos = new HashSet<>();
 
             jogos.add("Mega-Sena");
@@ -48,10 +52,20 @@ public class SplashActicity extends AppCompatActivity {
             jogos.add("Dia-de-Sorte");
 
             editor.putStringSet("jogos",jogos);
+            editor.putBoolean("isRated", isRated);
+            editor.putBoolean("isFirstRun", isFirstRun);
+            editor.putInt("contadorUso",contadorUso);
+            editor.commit();
+        }
+        else{
+            contadorUso = sharedPreferences.getInt("contadorUso",0);
+            contadorUso++;
+            editor.putBoolean("isFirstRun", false);
+            editor.putInt("contadorUso",contadorUso);
             editor.commit();
         }
 
-        if (!sharedPreferences.contains("firstRun") && verificarConexao() == false){
+        if (sharedPreferences.getBoolean("isFirstRun",true) && verificarConexao() == false){
 
             Toast.makeText(this,"Você precisa estar conectado para usar o aplicativo pela primeira vez",Toast.LENGTH_LONG).show();
 
@@ -64,8 +78,8 @@ public class SplashActicity extends AppCompatActivity {
 
         }else{
 
-            editor.putBoolean("firstRun",isFirstRun);
-            editor.commit();
+//            editor.putBoolean("firstRun",false);
+//            editor.commit();
 
             new Timer().schedule(new TimerTask() {
                 @Override
@@ -76,7 +90,7 @@ public class SplashActicity extends AppCompatActivity {
                     startActivity(it);
                     finish();
                 }
-            },5000);
+            },4000);
         }
     }
 
