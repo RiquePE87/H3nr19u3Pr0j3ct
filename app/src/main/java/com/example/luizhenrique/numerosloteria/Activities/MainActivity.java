@@ -30,10 +30,6 @@ import com.example.luizhenrique.numerosloteria.R;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
-import com.microsoft.appcenter.AppCenter;
-import com.microsoft.appcenter.analytics.Analytics;
-import com.microsoft.appcenter.crashes.Crashes;
-
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -62,8 +58,6 @@ public class MainActivity extends AppCompatActivity
 
         prefs = getSharedPreferences("app", MODE_PRIVATE);
         editor = prefs.edit();
-
-        AppCenter.start(getApplication(), "c030fb40-e0b0-48ed-b3df-c5946e208d63", Analytics.class, Crashes.class);
 
         mAdView = findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder().build();
